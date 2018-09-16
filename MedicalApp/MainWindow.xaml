@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MedicalApp"
         mc:Ignorable="d"
-        Title="Medical" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="24"		
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        Title="MedicalApp" Height="450" Width="800">
+    <Grid>		
+		<materialDesign:ColorZone  Mode="PrimaryLight"  Padding="16">
+			<StackPanel Orientation="Horizontal">
+				<ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
+			</StackPanel>
+		</materialDesign:ColorZone>
+	</Grid>
 </Window>

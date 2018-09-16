@@ -13,14 +13,16 @@ namespace MedicalApp
 		// If you wish to target a different database and/or database provider, modify the 'DataModel' 
 		// connection string in the application configuration file.
 		public DataModel()
-			: base("name=DataModel")
+			: base("name=MedicalAppDB")
 		{
 		}
 
 		// Add a DbSet for each entity type that you want to include in your model. For more information 
 		// on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
-		// public virtual DbSet<MyEntity> MyEntities { get; set; }
+		public virtual DbSet<Pacient> Pacients { get; set; }
+		public virtual DbSet<MedicalDoc> MedicalDocs{ get; set; }
+		public virtual DbSet<MedicalDocType> MedicalDocTypes{ get; set; }
 	}
 
 	//public class MyEntity

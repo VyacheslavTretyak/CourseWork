@@ -20,7 +20,7 @@
 				<Button
 				Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				 Width="100">
-					_DARK
+					NewName
 				</Button>
 			</StackPanel>
 		</materialDesign:ColorZone>

@@ -57,8 +57,9 @@
 
 		<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>
 		<TextBlock Grid.Row="3" Grid.Column="1">Date of birth:</TextBlock>
-		
-		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0"></TextBox>
+
+		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0" materialDesign:HintAssist.Hint="Floating Hint"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 		<TextBox Grid.Row="4" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0"></TextBox>
 		
 		<Button Grid.Row="4" Grid.Column="3" Name="buttonSearch" Margin="5 0">Search</Button>

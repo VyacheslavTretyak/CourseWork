@@ -30,14 +30,18 @@ namespace MedicalApp
 				BirthDay = new DateTime(1991, 1, 1)
 
 			};
-			using(DataModel db = new DataModel())
+			using (DataModel db = new DataModel())
 			{
-				//db.Pacients.Add(pacient);
-				//db.SaveChanges();
-				foreach (var pat in db.Pacients)
+				if (db.Pacients.FirstOrDefault(p => p.FirstName == pacient.FirstName) != null)
 				{
-					MessageBox.Show(pat.FirstName);
+					db.Pacients.Add(pacient);
 				}
+				
+				//db.SaveChanges();
+				//foreach (var pat in db.Pacients)
+				//{
+				//	MessageBox.Show(pat.FirstName);
+				//}
 			}
 		}
 	}

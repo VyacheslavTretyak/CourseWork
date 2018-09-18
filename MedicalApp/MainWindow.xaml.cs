@@ -23,6 +23,7 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			InitializeComponent();
+			/*
 			Pacient pacient = new Pacient()
 			{
 				FirstName = "Pomber",
@@ -32,13 +33,14 @@ namespace MedicalApp
 			};
 			using(DataModel db = new DataModel())
 			{
-				//db.Pacients.Add(pacient);
-				//db.SaveChanges();
+				db.Pacients.Add(pacient);
+				db.SaveChanges();
 				foreach (var pat in db.Pacients)
 				{
 					MessageBox.Show(pat.FirstName);
 				}
 			}
+			*/
 		}
 	}
 }

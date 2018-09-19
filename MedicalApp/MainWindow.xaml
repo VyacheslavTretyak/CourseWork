@@ -49,6 +49,9 @@
 			</StackPanel>
 		</materialDesign:ColorZone>
 
+        <Button Name="btnAdd"  Width="100" Height="30" Margin="650,350,0, 10" Click="btnAdd_Click">Add</Button>
+
+
 		<TextBlock Grid.Row="1" Grid.Column="0">Number card:</TextBlock>
 		<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>
 		
@@ -70,5 +73,6 @@
 		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0">Remove</Button>
 
 		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0">Add</Button>
+
 	</Grid>
 </Window>

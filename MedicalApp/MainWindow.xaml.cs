@@ -29,7 +29,7 @@ namespace MedicalApp
             //testkate
 
             //slav test gihub
-            //2.3
+            
 		}
 		private void InitFirstData()
 		{

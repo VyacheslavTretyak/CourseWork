@@ -25,6 +25,8 @@ namespace MedicalApp
 			InitializeComponent();
 			InitFirstData();
 
+            // Test Remote v4
+
             // Test Remote v2
             //..
             //..
@@ -38,12 +40,13 @@ namespace MedicalApp
             //..
             //..
 
+            // Test Remote v6
 
             //kuku
             //test
             //testkate
 
-            //slav test v2 gihub
+            //slav test v2 github
 
             // Test Makc | origin/Alikberov - v0.1
 
@@ -53,6 +56,8 @@ namespace MedicalApp
             //..
             //..
             //..
+
+            // Test Remote v5
 
         }
         private void InitFirstData()

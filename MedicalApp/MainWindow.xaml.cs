@@ -26,6 +26,11 @@ namespace MedicalApp
 			InitFirstData();
 
             // Test Remote v4
+            //..
+            //..
+            //..
+            //..
+            //..
 
             // Test Remote v2
             //..
@@ -58,6 +63,11 @@ namespace MedicalApp
             //..
 
             // Test Remote v5
+            //..
+            //..
+            //..
+            //..
+            //..
 
         }
         private void InitFirstData()

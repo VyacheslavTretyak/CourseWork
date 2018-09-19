@@ -23,24 +23,71 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			InitializeComponent();
-			/*
-			Pacient pacient = new Pacient()
+			InitFirstData();
+			
+
+		}
+		private void InitFirstData()
+		{
+			Pacient[] pacients = {
+			new Pacient()
 			{
 				FirstName = "Pomber",
 				LastName = "Asekrot",
-				BirthDay = new DateTime(1991, 1, 1)
-
-			};
-			using(DataModel db = new DataModel())
+				BirthDay = new DateTime(1991, 1, 1),
+				Addres = "Krivoy Rog Sicheslavska str. 11/13",
+				Gender = true
+			},
+			new Pacient()
 			{
-				db.Pacients.Add(pacient);
-				db.SaveChanges();
-				foreach (var pat in db.Pacients)
+				FirstName = "Arkport",
+				LastName = "Shurtrych",
+				BirthDay = new DateTime(1988, 12, 17),
+				Addres = "Krivoy Rog Myru str. 121/15",
+				Gender = true
+			},
+			new Pacient()
+			{
+				FirstName = "Roska",
+				LastName = "Viaerkova",
+				BirthDay = new DateTime(2001, 9, 11),
+				Addres = "Krivoy Rog Almasna str. 49/51",
+				Gender = false
+			},
+			};
+			MedicalDocType[] types =
+			{
+				new MedicalDocType()
 				{
-					MessageBox.Show(pat.FirstName);
+					Name = "Лікарняний"
+				},
+				new MedicalDocType()
+				{
+					Name = "Направлення на аналізи"
+				},
+				new MedicalDocType()
+				{
+					Name = "Результати аналізів"
 				}
+			};
+			using (DataModel db = new DataModel())
+			{
+				foreach (Pacient pacient in pacients)
+				{
+					if (db.Pacients.FirstOrDefault(p => p.FirstName == pacient.FirstName) == null)
+					{
+						db.Pacients.Add(pacient);
+					}
+				}
+				foreach (MedicalDocType doc in types)
+				{
+					if (db.MedicalDocTypes.FirstOrDefault(p => p.Name == doc.Name) == null)
+					{
+						db.MedicalDocTypes.Add(doc);
+					}
+				}
+				db.SaveChanges();
 			}
-			*/
 		}
 	}
 }

@@ -19,5 +19,6 @@
 				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
 			</StackPanel>
 		</materialDesign:ColorZone>
+        <Button Name="btnAdd"  Width="100" Height="30" Margin="650,350,0, 10" Click="btnAdd_Click">Add</Button>
 	</Grid>
 </Window>

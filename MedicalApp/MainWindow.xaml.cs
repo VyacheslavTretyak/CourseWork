@@ -24,5 +24,11 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddChangePatient addChangePatient = new AddChangePatient();
+            addChangePatient.Show();
+        }
+    }
 }

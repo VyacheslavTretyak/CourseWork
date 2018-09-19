@@ -22,6 +22,7 @@ namespace MedicalApp
         public AddChangePatient()
         {
             InitializeComponent();
+            //commit
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)

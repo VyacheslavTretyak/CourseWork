@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MedicalApp"
         mc:Ignorable="d"
         Title="AddChangePatient" Height="550" Width="500">
-    <Border Background="WhiteSmoke" BorderThickness="5" BorderBrush="Yellow" CornerRadius="5">
+    <Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5">
         <Border Margin="30, 50, 30, 30" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
@@ -44,8 +44,7 @@
                     <Button Name="btnAddEdit" Grid.Column="0" Grid.Row="7" Width="120" Height="30" Margin="20, 10, 10, 10" Click="btnAddEdit_Click">Add/Edit</Button>
                     <Button Name="btnCancel" Grid.Column="0" Grid.Row="7" Width="120" Height="30" Margin="130, 10, 0, 10" Click="btnCancel_Click">Cancel</Button>
                 </StackPanel>
-               
-                
+                 
             </Grid>
 
         </Border>

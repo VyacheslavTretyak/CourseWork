@@ -53,7 +53,7 @@ namespace MedicalApp
 
             //slav test v2 github
 
-            // Test Makc | origin/Alikberov - v0.
+            // Test Makc | origin/Alikberov - v0.3
 
             // Test Remote v1
             //..

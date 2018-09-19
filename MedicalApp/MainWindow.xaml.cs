@@ -27,6 +27,7 @@ namespace MedicalApp
 			//kuku
             //test
             //testkate
+            
 
 		}
 		private void InitFirstData()

@@ -23,5 +23,6 @@ namespace MedicalApp
 		/// </summary>
 		public bool Gender { get; set; }
 		public bool IsArchived { get; set; }
+		public List<MedicalDoc> Docs { get; set; }
 	}
 }

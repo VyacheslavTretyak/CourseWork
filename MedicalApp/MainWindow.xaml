@@ -11,14 +11,68 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="24"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Title="MedicalApp" Height="450" Width="800">
-    <Grid>		
-		<materialDesign:ColorZone  Mode="PrimaryLight"  Padding="16">
+        Title="MedicalApp" Height="600" Width="800">
+	<Grid>
+		<Grid.Resources>
+			<Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
+				<Setter Property="Margin" Value="5 0" />
+			</Style>
+			<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ControlBaseStyle}">
+				<Setter Property="VerticalAlignment" Value="Bottom" />
+			</Style>
+		</Grid.Resources>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition Height="6*"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		
+		<materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
 			<StackPanel Orientation="Horizontal">
 				<ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
 				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
+				<Button
+				Style="{StaticResource MaterialDesignRaisedDarkButton}"
+				 Width="100" Margin="20 0">
+					_Light
+				</Button>
 			</StackPanel>
 		</materialDesign:ColorZone>
+
         <Button Name="btnAdd"  Width="100" Height="30" Margin="650,350,0, 10" Click="btnAdd_Click">Add</Button>
+
+
+		<TextBlock Grid.Row="1" Grid.Column="0">Number card:</TextBlock>
+		<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>
+		
+		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxNumberCard" Margin="5 0"></TextBox>
+		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxAddress" Margin="5 0" Grid.ColumnSpan="3"></TextBox>
+
+		<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>
+		<TextBlock Grid.Row="3" Grid.Column="1">Date of birth:</TextBlock>
+
+		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0" materialDesign:HintAssist.Hint="Floating Hint"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+		<TextBox Grid.Row="4" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0"></TextBox>
+		
+		<Button Grid.Row="4" Grid.Column="3" Name="buttonSearch" Margin="5 0">Search</Button>
+
+		<DataGrid Grid.Row="5" Grid.ColumnSpan="4" Name="datagridPatiens"></DataGrid>
+
+		<Button Grid.Row="6" Grid.Column="0" Name="buttonEdit" Margin="5 0">Edit</Button>
+		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0">Remove</Button>
+
+		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0">Add</Button>
+
 	</Grid>
 </Window>

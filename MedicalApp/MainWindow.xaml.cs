@@ -31,6 +31,13 @@ namespace MedicalApp
             //slav test v2 gihub
 
             // Test Makc | origin/Alikberov - v0
+	    
+	    // Test Remote v1
+	    //..
+	    //..
+	    //..
+	    //..
+	    //..
             
 		}
 		private void InitFirstData()

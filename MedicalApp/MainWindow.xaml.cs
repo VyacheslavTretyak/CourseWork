@@ -24,16 +24,38 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
-			//kuku
+
+            // Test Remote v2
+            //..
+            //..
+            //..
+            //..
+            //..
+            // Test Remote v3
+            //..
+            //..
+            //..
+            //..
+            //..
+
+
+            //kuku
             //test
             //testkate
 
             //slav test v2 gihub
 
             // Test Makc | origin/Alikberov - v0.1
-            
-		}
-		private void InitFirstData()
+
+            // Test Remote v1
+            //..
+            //..
+            //..
+            //..
+            //..
+
+        }
+        private void InitFirstData()
 		{
 			Pacient[] pacients = {
 			new Pacient()

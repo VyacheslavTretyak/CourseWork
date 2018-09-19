@@ -29,6 +29,8 @@ namespace MedicalApp
             //testkate
 
             //slav test v2 gihub
+
+            // Test Makc | origin/Alikberov 
             
 		}
 		private void InitFirstData()

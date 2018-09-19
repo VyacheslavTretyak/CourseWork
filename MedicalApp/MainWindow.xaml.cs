@@ -25,6 +25,8 @@ namespace MedicalApp
 			InitializeComponent();
 			InitFirstData();
 			//kuku
+            //test
+            //testkate
 
 		}
 		private void InitFirstData()

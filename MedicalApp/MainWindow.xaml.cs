@@ -46,9 +46,10 @@ namespace MedicalApp
             //test
             //testkate
 
-            //slav test v2 github
+            //slav test v2 GitBash
 
             // Test Makc | origin/Alikberov - v0.3
+	    // v 0.4
 
             // Test Remote v1
             //..

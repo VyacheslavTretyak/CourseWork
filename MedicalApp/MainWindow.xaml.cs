@@ -25,8 +25,12 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
-			
+			//kuku
+            //test
+            //testkate
 
+            //slav test gihub
+            
 		}
 		private void InitFirstData()
 		{

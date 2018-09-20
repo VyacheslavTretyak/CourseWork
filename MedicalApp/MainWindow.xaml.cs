@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+// для того кто делает бэкэнд AddChangePatient окна:
+// после добавления или изменения пациента перед закрытием окна возвращайте DialogResult = true
+
 namespace MedicalApp
 {
 	/// <summary>

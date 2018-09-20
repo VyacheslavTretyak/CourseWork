@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//Для того кто делает Карточка пациента
+//Передайте в обработчике на кнопку Add - new AddEditDocument(Id пациента)
+//Передайте в обработчике на кнопку edit - new AddEditDocument(Id пациента, IdMedicalDoc)
+
 namespace MedicalApp
 {
     /// <summary>

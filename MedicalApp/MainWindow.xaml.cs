@@ -30,7 +30,7 @@ namespace MedicalApp
             InitFirstData();
 
 
-            AddEditDocument addEditDocument = new AddEditDocument(1);
+            AddEditDocument addEditDocument = new AddEditDocument(1,1);
             addEditDocument.Show();
 
         }

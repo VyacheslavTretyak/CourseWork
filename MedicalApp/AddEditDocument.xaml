@@ -36,14 +36,14 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0">Type:</TextBlock>
-        <ComboBox Name="ComboType" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" FontSize="20"></ComboBox>
+        <ComboBox Name="ComboType" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" FontSize="20" SelectionChanged="EnabledAdd"></ComboBox>
         <TextBlock Grid.Row="1">Name:</TextBlock>
-        <TextBox Name="TxBxName" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"></TextBox>
+        <TextBox Name="TxBxName" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" TextChanged="EnabledAdd"></TextBox>
         <TextBlock Grid.Row="2" VerticalAlignment="Top">Info:</TextBlock>
-        <TextBox Name="TxBxInfo" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"></TextBox>
+        <TextBox Name="TxBxInfo" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd"></TextBox>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock HorizontalAlignment="Left" Margin="115 10 10 10">Date:</TextBlock>
-            <DatePicker Name="DateBegin" MinWidth="200" Margin="10 10 30 10">
+            <DatePicker Name="DateBegin" MinWidth="200" Margin="10 10 30 10" SelectedDateChanged="EnabledAdd">
                 <DatePicker.Resources>
                     <Style TargetType="{x:Type DatePickerTextBox}" >
                         <Setter Property="Text" Value="дата начало" />
@@ -56,14 +56,13 @@
                 <DatePicker.Resources>
                     <Style TargetType="{x:Type DatePickerTextBox}" >
                         <Setter Property="Text" Value="дата конец" />
-                        <Setter Property="IsReadOnly" Value="True" />
                     </Style>
                 </DatePicker.Resources>
             </DatePicker>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Name="Add" MinWidth="200" Margin="150 10 10 10" FontSize="20">Add</Button>
-            <Button Name="Cancel" MinWidth="200" Margin="50 10 10 10" FontSize="20">Cancel</Button>
+            <Button Name="Add" Click="Add_Click" MinWidth="200" Margin="150 10 10 10" FontSize="20" IsEnabled="False">Add</Button>
+            <Button Name="Cancel" Click="Cancel_Click" MinWidth="200" Margin="50 10 10 10" FontSize="20">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

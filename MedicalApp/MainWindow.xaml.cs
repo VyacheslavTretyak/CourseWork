@@ -21,6 +21,7 @@ namespace MedicalApp
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		//For example
 		public MainWindow()
 		{
 			InitializeComponent();

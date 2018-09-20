@@ -162,7 +162,7 @@ namespace MedicalApp
 		void buttonsEditRemoveStateChange()
 		{
 			// to make buttons enabled only when patient was chosen
-			buttonEdit.IsEnabled = buttonRemove.IsEnabled = (datagridPatiens.SelectedItems.Count > 0);
+			buttonEdit.IsEnabled = buttonRemove.IsEnabled = buttonOpen.IsEnabled = (datagridPatiens.SelectedItems.Count > 0);
 		}
 
 		// button click on data grid 
@@ -199,6 +199,16 @@ namespace MedicalApp
 			// if enter key was pressed in textbox to raise button search event
 			if (e.Key == Key.Enter)
 				buttonSearch.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+		}
+
+		// open card button
+		private void buttonOpen_Click(object sender, RoutedEventArgs e)
+		{
+			// check patient was chosen in list
+			if (datagridPatiens.SelectedItems.Count <= 0)
+				return;
+
+			openPatientsCard();
 		}
 	}
 }

@@ -24,13 +24,15 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
-			//kuku
+            //kuku
             //test
             //testkate
 
             //slav test gihub
-            
-		}
+            AddEditDocument addEditDocument = new AddEditDocument();
+            addEditDocument.Show();
+
+        }
 		private void InitFirstData()
 		{
 			Pacient[] pacients = {

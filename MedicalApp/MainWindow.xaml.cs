@@ -45,7 +45,10 @@ namespace MedicalApp
 					// select only not archived patients
 					datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
 				}
-				catch(Exception ex) { MessageBox.Show(ex.Message); }
+				catch(Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
 			}
 		}
 
@@ -59,7 +62,39 @@ namespace MedicalApp
 		// search button click 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
 		{
-			// TODO
+			using (DataModel db = new DataModel())
+			{
+				// first select all not archived patiens
+				IQueryable<Pacient> queryable = db.Pacients.Where(p => p.IsArchived == false);
+				// if number card field not empty
+				if (!string.IsNullOrWhiteSpace(textboxNumberCard.Text))
+				{
+					// selection of patients with the entered card number
+					int cardNum = Convert.ToInt32(textboxNumberCard.Text);
+					queryable = queryable.Where(p => p.Id == cardNum);
+				}
+				// if last name field not empty
+				if (!string.IsNullOrWhiteSpace(textboxLastName.Text))
+				{
+					// selection of patients whose names contain the entered text 
+					queryable = queryable.Where(p => p.LastName.Contains(textboxLastName.Text));
+				}
+				// if year of birth field not empty
+				if (!string.IsNullOrWhiteSpace(textboxDateOfBirth.Text))
+				{
+					// selection of patients with the entered year of birth
+					int year = Convert.ToInt32(textboxDateOfBirth.Text);
+					queryable = queryable.Where(p => p.BirthDay.Year == year);
+				}
+				// if address field not empty
+				if (!string.IsNullOrWhiteSpace(textboxAddress.Text))
+				{
+					// selection of patients whose address contain the entered text 
+					queryable = queryable.Where(p => p.Addres.Contains(textboxAddress.Text));
+				}
+				// put query result to data grid table
+				datagridPatiens.ItemsSource = queryable.ToList();
+			}
 		}
 
 		// add patient button click 
@@ -77,7 +112,7 @@ namespace MedicalApp
 		// edit patient button click
 		private void buttonEdit_Click(object sender, RoutedEventArgs e)
 		{
-			// check patient was choosed in list
+			// check patient was chosen in list
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
 
@@ -93,11 +128,28 @@ namespace MedicalApp
 		// remove patient button click
 		private void buttonRemove_Click(object sender, RoutedEventArgs e)
 		{
-			// check patient was choosed in list
+			// check patient was chosen in list
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
-
-			// TODO
+			
+			// get selected patient
+			Pacient pacient = datagridPatiens.SelectedItem as Pacient;
+			// show confirmation message box
+			if (MessageBox.Show($"Are you sure you want to archive {pacient.FirstName + " " + pacient.LastName} ?",
+				"Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				using (DataModel db = new DataModel())
+				{
+					// find patient in db
+					pacient = db.Pacients.FirstOrDefault(p => p.Id == pacient.Id);
+					// remove
+					pacient.IsArchived = true;
+					// save
+					db.SaveChanges();
+					// update data grid list
+					fillDataFromDBtoDatagrid();
+				}
+			}
 		}
 
 		// data grid selection changed event
@@ -137,6 +189,16 @@ namespace MedicalApp
 		void openPatientsCard()
 		{
 			// TODO
+			// PatientCardWindow patientCardWindow = new PatientCardWindow();
+			// patientCardWindow.Show();
+		}
+
+		// search by enter key
+		private void textbox_EnterKeyDown(object sender, KeyEventArgs e)
+		{
+			// if enter key was pressed in textbox to raise button search event
+			if (e.Key == Key.Enter)
+				buttonSearch.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
 		}
 	}
 }

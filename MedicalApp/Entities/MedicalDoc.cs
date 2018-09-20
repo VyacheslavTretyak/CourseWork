@@ -13,12 +13,12 @@ namespace MedicalApp
 
 		}
 		public int Id { get; set; }
-		public int idPacient { get; set; }
+        public string Name { get; set; }
+        public int idPacient { get; set; }
 		public int idMedicalDocType { get; set; }
 		public DateTime BeginTime { get; set; }
 		public DateTime EndTime { get; set; }
 		public string Info { get; set; }
-		public string Result { get; set; }
 	}
 	
 }

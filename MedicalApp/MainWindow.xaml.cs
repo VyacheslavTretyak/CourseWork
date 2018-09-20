@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,12 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			InitializeComponent();
-			InitFirstData();
-            //kuku
-            //test
-            //testkate
+            //Database.SetInitializer(new DropCreateDatabaseAlways<DataModel>());
 
-            //slav test gihub
-            AddEditDocument addEditDocument = new AddEditDocument();
+            InitFirstData();
+
+
+            AddEditDocument addEditDocument = new AddEditDocument(1);
             addEditDocument.Show();
 
         }
@@ -74,9 +74,44 @@ namespace MedicalApp
 				new MedicalDocType()
 				{
 					Name = "Результати аналізів"
-				}
-			};
-			using (DataModel db = new DataModel())
+				},
+                new MedicalDocType()
+                {
+                    Name = "Направлення на процедури"
+                }
+            };
+            MedicalDoc[] docs =
+            {
+                new MedicalDoc()
+                {
+                    Name = "Лікарняний Перелом",
+                    idPacient =1,
+                    idMedicalDocType = 1,
+                    BeginTime = new DateTime(2002,04,21),
+                    EndTime = new DateTime(2002,05,21),
+                    Info = "Aliquam gravida mauris ut mi. Duis risus odio"
+                },
+                new MedicalDoc()
+                {
+                    Name = "Направлення на анализ крови",
+                    idPacient =2,
+                    idMedicalDocType = 2,
+                    BeginTime = new DateTime(2004,04,22),
+                    EndTime = new DateTime(2004,04,22),
+                    Info = "ut, nulla. Cras eu tellus eu augue"
+                },
+                new MedicalDoc()
+                {
+                    Name = "Результати аналізів крови",
+                    idPacient =3,
+                    idMedicalDocType = 3,
+                    BeginTime = new DateTime(2006,04,23),
+                    EndTime = new DateTime(2006,05,23),
+                    Info = "sit amet, consectetuer adipiscing elit. Aliquam auctor"
+                }
+            };
+
+            using (DataModel db = new DataModel())
 			{
 				foreach (Pacient pacient in pacients)
 				{
@@ -92,7 +127,14 @@ namespace MedicalApp
 						db.MedicalDocTypes.Add(doc);
 					}
 				}
-				db.SaveChanges();
+                foreach (MedicalDoc docum in docs)
+                {
+                    if (db.MedicalDocs.FirstOrDefault(p => p.Info == docum.Info) == null)
+                    {
+                        db.MedicalDocs.Add(docum);
+                    }
+                }
+                db.SaveChanges();
 			}
 		}
 

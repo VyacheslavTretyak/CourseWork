@@ -24,13 +24,12 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
-            //kuku
+			//kuku
             //test
             //testkate
 
             //slav test gihub
-            PatientCard pt = new PatientCard();
-            pt.Show();
+            
 		}
 		private void InitFirstData()
 		{

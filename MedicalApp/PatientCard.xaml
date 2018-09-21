@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MedicalApp"
         mc:Ignorable="d"
-        Title="Patient Card" Height="675.626" Width="638.119">
-    <Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5" Margin="0,0,2,-3" RenderTransformOrigin="0.317,0.53">
+        Title="Patient Card" Height="675.626" Width="645.252">
+    <Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5" Margin="0,0,-8,-3" RenderTransformOrigin="0.317,0.53">
         <Border Margin="30, 50, 30, 30" Background="White" RenderTransformOrigin="0.308,0.5">
             <Grid Margin="0,0,2,11">
                 <Grid.RowDefinitions>
@@ -46,7 +46,7 @@
                     <TextBox x:Name="txbName" Grid.Column="0" Height="25" Margin="10,1,1,1"/>
                     <TextBox x:Name="txbAStartData" Grid.Column="0" Height="25" Margin="10,1,1,1"/>
                     <TextBox x:Name="txbFinalData" Grid.Column="0" Height="25" Margin="10,1,1,1"/>
-                    <Button x:Name="btnDocSearch" Grid.Column="1" Grid.Row="0"  Height="Auto" Margin="10,25,1,1"  Content="Search document"/>
+                    <Button x:Name="btnDocSearch" Grid.Column="1" Grid.Row="0"  Height="Auto" Margin="10,25,1,1" Click="btnCancel_Click" Content="Search document"/>
                 </StackPanel>
                 <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Name="txbInfo"  Text="" Background="WhiteSmoke" Margin="10" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 

@@ -27,7 +27,7 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			InitializeComponent();
-
+			InitFirstData();
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -213,17 +213,14 @@ namespace MedicalApp
 
 			openPatientsCard();
 		}
-	}
-			InitFirstData();
-			//kuku
-            //test
-            //testkate
-
-            //slav test gihub
+	
+			
+			
             
-		}
+		
 		private void InitFirstData()
 		{
+			//Первичные данные для DB
 			Pacient[] pacients = {
 			new Pacient()
 			{
@@ -254,15 +251,15 @@ namespace MedicalApp
 			{
 				new MedicalDocType()
 				{
-					Name = "Лікарняний"
+					Name = "Hospital"
 				},
 				new MedicalDocType()
 				{
-					Name = "Направлення на аналізи"
+					Name = "Referral on analizes"
 				},
 				new MedicalDocType()
 				{
-					Name = "Результати аналізів"
+					Name = "Results of analizes"
 				}
 			};
 			using (DataModel db = new DataModel())

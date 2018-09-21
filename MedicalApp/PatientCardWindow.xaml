@@ -65,7 +65,7 @@
 
 
 
-                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged" Text="Adress"/>
+                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged" Text="Address"/>
 
 
                 <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>

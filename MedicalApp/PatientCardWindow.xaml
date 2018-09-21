@@ -65,7 +65,7 @@
 
 
 
-                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged"/>
+                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged" Text="Adress"/>
 
 
                 <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>
@@ -90,7 +90,7 @@
                 <TextBox x:Name="txbFinalData" Grid.Row="14" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2" Click="btnDocSearch_Click"  Content="Search document"/>
 
-                <TextBox Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Name="txbInfo" Margin="1" Text="" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                <TextBox Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Name="txbInfo" Margin="1" Text="Info" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
 
             </Grid>
         </Border>

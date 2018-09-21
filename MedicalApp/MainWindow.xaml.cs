@@ -216,11 +216,6 @@ namespace MedicalApp
 
 			openPatientsCard();
 		}
-	
-			
-			
-            
-		
 		private void InitFirstData()
 		{
 			//Первичные данные для DB

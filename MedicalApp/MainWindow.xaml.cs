@@ -193,9 +193,8 @@ namespace MedicalApp
 		void openPatientsCard()
 		{
 			// TODO
-			PatientCardWindow patientCardWindow = new PatientCardWindow();
-			patientCardWindow.Show();
-			PatientCard patientCard = new PatientCard();
+
+            PatientCardWindow patientCard = new PatientCardWindow();
 			patientCard.Show();
 		}
 
@@ -265,9 +264,38 @@ namespace MedicalApp
 					Name = "Результати аналізів"
 				}
 			};
+            MedicalDoc[] docs =
+          {
+                new MedicalDoc()
+                {
+                    Name = "Лікарняний Перелом",
+                    idPacient =1,
+                    idMedicalDocType = 1,
+                    BeginTime = new DateTime(2002,04,21),
+                    EndTime = new DateTime(2002,05,21),
+                    Info = "Aliquam gravida mauris ut mi. Duis risus odio"
+                },
+                new MedicalDoc()
+                {
+                    Name = "Направлення на анализ крови",
+                    idPacient =2,
+                    idMedicalDocType = 2,
+                    BeginTime = new DateTime(2004,04,22),
+                    EndTime = new DateTime(2004,04,22),
+                    Info = "ut, nulla. Cras eu tellus eu augue"
+                },
+                new MedicalDoc()
+                {
+                    Name = "Результати аналізів крови",
+                    idPacient =3,
+                    idMedicalDocType = 3,
+                    BeginTime = new DateTime(2006,04,23),
+                    EndTime = new DateTime(2006,05,23),
+                    Info = "sit amet, consectetuer adipiscing elit. Aliquam auctor"
+                }
+            };
 
-
-			using (DataModel db = new DataModel())
+            using (DataModel db = new DataModel())
 			{
 				foreach (Pacient pacient in pacients)
 				{

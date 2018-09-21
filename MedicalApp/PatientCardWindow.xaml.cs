@@ -17,9 +17,9 @@ namespace MedicalApp
     /// <summary>
     /// Interaction logic for PatientCard.xaml
     /// </summary>
-    public partial class PatientCard : Window
+    public partial class PatientCardWindow : Window
     {
-        public PatientCard()
+        public PatientCardWindow()
         {
             InitializeComponent();
         }

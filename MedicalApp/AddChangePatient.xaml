@@ -35,8 +35,8 @@
                 <TextBox Name="txbBirth" Grid.Column="0" Grid.Row="3" Height="25" Width="220" Margin="100, 10, 0, 10" Panel.ZIndex="1"></TextBox>
                 
                 <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Horizontal">
-                    <RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="70" FontSize="16" Margin="160, 10, 10, 0" Checked="RadioButton_Checked" Content="Man" IsChecked="True"></RadioButton>
-                    <RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="80" FontSize="16" Margin="40, 10, 10, 0" Checked="RadioButton_Checked" Content="Women"></RadioButton>
+					<RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="70" FontSize="16" Margin="160, 10, 10, 0" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+					<RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="80" FontSize="16" Margin="40, 10, 10, 0" Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
                 </StackPanel>
                 <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="5" Grid.RowSpan="2"  Width="220" Height="80" Margin="100, 10, 0, 10" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
 

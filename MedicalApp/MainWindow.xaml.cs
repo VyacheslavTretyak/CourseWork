@@ -194,6 +194,8 @@ namespace MedicalApp
 			// TODO
 			// PatientCardWindow patientCardWindow = new PatientCardWindow();
 			// patientCardWindow.Show();
+			PatientCard patientCard = new PatientCard();
+			patientCard.Show();
 		}
 
 		// search by enter key

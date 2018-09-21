@@ -193,9 +193,8 @@ namespace MedicalApp
 		void openPatientsCard()
 		{
 			// TODO
-			// PatientCardWindow patientCardWindow = new PatientCardWindow();
-			// patientCardWindow.Show();
-			PatientCard patientCard = new PatientCard();
+
+            PatientCardWindow patientCard = new PatientCardWindow();
 			patientCard.Show();
 		}
 
@@ -216,6 +215,11 @@ namespace MedicalApp
 
 			openPatientsCard();
 		}
+	
+			
+			
+            
+		
 		private void InitFirstData()
 		{
 			//Первичные данные для DB
@@ -258,14 +262,10 @@ namespace MedicalApp
 				new MedicalDocType()
 				{
 					Name = "Результати аналізів"
-				},
-                new MedicalDocType()
-                {
-                    Name = "Направлення на процедури"
-                }
-            };
+				}
+			};
             MedicalDoc[] docs =
-            {
+          {
                 new MedicalDoc()
                 {
                     Name = "Лікарняний Перелом",

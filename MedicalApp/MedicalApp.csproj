@@ -99,14 +99,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PatientCard.xaml">
+    <Page Include="PatientCardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientCard.xaml.cs">
-      <DependentUpon>PatientCard.xaml</DependentUpon>
+    <Compile Include="PatientCardWindow.xaml.cs">
+      <DependentUpon>PatientCardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -193,8 +193,8 @@ namespace MedicalApp
 		void openPatientsCard()
 		{
 			// TODO
-			// PatientCardWindow patientCardWindow = new PatientCardWindow();
-			// patientCardWindow.Show();
+			PatientCardWindow patientCardWindow = new PatientCardWindow();
+			patientCardWindow.Show();
 			PatientCard patientCard = new PatientCard();
 			patientCard.Show();
 		}
@@ -265,6 +265,8 @@ namespace MedicalApp
 					Name = "Результати аналізів"
 				}
 			};
+
+
 			using (DataModel db = new DataModel())
 			{
 				foreach (Pacient pacient in pacients)

@@ -3,51 +3,72 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MedicalApp"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="24"		
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+
         Title="AddChangePatient" Height="550" Width="500">
-    <Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5">
-        <Border Margin="30, 50, 30, 30" Background="White">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
+                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <Label Grid.Column="1" Grid.Row="0" FontSize="20" FontWeight="Bold" FlowDirection="RightToLeft" Padding="0, 20, 0, 0" Margin="120, 0, 20, 0" xml:space="preserve">Add/Edit  Client</Label>
+        <Label Grid.Column="0" Grid.Row="1" FontSize="16"  Margin="10, 10, 0, 10">First Name:</Label>
+        <Label Grid.Column="0" Grid.Row="2" FontSize="16"  Margin="10, 10, 0, 10">Last Name:</Label>
+        <Label Grid.Column="0" Grid.Row="3" FontSize="16"  Margin="10, 10, 0, 10">Middle Name:</Label>
+        <Label Grid.Column="0" Grid.Row="4" FontSize="16" Margin="10, 10, 0, 10">Date of Birth:</Label>
+        <Label Grid.Column="0" Grid.Row="5" FontSize="16" Margin="10, 10, 10, 10">Gender:</Label>
+        <Label Grid.Column="0" Grid.Row="6" FontSize="16"  Margin="10, 10, 0, 10">Adress:</Label>
+
+        <TextBox Name="txbFirstName" Grid.Column="1" Grid.Row="1" Height="30" Margin="10, 10, 10, 10"></TextBox>
+        <TextBox Name="txbLastName" Grid.Column="1" Grid.Row="2" Height="25" Margin="10, 10, 10, 10"></TextBox>
+        <TextBox Name="txbMiddleName" Grid.Column="1" Grid.Row="3" Height="25" Margin="10, 10, 10, 10" Panel.ZIndex="1"></TextBox>
+        <TextBox Name="txbBirth" Grid.Column="1" Grid.Row="4" Height="25"  Margin="10, 10, 10, 10" Panel.ZIndex="1"></TextBox>
+        <TextBox Name="txbAdress" Grid.Column="1" Grid.Row="6" Grid.RowSpan="2"  Margin="10, 10, 10, 10" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" Margin="40, 0, 0, 0">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Label FontSize="20" FontWeight="Bold" Height="40"  Margin="0, -110, -10, 0">Add Client</Label>
-                <Label FontSize="20" FontWeight="Bold" Height="40" Margin="290, -110, -10, 0">Edit Client</Label>
-                <Label Grid.Column="0" Grid.Row="0" FontSize="16" Width="140" Margin="0, 10, 300, 10">First Name</Label>
-                <Label Grid.Column="0" Grid.Row="1" FontSize="16" Width="140" Margin="0, 10, 300, 10">Last Name</Label>
-                <Label Grid.Column="0" Grid.Row="2" FontSize="16" Width="140" Margin="0, 10, 300, 10">Middle Name</Label>
-                <Label Grid.Column="0" Grid.Row="3" FontSize="16" Width="140" Margin="0, 10, 300, 10">Date of Birth</Label>
-                <Label Grid.Column="0" Grid.Row="4" FontSize="16" Width="140" Margin="0, 10, 300, 10">Gender</Label>
-                <Label Grid.Column="0" Grid.Row="5" FontSize="16" Width="140" Margin="0, 10, 300, 10">Adress</Label>
-                
-                <TextBox Name="txbFirstName" Grid.Column="0" Grid.Row="0" Height="30" Width="220" Margin="100, 10, 0, 10"></TextBox>
-                <TextBox Name="txbLastName" Grid.Column="0" Grid.Row="1" Height="25" Width="220" Margin="100, 10, 0, 10"></TextBox>
-                <TextBox Name="txbMiddleName" Grid.Column="0" Grid.Row="2" Height="25" Width="220" Margin="100, 10, 0, 10" Panel.ZIndex="1"></TextBox>
-                <TextBox Name="txbBirth" Grid.Column="0" Grid.Row="3" Height="25" Width="220" Margin="100, 10, 0, 10" Panel.ZIndex="1"></TextBox>
-                
-                <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Horizontal">
-					<RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="70" FontSize="16" Margin="160, 10, 10, 0" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
-					<RadioButton GroupName="Gender" Grid.Row="4" Height="40" Width="80" FontSize="16" Margin="40, 10, 10, 0" Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
-                </StackPanel>
-                <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="5" Grid.RowSpan="2"  Width="220" Height="80" Margin="100, 10, 0, 10" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"></TextBox>
-
-                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="7">
-                    <Button Name="btnAddEdit" Grid.Column="0" Grid.Row="7" Width="120" Height="30" Margin="20, 10, 10, 10" Click="btnAddEdit_Click">Add/Edit</Button>
-                    <Button Name="btnCancel" Grid.Column="0" Grid.Row="7" Width="120" Height="30" Margin="130, 10, 0, 10" Click="btnCancel_Click">Cancel</Button>
-                </StackPanel>
-                 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="0, 20, 40, 0" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+                <RadioButton Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="60, 20, 20, 0"  Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
             </Grid>
+        </StackPanel>
 
-        </Border>
-    </Border>
-      
+
+        <Button Name="btnAddEdit" Grid.Column="0" Grid.Row="8" Margin="20, 10, 20, 10" Click="btnAddEdit_Click">Add/Edit</Button>
+        <Button Name="btnCancel" Grid.Column="1" Grid.Row="8"  Margin="140, 10, 20, 10" Click="btnCancel_Click">Cancel</Button>
+
+
+    </Grid>
+
 </Window>

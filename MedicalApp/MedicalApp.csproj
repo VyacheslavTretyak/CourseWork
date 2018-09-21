@@ -84,6 +84,9 @@
     <Compile Include="AddChangePatient.xaml.cs">
       <DependentUpon>AddChangePatient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditDocument.xaml.cs">
+      <DependentUpon>AddEditDocument.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

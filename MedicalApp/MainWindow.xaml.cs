@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -194,6 +195,8 @@ namespace MedicalApp
 			// TODO
 			// PatientCardWindow patientCardWindow = new PatientCardWindow();
 			// patientCardWindow.Show();
+			PatientCard patientCard = new PatientCard();
+			patientCard.Show();
 		}
 
 		// search by enter key
@@ -259,7 +262,7 @@ namespace MedicalApp
 				},
 				new MedicalDocType()
 				{
-					Name = "Results of analizes"
+					Name = "Результати аналізів"
 				}
 			};
 			using (DataModel db = new DataModel())
@@ -278,7 +281,14 @@ namespace MedicalApp
 						db.MedicalDocTypes.Add(doc);
 					}
 				}
-				db.SaveChanges();
+                foreach (MedicalDoc docum in docs)
+                {
+                    if (db.MedicalDocs.FirstOrDefault(p => p.Info == docum.Info) == null)
+                    {
+                        db.MedicalDocs.Add(docum);
+                    }
+                }
+                db.SaveChanges();
 			}
 		}
 

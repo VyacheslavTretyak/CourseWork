@@ -39,5 +39,9 @@ namespace MedicalApp
         {
 
         }
+		public AddChangePatient(Pacient patient) : this()
+		{
+			// TODO fill all fields from received patient object
+		}
     }
 }

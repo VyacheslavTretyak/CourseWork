@@ -22,6 +22,8 @@ namespace MedicalApp
     {
         private List<MedicalDoc> documentsOfTheCurrentPatient = null;
 
+        class SomeClass { }
+
         public PatientCardWindow()
         {
             InitializeComponent();
@@ -41,22 +43,36 @@ namespace MedicalApp
         {
             PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
             e.Column.Header = propertyDescriptor.DisplayName;
-            if (propertyDescriptor.DisplayName == "Id")
+            if (IsColumnNotDisplayed(propertyDescriptor))
             {
                 e.Cancel = true;
             }
         }
 
+        private static bool IsColumnNotDisplayed(PropertyDescriptor propertyDescriptor)
+        {
+            if (propertyDescriptor.DisplayName == "Id"
+                || propertyDescriptor.DisplayName == "idPacient"
+                || propertyDescriptor.DisplayName == "BeginTime"
+                || propertyDescriptor.DisplayName == "EndTime"
+                || propertyDescriptor.DisplayName == "Info"
+                || propertyDescriptor.DisplayName == "Pacient_Id")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
-
+            SomeClass someClass = (sender as DataGrid).SelectedValue as SomeClass;
             //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
-            //this.txbInfo.Text
+            this.txbInfo.Text
                 //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
-                //= this.dataGridDocumentList.SelectedItem
-
-            var ttt = this.dataGridDocumentList.SelectedItems[0];
+                //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
+                = ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
         }
 
         /// <summary>
@@ -109,8 +125,10 @@ namespace MedicalApp
                     this.dataGridDocumentList.ItemsSource 
                         = documentsOfTheCurrentPatient
                         //.Select( x => new { x.DocumentType, x.Name })
-                        .Select(x => new { x.Id, x.idMedicalDocType, x.Name })  // TODO up
+                        //.Select(x => new { x.Id, x.idMedicalDocType, x.Name })  // TODO up
+                        .Select(x => x)
                         .ToList();
+                    //dataGridDocumentList.Columns[0].DisplayIndex = 1;
                 }
             }
         }

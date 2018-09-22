@@ -66,20 +66,14 @@ namespace MedicalApp
                     var documentsOfTheCurrentPatient
                         = (
                         from doc in db.MedicalDocs
+                        join docType in db.MedicalDocTypes
+                        on doc.idMedicalDocType equals docType.Id
                         where doc.idPacient == idPatient
-                        select new { doc.Id, doc.idMedicalDocType, doc.Name }
+                        select new { DocumentType = docType.Name , doc.Name }
                         )
                         .ToList();
 
                     this.dataGridDocumentList.ItemsSource = documentsOfTheCurrentPatient;
-
-                    //this.dataGridDocumentList.DataContext
-                    //    = (
-                    //    from doc in db.MedicalDocs
-                    //    where doc.idPacient == idPatient
-                    //    select new { doc.Id, doc.idMedicalDocType, doc.Name }
-                    //    )
-                    //    /*.ToList()*/;
                 }
             }
         }

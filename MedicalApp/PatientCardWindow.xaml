@@ -74,14 +74,7 @@
 
                 <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1"
 				  SelectionMode="Single"  Background="White"
-				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
-                    <DataGrid.Resources>
-                        <local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Female" TrueValue="Male" />
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Doc Name"  Binding="{Binding LastName}"/>
-                    </DataGrid.Columns>
+				    IsReadOnly="True" ColumnWidth="*">
                 </DataGrid>
 
 

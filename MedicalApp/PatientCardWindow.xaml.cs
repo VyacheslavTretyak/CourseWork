@@ -40,10 +40,11 @@ namespace MedicalApp
 
             using (DataModel db = new DataModel())
             {
-                var currentPatient =
-                    (from patient in db.Pacients
-                     where patient.Id == idPatient
-                     select patient
+                var currentPatient 
+                    = (
+                    from patient in db.Pacients
+                    where patient.Id == idPatient
+                    select patient
                     )
                     .FirstOrDefault();
 
@@ -51,11 +52,34 @@ namespace MedicalApp
                 {
                     this.labelFullName.Content = currentPatient.FirstName
                         + " "
-                        + currentPatient.LastName;
+                        + currentPatient.LastName
+                        //+ " "
+                        //+ currentPatient.MiddleName
+                        ;
 
                     this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
 
                     this.txbAdress.Text = currentPatient.Addres;
+
+                    // doc type
+
+                    var documentsOfTheCurrentPatient
+                        = (
+                        from doc in db.MedicalDocs
+                        where doc.idPacient == idPatient
+                        select new { doc.Id, doc.idMedicalDocType, doc.Name }
+                        )
+                        .ToList();
+
+                    this.dataGridDocumentList.ItemsSource = documentsOfTheCurrentPatient;
+
+                    //this.dataGridDocumentList.DataContext
+                    //    = (
+                    //    from doc in db.MedicalDocs
+                    //    where doc.idPacient == idPatient
+                    //    select new { doc.Id, doc.idMedicalDocType, doc.Name }
+                    //    )
+                    //    /*.ToList()*/;
                 }
             }
         }

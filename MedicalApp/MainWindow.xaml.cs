@@ -116,6 +116,13 @@ namespace MedicalApp
 				datagridPatiens.SelectedIndex = datagridPatiens.Items.Count - 1;
 				// scroll patient list to the added patient
 				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+
+				// popup notification
+				var messageQueue = SnackbarThree.MessageQueue;
+				var message = "Patient added";
+
+				//the message queue can be called from any thread
+				Task.Factory.StartNew(() => messageQueue.Enqueue(message));
 			}
 		}
 

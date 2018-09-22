@@ -82,7 +82,7 @@
 				<DataGridTextColumn Header="Gender"  Binding="{Binding Gender, Converter={StaticResource BooleanToStringConverter}}"/>
 			</DataGrid.Columns>
 		</DataGrid>
-
+		
 		<Button Grid.Row="6" Grid.Column="0" Name="buttonOpen" Margin="5 5" Click="buttonOpen_Click"
 				ToolTip="Open patient card" Style="{StaticResource MaterialDesignRaisedAccentButton}">Open card</Button>
 		<Button Grid.Row="6" Grid.Column="1" Name="buttonEdit" Margin="5 5" Click="buttonEdit_Click" ToolTip="Edit a patient">Edit</Button>
@@ -91,5 +91,8 @@
 				Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="0 -54 25 0" HorizontalAlignment="Right">
 			<materialDesign:PackIcon Kind="Plus" Height="24" Width="24"/>
 		</Button>
+
+		<!--popup notification-->
+		<materialDesign:Snackbar Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" MessageQueue="{materialDesign:MessageQueue}" Name="SnackbarThree" />
 	</Grid>
 </Window>

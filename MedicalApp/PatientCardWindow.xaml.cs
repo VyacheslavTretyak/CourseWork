@@ -57,6 +57,8 @@ namespace MedicalApp
                 = new AddEditDocument(this.idPatient, currentDocId);   // TODO передать тип.
 
             addDocument.ShowDialog();
+
+            this.ShowPatientDocsToADatagrid();
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
@@ -64,7 +66,11 @@ namespace MedicalApp
             AddEditDocument addDocument = new AddEditDocument(this.idPatient);
 
             addDocument.ShowDialog();
+
+            this.ShowPatientDocsToADatagrid();
         }
+
+        
 
         private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -98,9 +104,12 @@ namespace MedicalApp
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
 
             //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
-            this.txbInfo.Text
+            ////this.txbInfo.Text
                 //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
                 //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
+                ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+
+            this.txbInfo.Text
                 = ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
         }
 
@@ -139,32 +148,49 @@ namespace MedicalApp
                     this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
 
                     this.txbAdress.Text = currentPatient.Addres;
-
-                    // db search doc type
-                    //var documentsOfTheCurrentPatient
-                    this.documentsOfTheCurrentPatient
-                        = (
-                        from doc in db.MedicalDocs
-                        join docType in db.MedicalDocTypes
-                        on doc.idMedicalDocType equals docType.Id
-                        where doc.idPacient == this.idPatient
-                        //select new { DocumentType = docType.Name, doc.Name }
-                        select doc                                                  // TODO up
-                        //select new { DocumentType = docType.Name, doc.Name, doc.Info }
-                        //select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name }
-                        )
-                        .ToList();
-
-                    // show docs patient
-                    this.dataGridDocumentList.ItemsSource 
-                        = documentsOfTheCurrentPatient
-                        //.Select( x => new { x.DocumentType, x.Name })
-                        //.Select(x => new { x.Id, x.idMedicalDocType, x.Name })  // TODO up
-                        .Select(x => x)
-                        .ToList();
-                    //dataGridDocumentList.Columns[0].DisplayIndex = 1;
+                    this.ShowPatientDocsToADatagrid(db);
                 }
             }
+        }
+
+        private void ShowPatientDocsToADatagrid()
+        {
+            using (DataModel db = new DataModel())
+            {
+                this.LoadingFromDatabaseDocsThePatientInDatagrid(db);
+            }
+        }
+
+        private void ShowPatientDocsToADatagrid(DataModel db)
+        {
+            this.LoadingFromDatabaseDocsThePatientInDatagrid(db);
+        }
+
+        private void LoadingFromDatabaseDocsThePatientInDatagrid(DataModel db)
+        {
+            // db search doc type
+            //var documentsOfTheCurrentPatient
+            this.documentsOfTheCurrentPatient
+                = (
+                from doc in db.MedicalDocs
+                join docType in db.MedicalDocTypes
+                on doc.idMedicalDocType equals docType.Id
+                where doc.idPacient == this.idPatient
+                //select new { DocumentType = docType.Name, doc.Name }
+                select doc                                                  // TODO up
+                                                                            //select new { DocumentType = docType.Name, doc.Name, doc.Info }
+                                                                            //select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name }
+                )
+                .ToList();
+
+            // show docs patient
+            this.dataGridDocumentList.ItemsSource
+                = documentsOfTheCurrentPatient
+                //.Select( x => new { x.DocumentType, x.Name })
+                //.Select(x => new { x.Id, x.idMedicalDocType, x.Name })  // TODO up
+                .Select(x => x)
+                .ToList();
+            //dataGridDocumentList.Columns[0].DisplayIndex = 1;
         }
 
         private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)

@@ -72,7 +72,7 @@
 		<Button Grid.Row="6" Grid.Column="0" Name="buttonEdit" Margin="5 0">Edit</Button>
 		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0">Remove</Button>
 
-		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0">Add</Button>
+		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0" Click="btnAdd_Click">Add</Button>
 
 	</Grid>
 </Window>

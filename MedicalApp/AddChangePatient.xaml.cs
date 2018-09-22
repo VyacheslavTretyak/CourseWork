@@ -32,12 +32,16 @@ namespace MedicalApp
 
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            using (DataModel db = new DataModel()) 
+            {
+                
+            }
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

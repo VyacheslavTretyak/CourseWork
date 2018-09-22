@@ -28,8 +28,36 @@ namespace MedicalApp
         {
             InitializeComponent();
 
-            // TODO method
-            MessageBox.Show(idPatient.ToString());
+            this.FillTheCardWithPatientData(idPatient);
+        }
+
+        /// <summary>
+        /// Fill the card with patient data.
+        /// </summary>
+        private void FillTheCardWithPatientData(int idPatient)
+        {
+            // TODO #1
+
+            using (DataModel db = new DataModel())
+            {
+                var currentPatient =
+                    (from patient in db.Pacients
+                     where patient.Id == idPatient
+                     select patient
+                    )
+                    .FirstOrDefault();
+
+                if (currentPatient != null)
+                {
+                    this.labelFullName.Content = currentPatient.FirstName
+                        + " "
+                        + currentPatient.LastName;
+
+                    this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
+
+                    this.txbAdress.Text = currentPatient.Addres;
+                }
+            }
         }
 
         private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)

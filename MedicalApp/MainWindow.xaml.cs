@@ -235,26 +235,26 @@ namespace MedicalApp
 			Pacient[] pacients = {
 			new Pacient()
 			{
-				FirstName = "Pomber",
-				LastName = "Asekrot",
+				FirstName = "Bart",
+				LastName = "Simpson",
 				BirthDay = new DateTime(1991, 1, 1),
-				Addres = "Krivoy Rog Sicheslavska str. 11/13",
+				Addres = "Springfield Sicheslavska str. 11/13",
 				Gender = true
 			},
 			new Pacient()
 			{
-				FirstName = "Arkport",
-				LastName = "Shurtrych",
+				FirstName = "Bender",
+				LastName = "Rodriguez",
 				BirthDay = new DateTime(1988, 12, 17),
-				Addres = "Krivoy Rog Myru str. 121/15",
+				Addres = "New York Myru str. 121/15",
 				Gender = true
 			},
 			new Pacient()
 			{
-				FirstName = "Roska",
-				LastName = "Viaerkova",
+				FirstName = "Lisa",
+				LastName = "Simpson",
 				BirthDay = new DateTime(2001, 9, 11),
-				Addres = "Krivoy Rog Almasna str. 49/51",
+				Addres = "Springfield Almasna str. 49/51",
 				Gender = false
 			},
 			};

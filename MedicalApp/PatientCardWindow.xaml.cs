@@ -50,7 +50,7 @@ namespace MedicalApp
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
             AddEditDocument addDocument 
-                = new AddEditDocument(this.idPatient, 1);
+                = new AddEditDocument(this.idPatient, 1);   // TODO передать тип.
 
             addDocument.ShowDialog();
         }
@@ -89,6 +89,8 @@ namespace MedicalApp
 
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.ActivationOfTheDocumentEditingButton();
+
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
 
             //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
@@ -96,6 +98,11 @@ namespace MedicalApp
                 //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
                 //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
                 = ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+        }
+
+        private void ActivationOfTheDocumentEditingButton()
+        {
+            this.btnDocEdit.IsEnabled = true;
         }
 
         /// <summary>

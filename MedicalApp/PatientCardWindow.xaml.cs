@@ -20,9 +20,9 @@ namespace MedicalApp
     /// </summary>
     public partial class PatientCardWindow : Window
     {
-        private List<MedicalDoc> documentsOfTheCurrentPatient = null;
+        private List<MedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
 
-        class SomeClass { }
+        private int idPatient;
 
         public PatientCardWindow()
         {
@@ -33,10 +33,22 @@ namespace MedicalApp
         {
             InitializeComponent();
 
+            this.idPatient = idPatient;
+
             this.FillTheCardWithPatientData(idPatient);
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
             this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
+
+            // Button
+            this.btnDocAdd.Click += BtnDocAdd_Click;
+        }
+
+        private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditDocument addDocument = new AddEditDocument(this.idPatient);
+
+            addDocument.ShowDialog();
         }
 
         private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -67,7 +79,7 @@ namespace MedicalApp
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
-            SomeClass someClass = (sender as DataGrid).SelectedValue as SomeClass;
+
             //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
             this.txbInfo.Text
                 //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();

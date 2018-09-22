@@ -295,6 +295,15 @@ namespace MedicalApp
                 },
                 new MedicalDoc()
                 {
+                    Name = "Направлення на мойку",
+                    idPacient =2,
+                    idMedicalDocType = 1,
+                    BeginTime = new DateTime(2004,04,22),
+                    EndTime = new DateTime(2004,04,22),
+                    Info = "lorem ipsum"
+                },
+                new MedicalDoc()
+                {
                     Name = "Результати аналізів крови",
                     idPacient =3,
                     idMedicalDocType = 3,

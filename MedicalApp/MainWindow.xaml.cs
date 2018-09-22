@@ -107,10 +107,16 @@ namespace MedicalApp
 			// open add patient window
 			AddChangePatient addEditWindow = new AddChangePatient();
 			addEditWindow.Title = "Add patient";
-			
+
 			// update data grid if patient was added 
 			if (addEditWindow.ShowDialog() == true)
+			{
 				fillDataFromDBtoDatagrid();
+				// focus on the added patient 
+				datagridPatiens.SelectedIndex = datagridPatiens.Items.Count - 1;
+				// scroll patient list to the added patient
+				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+			}
 		}
 
 		// edit patient button click
@@ -126,7 +132,10 @@ namespace MedicalApp
 
 			// update data grid if patient was changed 
 			if (addEditWindow.ShowDialog() == true)
+			{
 				fillDataFromDBtoDatagrid();
+				// TODO
+			}
 		}
 
 		// remove patient button click

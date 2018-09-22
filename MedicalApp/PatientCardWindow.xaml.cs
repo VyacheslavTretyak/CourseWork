@@ -54,7 +54,7 @@ namespace MedicalApp
                 .Id;
 
             AddEditDocument addDocument 
-                = new AddEditDocument(this.idPatient, currentDocId);   // TODO передать тип.
+                = new AddEditDocument(this.idPatient, currentDocId);
 
             addDocument.ShowDialog();
 
@@ -103,6 +103,7 @@ namespace MedicalApp
             {
                 this.ActivationOfTheDocumentEditingButton();
 
+                // TODO поменять местами (анонимный тип или Display)
                 this.txbInfo.Text
                     = ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
             }
@@ -111,18 +112,20 @@ namespace MedicalApp
                 this.DeactivationOfTheDocumentEditingButton();
             }
 
-            
+
 
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
 
-            //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
-            ////this.txbInfo.Text
-            //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
-            //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
-            ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+        //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
+        ////this.txbInfo.Text
+        //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
+        //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
+        ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
 
-            
+        
         }
+
+
 
         private void DeactivationOfTheDocumentEditingButton()
         {
@@ -207,11 +210,6 @@ namespace MedicalApp
                 .Select(x => x)
                 .ToList();
             //dataGridDocumentList.Columns[0].DisplayIndex = 1;
-        }
-
-        private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)

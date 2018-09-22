@@ -63,7 +63,7 @@
                 <Label  Grid.Column="0" Grid.Row="2"  FontWeight="Bold" x:Name="labelFullName" Content="FullName" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Left" x:Name="DateOfBirth" Content="Date Of Birth:" Margin="1" VerticalAlignment="Top"/>
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" x:Name="DateOfBirthValue" Content="00/00/00" HorizontalAlignment="Right" Margin="185,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.988,0.414"/>
-                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged" Text="Address"/>
+                <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="Address"/>
                 <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>
                 <Button x:Name="btnDocEdit"  Grid.Column="3" Grid.Row="6" Height="Auto" Margin="2" Content="Edit document"/>
 

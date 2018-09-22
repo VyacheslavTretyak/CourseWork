@@ -45,6 +45,15 @@ namespace MedicalApp
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
             this.btnDocEdit.Click += BtnDocEdit_Click;
+
+
+            // Temp method - do not delete.
+            TempMethod();
+        }
+
+        private void TempMethod()
+        {
+            this.dataGridDocumentList.ToolTip = "// TODO = Вместо цифр будут выводится названия типов доков, и в 1ю колонку";
         }
 
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
@@ -214,7 +223,8 @@ namespace MedicalApp
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
 		{
-
+            // TODO реализовать поиск документов.
+            MessageBox.Show("Пока еще не реализовано");
 		}
 	}
 }

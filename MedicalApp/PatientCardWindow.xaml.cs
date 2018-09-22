@@ -24,6 +24,13 @@ namespace MedicalApp
             InitializeComponent();
         }
 
+        public PatientCardWindow(int idPatient)
+        {
+            InitializeComponent();
+
+            // TODO method
+        }
+
         private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)
         {
 

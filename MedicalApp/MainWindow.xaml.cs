@@ -174,7 +174,7 @@ namespace MedicalApp
 		{
 			// open patient's card by enter key
 			if (e.Key == Key.Enter)
-				openPatientsCard();
+				openPatientsCard(this.GetIdOfTheSelectedPatient());
 			// remove patient by delete key
 			else if (e.Key == Key.Delete)
 				buttonRemove.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -184,17 +184,26 @@ namespace MedicalApp
 		private void datagridPatiens_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (datagridPatiens.SelectedItems.Count > 0)
-			{
-				openPatientsCard();
-			}
-		}
+            {
+                openPatientsCard(this.GetIdOfTheSelectedPatient());
+            }
+        }
 
-		// open patient card window
-		void openPatientsCard()
+        /// <summary>
+        /// Get the id of the selected patient.
+        /// </summary>
+        /// <returns>Id of the selected patient in the datagridPatiens.</returns>
+        private int GetIdOfTheSelectedPatient()
+        {
+            return (datagridPatiens.SelectedItem as Pacient).Id;
+        }
+
+        // open patient card window
+        void openPatientsCard(int idPatient)
 		{
 			// TODO
 
-            PatientCardWindow patientCard = new PatientCardWindow();
+            PatientCardWindow patientCard = new PatientCardWindow(idPatient);
 			patientCard.Show();
 		}
 

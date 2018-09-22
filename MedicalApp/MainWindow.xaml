@@ -9,26 +9,25 @@
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        TextElement.FontSize="24"		
+        TextElement.FontSize="18"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="MedicalApp" Height="600" Width="800" MinHeight="400" MinWidth="400">
 	<Grid>
-		<Grid.Resources>
+		<!--<Grid.Resources>
 			<Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
 				<Setter Property="Margin" Value="5 0" />
 			</Style>
 			<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ControlBaseStyle}">
 				<Setter Property="VerticalAlignment" Value="Bottom" />
 			</Style>
-		</Grid.Resources>
+		</Grid.Resources>-->
 		<Grid.RowDefinitions>
-			<RowDefinition Height="70"/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition Height="6*"/>
-			<RowDefinition/>
+			<RowDefinition Height="62"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -36,7 +35,9 @@
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		
+		<Grid Grid.Row="2" Name="gridRow2"/>
+		<Grid Grid.Row="1" Height="{Binding ElementName=gridRow2, Path=ActualHeight}"/>
+
 		<materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
 			<StackPanel Orientation="Horizontal">
 				<materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
@@ -47,22 +48,26 @@
 		<!--<TextBlock Grid.Row="1" Grid.Column="0">Card number:</TextBlock>-->
 		<!--<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>-->
 
-		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="12" materialDesign:HintAssist.Hint="Card number" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
-				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+		<TextBox Grid.Row="1" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="12" materialDesign:HintAssist.Hint="Card number"></TextBox>
+		<TextBox Grid.Row="1" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address"></TextBox>
 
 		<!--<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>-->
 		<!--<TextBlock Grid.Row="3" Grid.Column="1">Year of birth:</TextBlock>-->
 
-		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxLastName" Margin="5 0" KeyDown="textbox_EnterKeyDown"
 				 MaxLength="32" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-		<TextBox Grid.Row="4" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" KeyDown="textbox_EnterKeyDown"
 				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="4" materialDesign:HintAssist.Hint="Year of birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-		
-		<Button Grid.Row="4" Grid.Column="3" Name="buttonSearch" Margin="5 0" Click="buttonSearch_Click">Search</Button>
 
-		<DataGrid Grid.Row="5" Grid.ColumnSpan="4" Name="datagridPatiens"
+		<Button Grid.Row="2" Grid.Column="3" Name="buttonSearch" Margin="-65 5 65 5" Click="buttonSearch_Click" ToolTip="Search for patients">Search</Button>
+		<Button Grid.Row="2" Grid.Column="3" Name="buttonEraser" Margin="5 5" Content="{materialDesign:PackIcon Eraser}"
+				Click="buttonEraser_Click" ToolTip="Clear all search fields" HorizontalAlignment="Right" Width="50"/>
+
+		<TextBlock Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center"
+				   Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="0 15 0 0">List of patient cards:</TextBlock>
+		<DataGrid Grid.Row="4" Grid.ColumnSpan="4" Name="datagridPatiens"
 				  SelectionMode="Single" SelectionChanged="datagridPatiens_SelectionChanged"
 				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*"
 				  PreviewKeyDown="datagridPatiens_PreviewKeyDown" MouseDoubleClick="datagridPatiens_MouseDoubleClick">
@@ -78,9 +83,13 @@
 			</DataGrid.Columns>
 		</DataGrid>
 
-		<Button Grid.Row="6" Grid.Column="0" Name="buttonEdit" Margin="5 0" Click="buttonEdit_Click">Edit</Button>
-		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0" Click="buttonRemove_Click">Remove</Button>
-		<Button Grid.Row="6" Grid.Column="2" Name="buttonOpen" Margin="5 0" Click="buttonOpen_Click">Open card</Button>
-		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0" Click="buttonAdd_Click">Add</Button>
+		<Button Grid.Row="6" Grid.Column="0" Name="buttonOpen" Margin="5 5" Click="buttonOpen_Click"
+				ToolTip="Open patient card" Style="{StaticResource MaterialDesignRaisedAccentButton}">Open card</Button>
+		<Button Grid.Row="6" Grid.Column="1" Name="buttonEdit" Margin="5 5" Click="buttonEdit_Click" ToolTip="Edit a patient">Edit</Button>
+		<Button Grid.Row="6" Grid.Column="2" Name="buttonRemove" Margin="5 5" Click="buttonRemove_Click" ToolTip="Remove a patient">Remove</Button>
+		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Click="buttonAdd_Click" ToolTip="Add a patients"
+				Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="0 -54 25 0" HorizontalAlignment="Right">
+			<materialDesign:PackIcon Kind="Plus" Height="24" Width="24"/>
+		</Button>
 	</Grid>
 </Window>

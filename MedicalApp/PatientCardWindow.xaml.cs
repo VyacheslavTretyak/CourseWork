@@ -29,6 +29,7 @@ namespace MedicalApp
             InitializeComponent();
 
             // TODO method
+            MessageBox.Show(idPatient.ToString());
         }
 
         private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)

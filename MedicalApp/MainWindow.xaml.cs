@@ -222,7 +222,7 @@ namespace MedicalApp
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
 
-			openPatientsCard();
+			openPatientsCard(this.GetIdOfTheSelectedPatient());
 		}
 	
 			

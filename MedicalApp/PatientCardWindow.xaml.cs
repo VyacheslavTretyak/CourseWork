@@ -29,6 +29,13 @@ namespace MedicalApp
             InitializeComponent();
 
             this.FillTheCardWithPatientData(idPatient);
+
+            this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
+        }
+
+        private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //this.txbInfo.Text = (sender as DataGridCell).Column
         }
 
         /// <summary>
@@ -53,6 +60,7 @@ namespace MedicalApp
                     this.labelFullName.Content = currentPatient.FirstName
                         + " "
                         + currentPatient.LastName
+                        // TODO add MiddleName in DB
                         //+ " "
                         //+ currentPatient.MiddleName
                         ;
@@ -62,18 +70,22 @@ namespace MedicalApp
                     this.txbAdress.Text = currentPatient.Addres;
 
                     // doc type
-
                     var documentsOfTheCurrentPatient
                         = (
                         from doc in db.MedicalDocs
                         join docType in db.MedicalDocTypes
                         on doc.idMedicalDocType equals docType.Id
                         where doc.idPacient == idPatient
-                        select new { DocumentType = docType.Name , doc.Name }
+                        select new { doc.Id, DocumentType = docType.Name, doc.Name }
+                        //select doc
+                        //select new { DocumentType = docType.Name, doc.Name, doc.Info }
                         )
                         .ToList();
 
-                    this.dataGridDocumentList.ItemsSource = documentsOfTheCurrentPatient;
+                    this.dataGridDocumentList.ItemsSource 
+                        = documentsOfTheCurrentPatient
+                        .Select( x => new { x.DocumentType, x.Name })
+                        .ToList();
                 }
             }
         }

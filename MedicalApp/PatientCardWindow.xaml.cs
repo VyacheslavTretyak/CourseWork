@@ -49,8 +49,12 @@ namespace MedicalApp
 
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
+            int currentDocId
+                = (this.dataGridDocumentList.SelectedItem as MedicalDoc)
+                .Id;
+
             AddEditDocument addDocument 
-                = new AddEditDocument(this.idPatient, 1);   // TODO передать тип.
+                = new AddEditDocument(this.idPatient, currentDocId);   // TODO передать тип.
 
             addDocument.ShowDialog();
         }

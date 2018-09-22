@@ -35,6 +35,8 @@ namespace MedicalApp
 
             this.idPatient = idPatient;
 
+            this.btnDocEdit.IsEnabled = false;
+
             this.FillTheCardWithPatientData(idPatient);
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
@@ -42,6 +44,15 @@ namespace MedicalApp
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
+            this.btnDocEdit.Click += BtnDocEdit_Click;
+        }
+
+        private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditDocument addDocument 
+                = new AddEditDocument(this.idPatient, 1);
+
+            addDocument.ShowDialog();
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)

@@ -24,11 +24,6 @@ namespace MedicalApp
             InitializeComponent();
         }
 
-        private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
 		{
 

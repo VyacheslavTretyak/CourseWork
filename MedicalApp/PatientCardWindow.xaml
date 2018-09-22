@@ -15,14 +15,16 @@
     <Border Background="WhiteSmoke" BorderThickness="4"  CornerRadius="5" Margin="0,0,2,-3" RenderTransformOrigin="0.317,0.53">
         <Border  Background="White" RenderTransformOrigin="0.308,0.5" Margin="-3,-1,-4,6">
             <Grid>
+                
                 <Grid.Resources>
                     <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
-                        <Setter Property="Margin" Value="5 0" />
+                        <Setter Property="Margin" Value="5 0"/>
                     </Style>
                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ControlBaseStyle}">
-                        <Setter Property="VerticalAlignment" Value="Bottom" />
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
                     </Style>
                 </Grid.Resources>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55*"></RowDefinition>
                     <RowDefinition Height="7*"></RowDefinition>
@@ -44,53 +46,39 @@
                     <RowDefinition Height="7*"></RowDefinition>
                     <RowDefinition Height="138*"></RowDefinition>
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="269*"></ColumnDefinition>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                     <ColumnDefinition Width="261*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
+
                 <materialDesign:ColorZone Grid.ColumnSpan="3" Mode="PrimaryLight"  Padding="16">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
+                        <materialDesign:PackIcon Kind="Hospital" Height="30" Width="30"/>
                         <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
                     </StackPanel>
                 </materialDesign:ColorZone>
 
-
-
                 <Label  Grid.Column="0" Grid.Row="2"  FontWeight="Bold" x:Name="labelFullName" Content="FullName" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Left" x:Name="DateOfBirth" Content="Date Of Birth:" Margin="1" VerticalAlignment="Top"/>
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" x:Name="DateOfBirthValue" Content="00/00/00" HorizontalAlignment="Right" Margin="185,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.988,0.414"/>
-
-
-
                 <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Name="txbAdress"  Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="txbAdress_TextChanged" Text="Address"/>
-
-
                 <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>
                 <Button x:Name="btnDocEdit"  Grid.Column="3" Grid.Row="6" Height="Auto" Margin="2" Content="Edit document"/>
 
-
-                <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1"
-				  SelectionMode="Single"  Background="White"
-				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
-                    <DataGrid.Resources>
-                        <local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Female" TrueValue="Male" />
-                    </DataGrid.Resources>
+                <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1" SelectionMode="Single"  Background="White" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Doc Name"  Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Id"/>
+                        <DataGridTextColumn Header="Doc Name"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
-
-                <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <TextBox x:Name="txbAStartData" Grid.Row="12" Grid.Column="2" MaxLength="12" materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="txbAStartData" Grid.Row="12" Grid.Column="2" MaxLength="12" materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="txbFinalData" Grid.Row="14" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2" Click="btnDocSearch_Click"  Content="Search document"/>
-
-                <TextBox Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Name="txbInfo" Margin="1" Text="Info" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                <TextBox Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Name="txbInfo" Margin="1" Text="Info" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 
             </Grid>
         </Border>

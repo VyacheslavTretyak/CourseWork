@@ -321,11 +321,11 @@ namespace MedicalApp
                 db.SaveChanges();
 			}
 		}
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddChangePatient addChangePatient = new AddChangePatient();
-            addChangePatient.Show();
-        }
-    }
+		// unused method
+		//private void btnAdd_Click(object sender, RoutedEventArgs e)
+		//{
+		//    AddChangePatient addChangePatient = new AddChangePatient();
+		//    addChangePatient.Show();
+		//}
+	}
 }

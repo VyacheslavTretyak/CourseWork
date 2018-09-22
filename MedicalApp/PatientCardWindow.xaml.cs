@@ -37,7 +37,7 @@ namespace MedicalApp
 
             this.btnDocEdit.IsEnabled = false;
 
-            this.FillTheCardWithPatientData(idPatient);
+            this.FillTheCardWithPatientData();
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
             this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
@@ -112,7 +112,7 @@ namespace MedicalApp
         /// <summary>
         /// Fill the card with patient data.
         /// </summary>
-        private void FillTheCardWithPatientData(int idPatient)
+        private void FillTheCardWithPatientData()
         {
             // TODO #1
 
@@ -121,7 +121,7 @@ namespace MedicalApp
                 var currentPatient 
                     = (
                     from patient in db.Pacients
-                    where patient.Id == idPatient
+                    where patient.Id == this.idPatient
                     select patient
                     )
                     .FirstOrDefault();
@@ -147,7 +147,7 @@ namespace MedicalApp
                         from doc in db.MedicalDocs
                         join docType in db.MedicalDocTypes
                         on doc.idMedicalDocType equals docType.Id
-                        where doc.idPacient == idPatient
+                        where doc.idPacient == this.idPatient
                         //select new { DocumentType = docType.Name, doc.Name }
                         select doc                                                  // TODO up
                         //select new { DocumentType = docType.Name, doc.Name, doc.Info }

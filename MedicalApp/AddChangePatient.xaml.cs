@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,24 +20,62 @@ namespace MedicalApp
     /// </summary>
     public partial class AddChangePatient : Window
     {
+        Pacient pacient;
         public AddChangePatient()
         {
             InitializeComponent();
             //commit
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
+            btnAddEdit.Content = "Add";
+            WindowName.Content = "Add Client";
         }
 
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-            using (DataModel db = new DataModel()) 
+            if(!String.IsNullOrEmpty(txbFirstName.Text) && 
+                !String.IsNullOrEmpty(txbLastName.Text) && 
+                !String.IsNullOrEmpty(txbAdress.Text) &&
+                !String.IsNullOrEmpty(txbBirth.Text))
             {
-                
+                using (DataModel db = new DataModel())
+                {
+                    if (pacient != null)
+                    {
+                        db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
+                        db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
+                        db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
+                        db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                            System.Globalization.CultureInfo.InvariantCulture);
+                        if (rdbMale.IsChecked == false)
+                            db.Pacients.Find(pacient.Id).Gender = false;
+                        else
+                            db.Pacients.Find(pacient.Id).Gender = true;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        pacient = new Pacient();
+                        pacient.FirstName = txbFirstName.Text;
+                        pacient.LastName = txbLastName.Text;
+                        pacient.Addres = txbAdress.Text;
+                        pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                            System.Globalization.CultureInfo.InvariantCulture);
+                        if (rdbMale.IsChecked == false)
+                            pacient.Gender = false;
+                        else
+                            pacient.Gender = true;
+                        db.Pacients.Add(pacient);
+                        db.SaveChanges();
+                    }
+                }
             }
             this.Close();
+        }
+
+        // PreviewTextInput event to make numeric textbox
+        private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9.]+");
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -45,7 +84,16 @@ namespace MedicalApp
         }
 		public AddChangePatient(Pacient patient) : this()
 		{
-			// TODO fill all fields from received patient object
-		}
+            pacient = patient;
+            btnAddEdit.Content = "Edit";
+            WindowName.Content = "Edit Client";
+            txbFirstName.Text = patient.FirstName;
+            txbLastName.Text = patient.LastName;
+            //TODO MiddleName
+            txbAdress.Text = patient.Addres;
+            txbBirth.Text = patient.BirthDay.ToShortDateString();
+            if (!patient.Gender)
+                rdbFemale.IsChecked = true;
+        }
     }
 }

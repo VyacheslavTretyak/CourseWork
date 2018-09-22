@@ -205,6 +205,10 @@ namespace MedicalApp
 			if (e.Key == Key.Enter)
 				buttonSearch.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
 		}
+			//kuku
+            //test
+            //testkate
+            //lisa
 
 		// open card button
 		private void buttonOpen_Click(object sender, RoutedEventArgs e)

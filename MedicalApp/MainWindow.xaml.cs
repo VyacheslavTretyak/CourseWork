@@ -74,7 +74,7 @@ namespace MedicalApp
 				if (!string.IsNullOrWhiteSpace(textboxNumberCard.Text))
 				{
 					// selection of patients with the entered card number
-					int cardNum = Convert.ToInt32(textboxNumberCard.Text);
+					long cardNum = Convert.ToInt64 (textboxNumberCard.Text);
 					queryable = queryable.Where(p => p.Id == cardNum);
 				}
 				// if last name field not empty
@@ -215,11 +215,16 @@ namespace MedicalApp
 
 			openPatientsCard();
 		}
-	
-			
-			
-            
-		
+
+		private void buttonEraser_Click(object sender, RoutedEventArgs e)
+		{
+			textboxNumberCard.Text = textboxAddress.Text = textboxLastName.Text = textboxDateOfBirth.Text = "";
+		}
+
+
+
+
+
 		private void InitFirstData()
 		{
 			//Первичные данные для DB
@@ -322,10 +327,11 @@ namespace MedicalApp
 			}
 		}
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddChangePatient addChangePatient = new AddChangePatient();
-            addChangePatient.Show();
-        }
-    }
+		// unused method
+		//private void btnAdd_Click(object sender, RoutedEventArgs e)
+		//{
+		//    AddChangePatient addChangePatient = new AddChangePatient();
+		//    addChangePatient.Show();
+		//}
+	}
 }

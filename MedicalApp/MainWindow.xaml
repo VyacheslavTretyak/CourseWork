@@ -39,40 +39,48 @@
 		
 		<materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
 			<StackPanel Orientation="Horizontal">
-				<ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
-				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
-				<Button
-				Style="{StaticResource MaterialDesignRaisedDarkButton}"
-				 Width="100" Margin="20 0">
-					_Light
-				</Button>
+				<materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
+				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>				
 			</StackPanel>
 		</materialDesign:ColorZone>
 
-        <Button Name="btnAdd"  Width="100" Height="30" Margin="650,350,0, 10" Click="btnAdd_Click">Add</Button>
+		<!--<TextBlock Grid.Row="1" Grid.Column="0">Card number:</TextBlock>-->
+		<!--<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>-->
 
+		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="12" materialDesign:HintAssist.Hint="Card number" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
-		<TextBlock Grid.Row="1" Grid.Column="0">Number card:</TextBlock>
-		<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>
+		<!--<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>-->
+		<!--<TextBlock Grid.Row="3" Grid.Column="1">Year of birth:</TextBlock>-->
+
+		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 MaxLength="32" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+		<TextBox Grid.Row="4" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" KeyDown="textbox_EnterKeyDown"
+				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="4" materialDesign:HintAssist.Hint="Year of birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 		
-		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxNumberCard" Margin="5 0"></TextBox>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxAddress" Margin="5 0" Grid.ColumnSpan="3"></TextBox>
+		<Button Grid.Row="4" Grid.Column="3" Name="buttonSearch" Margin="5 0" Click="buttonSearch_Click">Search</Button>
 
-		<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>
-		<TextBlock Grid.Row="3" Grid.Column="1">Date of birth:</TextBlock>
+		<DataGrid Grid.Row="5" Grid.ColumnSpan="4" Name="datagridPatiens"
+				  SelectionMode="Single" SelectionChanged="datagridPatiens_SelectionChanged"
+				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*"
+				  PreviewKeyDown="datagridPatiens_PreviewKeyDown" MouseDoubleClick="datagridPatiens_MouseDoubleClick">
+			<DataGrid.Resources>
+				<local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Female" TrueValue="Male" />
+			</DataGrid.Resources>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Card number" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="Last name"  Binding="{Binding LastName}"/>
+				<DataGridTextColumn Header="First name"  Binding="{Binding FirstName}"/>
+				<DataGridTextColumn Header="Birthday"  Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"/>
+				<DataGridTextColumn Header="Gender"  Binding="{Binding Gender, Converter={StaticResource BooleanToStringConverter}}"/>
+			</DataGrid.Columns>
+		</DataGrid>
 
-		<TextBox Grid.Row="4" Grid.Column="0" Name="textboxLastName" Margin="5 0" materialDesign:HintAssist.Hint="Floating Hint"
-  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-		<TextBox Grid.Row="4" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0"></TextBox>
-		
-		<Button Grid.Row="4" Grid.Column="3" Name="buttonSearch" Margin="5 0">Search</Button>
-
-		<DataGrid Grid.Row="5" Grid.ColumnSpan="4" Name="datagridPatiens"></DataGrid>
-
-		<Button Grid.Row="6" Grid.Column="0" Name="buttonEdit" Margin="5 0">Edit</Button>
-		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0">Remove</Button>
-
-		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0" Click="btnAdd_Click">Add</Button>
-
+		<Button Grid.Row="6" Grid.Column="0" Name="buttonEdit" Margin="5 0" Click="buttonEdit_Click">Edit</Button>
+		<Button Grid.Row="6" Grid.Column="1" Name="buttonRemove" Margin="5 0" Click="buttonRemove_Click">Remove</Button>
+		<Button Grid.Row="6" Grid.Column="2" Name="buttonOpen" Margin="5 0" Click="buttonOpen_Click">Open card</Button>
+		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Margin="5 0" Click="buttonAdd_Click">Add</Button>
 	</Grid>
 </Window>

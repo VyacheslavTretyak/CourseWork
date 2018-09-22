@@ -29,6 +29,7 @@ namespace MedicalApp
             WindowName.Content = "Add Client";
         }
 
+        //add/edit button click
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
             if(!String.IsNullOrEmpty(txbFirstName.Text) && 
@@ -38,6 +39,7 @@ namespace MedicalApp
             {
                 using (DataModel db = new DataModel())
                 {
+                    //edit current user
                     if (pacient != null)
                     {
                         db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
@@ -51,6 +53,7 @@ namespace MedicalApp
                             db.Pacients.Find(pacient.Id).Gender = true;
                         db.SaveChanges();
                     }
+                    //create new user
                     else
                     {
                         pacient = new Pacient();
@@ -67,8 +70,13 @@ namespace MedicalApp
                         db.SaveChanges();
                     }
                 }
+                this.Close();
             }
-            this.Close();
+            //warn about not fill required fields
+            else
+            {
+                MessageBox.Show($"Some required fields weren't filled", "Warning", MessageBoxButton.OK);
+            }
         }
 
         // PreviewTextInput event to make numeric textbox
@@ -78,10 +86,13 @@ namespace MedicalApp
             e.Handled = Regex.IsMatch(e.Text, "[^0-9.]+");
         }
 
+        //cancel button click
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        //display information about selected user
 		public AddChangePatient(Pacient patient) : this()
 		{
             pacient = patient;

@@ -67,7 +67,7 @@
 
 		<TextBlock Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center"
 				   Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="0 15 0 0">List of patient cards:</TextBlock>
-		<DataGrid Grid.Row="4" Grid.ColumnSpan="4" Name="datagridPatiens"
+		<DataGrid Grid.Row="4" Grid.ColumnSpan="4" Name="datagridPatiens" SelectionUnit="FullRow"
 				  SelectionMode="Single" SelectionChanged="datagridPatiens_SelectionChanged"
 				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*"
 				  PreviewKeyDown="datagridPatiens_PreviewKeyDown" MouseDoubleClick="datagridPatiens_MouseDoubleClick">
@@ -93,6 +93,7 @@
 		</Button>
 
 		<!--popup notification-->
-		<materialDesign:Snackbar Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" MessageQueue="{materialDesign:MessageQueue}" Name="SnackbarThree" />
+		<materialDesign:Snackbar Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" 
+								 MessageQueue="{materialDesign:MessageQueue}" Name="SnackbarThree" />
 	</Grid>
 </Window>

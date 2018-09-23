@@ -42,17 +42,17 @@ namespace MedicalApp
 		// fill data grid from db
 		void fillDataFromDBtoDatagrid()
 		{
-			using (DataModel db = new DataModel())
+			try
 			{
-				try
+				using (DataModel db = new DataModel())
 				{
 					// select only not archived patients
 					datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
 				}
-				catch(Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -116,13 +116,8 @@ namespace MedicalApp
 				datagridPatiens.SelectedIndex = datagridPatiens.Items.Count - 1;
 				// scroll patient list to the added patient
 				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
-
 				// popup notification
-				var messageQueue = SnackbarThree.MessageQueue;
-				var message = "Patient added";
-
-				//the message queue can be called from any thread
-				Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+				showNotification("The patient was added");
 			}
 		}
 
@@ -148,6 +143,8 @@ namespace MedicalApp
 				datagridPatiens.SelectedIndex = selectedIndex;
 				// scroll patient list to the changed patient
 				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+				// popup notification
+				showNotification("The patient was edited");
 			}
 		}
 
@@ -166,6 +163,9 @@ namespace MedicalApp
 			{
 				using (DataModel db = new DataModel())
 				{
+					// save position to restore
+					int selectedIndex = datagridPatiens.SelectedIndex;
+
 					// find patient in db
 					pacient = db.Pacients.FirstOrDefault(p => p.Id == pacient.Id);
 					// remove
@@ -174,6 +174,10 @@ namespace MedicalApp
 					db.SaveChanges();
 					// update data grid list
 					fillDataFromDBtoDatagrid();
+					// scroll patient list to the previous position
+					datagridPatiens.ScrollIntoView(datagridPatiens.Items[Math.Min(selectedIndex,datagridPatiens.Items.Count-1)]);
+					// popup notification
+					showNotification("The patient was removed");
 				}
 			}
 		}
@@ -242,12 +246,21 @@ namespace MedicalApp
 			openPatientsCard();
 		}
 
+		// button to clear all fields
 		private void buttonEraser_Click(object sender, RoutedEventArgs e)
 		{
 			textboxNumberCard.Text = textboxAddress.Text = textboxLastName.Text = textboxDateOfBirth.Text = "";
 		}
 
+		// show popup notification
+		void showNotification(string message)
+		{
+			// SnackbarThree - xaml name of MaterialDesign.Snackbar  
+			var messageQueue = SnackbarThree.MessageQueue;
 
+			//the message queue can be called from any thread
+			Task.Run(() => messageQueue.Enqueue(message));
+		}
 
 
 

@@ -11,16 +11,8 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="18"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Title="MedicalApp" Height="600" Width="800" MinHeight="400" MinWidth="400">
+        Title="MedicalApp" Height="580" Width="780" MinHeight="400" MinWidth="400">
 	<Grid>
-		<!--<Grid.Resources>
-			<Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
-				<Setter Property="Margin" Value="5 0" />
-			</Style>
-			<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource ControlBaseStyle}">
-				<Setter Property="VerticalAlignment" Value="Bottom" />
-			</Style>
-		</Grid.Resources>-->
 		<Grid.RowDefinitions>
 			<RowDefinition Height="62"/>
 			<RowDefinition Height="Auto"/>
@@ -74,12 +66,17 @@
 			<DataGrid.Resources>
 				<local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Female" TrueValue="Male" />
 			</DataGrid.Resources>
+			<DataGrid.CellStyle>
+				<Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+					<Setter Property="BorderThickness" Value="0"/>
+				</Style>
+			</DataGrid.CellStyle>
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Card number" Binding="{Binding Id}"/>
+				<DataGridTextColumn Width="0.6*" Header="Card number" Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Last name"  Binding="{Binding LastName}"/>
 				<DataGridTextColumn Header="First name"  Binding="{Binding FirstName}"/>
-				<DataGridTextColumn Header="Birthday"  Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"/>
-				<DataGridTextColumn Header="Gender"  Binding="{Binding Gender, Converter={StaticResource BooleanToStringConverter}}"/>
+				<DataGridTextColumn Width="0.6*" Header="Birthday"  Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"/>
+				<DataGridTextColumn Width="0.6*" Header="Gender"  Binding="{Binding Gender, Converter={StaticResource BooleanToStringConverter}}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		

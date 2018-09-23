@@ -107,10 +107,23 @@ namespace MedicalApp
 			// open add patient window
 			AddChangePatient addEditWindow = new AddChangePatient();
 			addEditWindow.Title = "Add patient";
-			
+
 			// update data grid if patient was added 
 			if (addEditWindow.ShowDialog() == true)
+			{
 				fillDataFromDBtoDatagrid();
+				// focus on the added patient 
+				datagridPatiens.SelectedIndex = datagridPatiens.Items.Count - 1;
+				// scroll patient list to the added patient
+				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+
+				// popup notification
+				var messageQueue = SnackbarThree.MessageQueue;
+				var message = "Patient added";
+
+				//the message queue can be called from any thread
+				Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+			}
 		}
 
 		// edit patient button click
@@ -119,14 +132,23 @@ namespace MedicalApp
 			// check patient was chosen in list
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
-
+			
 			// open add patient window with filled fields
-			AddChangePatient addEditWindow = new AddChangePatient((Pacient)datagridPatiens.SelectedItem);
+			AddChangePatient addEditWindow = new AddChangePatient(datagridPatiens.SelectedItem as Pacient);
 			addEditWindow.Title = "Edit patient";
 
 			// update data grid if patient was changed 
 			if (addEditWindow.ShowDialog() == true)
+			{
+				// save position to restore
+				int selectedIndex = datagridPatiens.SelectedIndex;
+
 				fillDataFromDBtoDatagrid();
+				// focus on the changed patient from saved position
+				datagridPatiens.SelectedIndex = selectedIndex;
+				// scroll patient list to the changed patient
+				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+			}
 		}
 
 		// remove patient button click

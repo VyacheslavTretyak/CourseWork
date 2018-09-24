@@ -77,6 +77,10 @@
                 <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1"
 				  SelectionMode="Single"  Background="White"
 				    IsReadOnly="True" ColumnWidth="*">
+		    <DataGrid.Columns>
+			<DataGridTextColumn Header="Id"/>
+			<DataGridTextColumn Header="Doc Name"/>
+                    </DataGrid.Columns>
                 </DataGrid>
 
                 <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>

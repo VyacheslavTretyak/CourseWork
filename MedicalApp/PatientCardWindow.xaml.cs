@@ -108,11 +108,10 @@ namespace MedicalApp
 
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.dataGridDocumentList.SelectedIndex != -1)
+            if (this.IsARowOfTheDocumentInTheTableIsHighlighted())
             {
                 this.ActivationOfTheDocumentEditingButton();
 
-                // TODO поменять местами (анонимный тип или Display)
                 this.txbInfo.Text
                     = ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
             }
@@ -121,20 +120,32 @@ namespace MedicalApp
                 this.DeactivationOfTheDocumentEditingButton();
             }
 
-
+            
 
             //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
 
-        //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
-        ////this.txbInfo.Text
-        //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
-        //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
-        ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+            //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
+            ////this.txbInfo.Text
+            //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
+            //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
+            ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
 
-        
+
         }
 
+        /// <summary>
+        /// A row of the document in the table is highlighted.
+        /// </summary>
+        /// <returns>true, if selected.</returns>
+        private bool IsARowOfTheDocumentInTheTableIsHighlighted()
+        {
+            if (this.dataGridDocumentList.SelectedIndex != -1)
+            {
+                return true;
+            }
 
+            return false;
+        }
 
         private void DeactivationOfTheDocumentEditingButton()
         {

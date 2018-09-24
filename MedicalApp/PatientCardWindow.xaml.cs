@@ -119,18 +119,6 @@ namespace MedicalApp
             {
                 this.DeactivationOfTheDocumentEditingButton();
             }
-
-            
-
-            //MessageBox.Show((sender as DataGrid).SelectedIndex.ToString());
-
-            //this.txbInfo.Text = (this.dataGridDocumentList.SelectedItem as )
-            ////this.txbInfo.Text
-            //= ((sender as DataGrid).SelectedItem as DataGridRow).Name.ToString();
-            //= (this.dataGridDocumentList.Columns[1].GetCellContent(this.dataGridDocumentList.SelectedItem) as TextBlock).Text;
-            ////= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
-
-
         }
 
         /// <summary>
@@ -218,9 +206,8 @@ namespace MedicalApp
                 on doc.idMedicalDocType equals docType.Id
                 where doc.idPacient == this.idPatient
                 //select new { DocumentType = docType.Name, doc.Name }
-                select doc                                                  // TODO up
-                                                                            //select new { DocumentType = docType.Name, doc.Name, doc.Info }
-                                                                            //select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name }
+                select doc
+                //select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name }
                 )
                 .ToList();
 

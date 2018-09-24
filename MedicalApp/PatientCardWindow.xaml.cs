@@ -40,7 +40,7 @@ namespace MedicalApp
             this.FillTheCardWithPatientData();
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
-            this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
+            //this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
@@ -81,30 +81,30 @@ namespace MedicalApp
 
         
 
-        private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
-            e.Column.Header = propertyDescriptor.DisplayName;
-            if (IsColumnNotDisplayed(propertyDescriptor))
-            {
-                e.Cancel = true;
-            }
-        }
+        //private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        //{
+        //    PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
+        //    e.Column.Header = propertyDescriptor.DisplayName;
+        //    if (IsColumnNotDisplayed(propertyDescriptor))
+        //    {
+        //        e.Cancel = true;
+        //    }
+        //}
 
-        private static bool IsColumnNotDisplayed(PropertyDescriptor propertyDescriptor)
-        {
-            if (propertyDescriptor.DisplayName == "Id"
-                || propertyDescriptor.DisplayName == "idPacient"
-                || propertyDescriptor.DisplayName == "BeginTime"
-                || propertyDescriptor.DisplayName == "EndTime"
-                || propertyDescriptor.DisplayName == "Info"
-                || propertyDescriptor.DisplayName == "Pacient_Id")
-            {
-                return true;
-            }
+        //private static bool IsColumnNotDisplayed(PropertyDescriptor propertyDescriptor)
+        //{
+        //    if (propertyDescriptor.DisplayName == "Id"
+        //        || propertyDescriptor.DisplayName == "idPacient"
+        //        || propertyDescriptor.DisplayName == "BeginTime"
+        //        || propertyDescriptor.DisplayName == "EndTime"
+        //        || propertyDescriptor.DisplayName == "Info"
+        //        || propertyDescriptor.DisplayName == "Pacient_Id")
+        //    {
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -176,6 +176,8 @@ namespace MedicalApp
                     this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
 
                     this.txbAdress.Text = currentPatient.Addres;
+
+
                     this.ShowPatientDocsToADatagrid(db);
                 }
             }

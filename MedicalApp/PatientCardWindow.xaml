@@ -75,8 +75,22 @@
 
 
                 <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1"
-				  SelectionMode="Single"  Background="White"
-				    IsReadOnly="True" ColumnWidth="*">
+				          SelectionMode="Single"  Background="White"
+				          IsReadOnly="True" ColumnWidth="*"
+                          AutoGenerateColumns="False">
+                    <!-- HACK code duplication - MainWindow.xaml -->
+                    <!-- TODO create style for project -->
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <!-- End code duplication -->
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding idMedicalDocType}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    </DataGrid.Columns>
                 </DataGrid>
 
                 <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>

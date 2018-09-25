@@ -69,7 +69,7 @@ namespace MedicalApp
 			using (DataModel db = new DataModel())
 			{
 				// first select all not archived patiens
-				IQueryable<Pacient> queryable = db.Pacients.Where(p => p.IsArchived == false);
+				IQueryable<Patient> queryable = db.Pacients.Where(p => p.IsArchived == false);
 				// if number card field not empty
 				if (!string.IsNullOrWhiteSpace(textboxNumberCard.Text))
 				{
@@ -129,7 +129,7 @@ namespace MedicalApp
 				return;
 			
 			// open add patient window with filled fields
-			AddChangePatient addEditWindow = new AddChangePatient(datagridPatiens.SelectedItem as Pacient);
+			AddChangePatient addEditWindow = new AddChangePatient(datagridPatiens.SelectedItem as Patient);
 			addEditWindow.Title = "Edit patient";
 
 			// update data grid if patient was changed 
@@ -156,7 +156,7 @@ namespace MedicalApp
 				return;
 			
 			// get selected patient
-			Pacient pacient = datagridPatiens.SelectedItem as Pacient;
+			Patient pacient = datagridPatiens.SelectedItem as Patient;
 			// show confirmation message box
 			if (MessageBox.Show($"Are you sure you want to archive {pacient.FirstName + " " + pacient.LastName} ?",
 				"Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -267,8 +267,8 @@ namespace MedicalApp
 		private void InitFirstData()
 		{
 			//Первичные данные для DB
-			Pacient[] pacients = {
-			new Pacient()
+			Patient[] pacients = {
+			new Patient()
 			{
 				FirstName = "Pomber",
 				LastName = "Asekrot",
@@ -276,7 +276,7 @@ namespace MedicalApp
 				Addres = "Krivoy Rog Sicheslavska str. 11/13",
 				Gender = true
 			},
-			new Pacient()
+			new Patient()
 			{
 				FirstName = "Arkport",
 				LastName = "Shurtrych",
@@ -284,7 +284,7 @@ namespace MedicalApp
 				Addres = "Krivoy Rog Myru str. 121/15",
 				Gender = true
 			},
-			new Pacient()
+			new Patient()
 			{
 				FirstName = "Roska",
 				LastName = "Viaerkova",
@@ -341,7 +341,7 @@ namespace MedicalApp
 
             using (DataModel db = new DataModel())
 			{
-				foreach (Pacient pacient in pacients)
+				foreach (Patient pacient in pacients)
 				{
 					if (db.Pacients.FirstOrDefault(p => p.FirstName == pacient.FirstName) == null)
 					{

@@ -19,6 +19,9 @@ namespace MedicalApp
 		public DateTime BeginTime { get; set; }
 		public DateTime? EndTime { get; set; }
 		public string Info { get; set; }
+
+		public virtual Patient Patient { get; set; }
+		public virtual MedicalDocType MedicalDocType { get; set; }
 	}
 	
 }

@@ -9,7 +9,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        TextElement.FontSize="24"		
+        TextElement.FontSize="14"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
         Title="AddChangePatient" Height="550" Width="500">
@@ -51,7 +51,8 @@
         <TextBox Name="txbFirstName" Grid.Column="1" Grid.Row="1" Height="35" Margin="10, 10, 10, 10" FontSize="20"></TextBox>
         <TextBox Name="txbLastName" Grid.Column="1" Grid.Row="2" Height="35" Margin="10, 10, 10, 10" FontSize="20"></TextBox>
         <TextBox Name="txbMiddleName" Grid.Column="1" Grid.Row="3" Height="35" Margin="10, 10, 10, 10" Panel.ZIndex="1" FontSize="20"></TextBox>
-        <TextBox Name="txbBirth" Grid.Column="1" Grid.Row="4" Height="35"  Margin="10, 10, 10, 10" Panel.ZIndex="1" FontSize="20" PreviewTextInput="textbox_OnlyNumeric"></TextBox>
+		<DatePicker Name="txbBirth" Grid.Row ="4" Grid.Column="1" Margin="10" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+        <!--<TextBox Name="txbBirth" Grid.Column="1" Grid.Row="4" Height="35"  Margin="10, 10, 10, 10" Panel.ZIndex="1" FontSize="20" PreviewTextInput="textbox_OnlyNumeric"></TextBox>-->
         <TextBox Name="txbAdress" Grid.Column="1" Grid.Row="6" Grid.RowSpan="2"  Margin="10, 10, 10, 10" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" FontSize="20"></TextBox>
 
 

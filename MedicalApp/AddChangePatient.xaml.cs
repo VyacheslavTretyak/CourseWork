@@ -20,7 +20,7 @@ namespace MedicalApp
     /// </summary>
     public partial class AddChangePatient : Window
     {
-        Pacient pacient;
+        Patient pacient;
         public AddChangePatient()
         {
             InitializeComponent();
@@ -56,7 +56,7 @@ namespace MedicalApp
                     //create new user
                     else
                     {
-                        pacient = new Pacient();
+                        pacient = new Patient();
                         pacient.FirstName = txbFirstName.Text;
                         pacient.LastName = txbLastName.Text;
                         pacient.Addres = txbAdress.Text;
@@ -94,14 +94,14 @@ namespace MedicalApp
         }
 
         //display information about selected user
-		public AddChangePatient(Pacient patient) : this()
+		public AddChangePatient(Patient patient) : this()
 		{
             pacient = patient;
-            btnAddEdit.Content = "Edit";
+            btnAddEdit.Content = "Save";
             WindowName.Content = "Edit Client";
             txbFirstName.Text = patient.FirstName;
             txbLastName.Text = patient.LastName;
-            //TODO MiddleName
+			txbMiddleName.Text = pacient.MiddleName;           
             txbAdress.Text = patient.Addres;
             txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)

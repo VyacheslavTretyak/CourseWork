@@ -42,7 +42,7 @@ namespace MedicalApp
             using (DataModel db = new DataModel())
             {
                 //check the patient's presence
-                Pacient pac = new Pacient();
+                Patient pac = new Patient();
                 pac = db.Pacients.Where(a => a.Id == IdPacient).FirstOrDefault();
                 if (pac == null)
                 {
@@ -73,7 +73,7 @@ namespace MedicalApp
             using (DataModel db = new DataModel())
             {
                 //check the patient's presence
-                Pacient pac = new Pacient();
+                Patient pac = new Patient();
                 pac = db.Pacients.Where(a => a.Id == IdPacient).FirstOrDefault();
                 if (pac == null)
                 {

@@ -221,7 +221,7 @@ namespace MedicalApp
         /// <returns>Id of the selected patient in the datagridPatiens.</returns>
         private int GetIdOfTheSelectedPatient()
         {
-            return (datagridPatiens.SelectedItem as Pacient).Id;
+            return (datagridPatiens.SelectedItem as Patient).Id;
         }
 
         // open patient card window
@@ -281,6 +281,7 @@ namespace MedicalApp
 			{
 				FirstName = "Bart",
 				LastName = "Simpson",
+                MiddleName = "mBartSimps",
 				BirthDay = new DateTime(1991, 1, 1),
 				Addres = "Springfield Sicheslavska str. 11/13",
 				Gender = true
@@ -289,6 +290,7 @@ namespace MedicalApp
 			{
 				FirstName = "Bender",
 				LastName = "Rodriguez",
+                MiddleName = "S",
 				BirthDay = new DateTime(1988, 12, 17),
 				Addres = "New York Myru str. 121/15",
 				Gender = true
@@ -297,7 +299,8 @@ namespace MedicalApp
 			{
 				FirstName = "Lisa",
 				LastName = "Simpson",
-				BirthDay = new DateTime(2001, 9, 11),
+                MiddleName = "mLisaSimps",
+                BirthDay = new DateTime(2001, 9, 11),
 				Addres = "Springfield Almasna str. 49/51",
 				Gender = false
 			},

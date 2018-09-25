@@ -202,8 +202,8 @@ namespace MedicalApp
             this.documentsOfTheCurrentPatient
                 = (
                 from doc in db.MedicalDocs
-                join docType in db.MedicalDocTypes
-                on doc.idMedicalDocType equals docType.Id
+                //join docType in db.MedicalDocTypes
+                //on doc.idMedicalDocType equals docType.Id
                 where doc.idPacient == this.idPatient
                 //select new { DocumentType = docType.Name, doc.Name }
                 select doc
@@ -217,6 +217,7 @@ namespace MedicalApp
                 //.Select( x => new { x.DocumentType, x.Name })
                 //.Select(x => new { x.Id, x.idMedicalDocType, x.Name })  // TODO up
                 .Select(x => x)
+                //.Select(x => new { x.Id, Type = x.MedicalDocType.Name, x.Name})
                 .ToList();
             //dataGridDocumentList.Columns[0].DisplayIndex = 1;
         }

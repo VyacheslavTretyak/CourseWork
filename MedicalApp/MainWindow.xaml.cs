@@ -296,7 +296,7 @@ namespace MedicalApp
                 new MedicalDoc()
                 {
                     Name = "Результати аналізів крови",
-                    idPacient =3,
+                    idPacient = 3,
                     idMedicalDocType = 3,
                     BeginTime = new DateTime(2006,04,23),
                     EndTime = new DateTime(2006,05,23),

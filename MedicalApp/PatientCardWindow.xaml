@@ -77,7 +77,7 @@
                 <DataGrid Grid.Row="10"  Grid.RowSpan="7" Name="dataGridDocumentList" BorderThickness="1"
 				          SelectionMode="Single"  Background="White"
 				          IsReadOnly="True" ColumnWidth="*"
-                          AutoGenerateColumns="False">
+                          AutoGenerateColumns="True">
                     <!-- HACK code duplication - MainWindow.xaml -->
                     <!-- TODO create style for project -->
                     <DataGrid.CellStyle>
@@ -87,10 +87,10 @@
                     </DataGrid.CellStyle>
                     <!-- End code duplication -->
                     
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Type" Binding="{Binding idMedicalDocType}"/>
+                    <!--<DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    </DataGrid.Columns>
+                    </DataGrid.Columns>-->
                 </DataGrid>
 
                 <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>

@@ -21,7 +21,7 @@ namespace MedicalApp
 		public string Info { get; set; }
 
 		public virtual Patient Patient { get; set; }
-		public virtual MedicalDocType MedicalDocTypeId { get; set; }
+		public virtual MedicalDocType MedicalDocType { get; set; }
 	}
 	
 }

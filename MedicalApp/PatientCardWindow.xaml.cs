@@ -232,49 +232,71 @@ namespace MedicalApp
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
 		{
-            // TODO реализовать поиск документов.
-            //MessageBox.Show("Пока еще не реализовано");
-
             if (this.IsSearchFieldsAreEmpty())
             {
                 this.ShowPatientDocsToADatagrid();
             }
             else
             {
-                // TODO проверяем. и выводим по заполненным полям поиска
-                List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;
+                this.SearchDocumentsBasedOnEnteredData();
+            }
+        }
 
-                using (DataModel db = new DataModel())
+        /// <summary>
+        /// Search for patient documents based on entered data.
+        /// </summary>
+        private void SearchDocumentsBasedOnEnteredData()
+        {
+            List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;
+
+            using (DataModel db = new DataModel())
+            {
+                if (!String.IsNullOrEmpty(this.txbName.Text))
                 {
-                    if (!String.IsNullOrEmpty(this.txbName.Text))
-                    {
-                        documentsOfTheCurrentPatient
-                            = (
-                            from doc in db.MedicalDocs.Include("MedicalDocType")
-                            where doc.PatientId == this.idPatient
-                            where doc.Name.Contains(this.txbName.Text)
-                            select new RedefinedMedicalDoc
-                            {
-                                Id = doc.Id,
-                                DocumentType = doc.MedicalDocType.Name,
-                                Name = doc.Name,
-                                Info = doc.Info,
-                                BeginTime = doc.BeginTime,
-                                EndTime = doc.EndTime
-                            }
-                            )
-                            .ToList();
-
-
-
-                    }
+                    documentsOfTheCurrentPatient
+                        = (
+                        from doc in db.MedicalDocs.Include("MedicalDocType")
+                        where doc.PatientId == this.idPatient
+                        where doc.Name.Contains(this.txbName.Text)
+                        select new RedefinedMedicalDoc
+                        {
+                            Id = doc.Id,
+                            DocumentType = doc.MedicalDocType.Name,
+                            Name = doc.Name,
+                            Info = doc.Info,
+                            BeginTime = doc.BeginTime,
+                            EndTime = doc.EndTime
+                        }
+                        )
+                        .ToList();
                 }
 
-
-                this.dataGridDocumentList.ItemsSource
-                        = documentsOfTheCurrentPatient;
+                if (!String.IsNullOrEmpty(this.txbAStartData.Text))
+                {
+                    documentsOfTheCurrentPatient
+                        = (
+                        from doc in db.MedicalDocs.Include("MedicalDocType")
+                        where doc.PatientId == this.idPatient
+                        where doc.Name.Contains(this.txbName.Text)
+                        select new RedefinedMedicalDoc
+                        {
+                            Id = doc.Id,
+                            DocumentType = doc.MedicalDocType.Name,
+                            Name = doc.Name,
+                            Info = doc.Info,
+                            BeginTime = doc.BeginTime,
+                            EndTime = doc.EndTime
+                        }
+                        )
+                        .ToList();
+                }
             }
-		}
+
+
+            this.dataGridDocumentList.ItemsSource
+                    = documentsOfTheCurrentPatient;
+        }
+
         /// <summary>
         /// Search fields are empty.
         /// </summary>

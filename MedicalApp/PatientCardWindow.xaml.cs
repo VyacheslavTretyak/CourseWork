@@ -128,6 +128,8 @@ namespace MedicalApp
             else
             {
                 this.DeactivationOfTheDocumentEditingButton();
+
+                this.txbInfo.Text = "";
             }
         }
 

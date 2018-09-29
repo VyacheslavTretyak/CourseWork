@@ -20,7 +20,7 @@ namespace MedicalApp
     /// </summary>
     public partial class PatientCardWindow : Window
     {
-        private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
+        //private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
 
         private int idPatient;
 
@@ -51,7 +51,6 @@ namespace MedicalApp
             this.FillTheCardWithPatientData();
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
-            //this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
@@ -64,7 +63,7 @@ namespace MedicalApp
 
         private void TempMethod()
         {
-            this.dataGridDocumentList.ToolTip = "// TODO = Вместо цифр будут выводится названия типов доков, и в 1ю колонку";
+            
         }
 
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
@@ -161,8 +160,6 @@ namespace MedicalApp
         /// </summary>
         private void FillTheCardWithPatientData()
         {
-            // TODO #1
-
             using (DataModel db = new DataModel())
             {
                 var currentPatient 
@@ -178,7 +175,6 @@ namespace MedicalApp
                     this.labelFullName.Content = currentPatient.FirstName
                         + " "
                         + currentPatient.LastName
-                        // TODO add MiddleName in DB
                         + " "
                         + currentPatient.MiddleName
                         ;
@@ -210,13 +206,9 @@ namespace MedicalApp
         {
             // db search doc type
             var documentsOfTheCurrentPatient
-            //this.documentsOfTheCurrentPatient
                 = (
-                from doc in db.MedicalDocs//.Include("MedicalDocType")
-                //join docType in db.MedicalDocTypes
-                //on doc.idMedicalDocType equals docType.Id
+                from doc in db.MedicalDocs.Include("MedicalDocType")
                 where doc.PatientId == this.idPatient
-                //select doc
                 select new RedefinedMedicalDoc{
                     Id =  doc.Id,
                     DocumentType = doc.MedicalDocType.Name,
@@ -228,15 +220,6 @@ namespace MedicalApp
                 )
                 .ToList();
 
-            //this.type = typeof(documentsOfTheCurrentPatient);
-
-            // show docs patient
-            //this.dataGridDocumentList.ItemsSource
-            //    = documentsOfTheCurrentPatient
-            //    .Select(x => x)
-            //    //.Select(x => new { x.Id, Type = x.MedicalDocType.Name })
-            //    //.Select(x => new { x, DocumentType = x.MedicalDocType.Name })
-            //    .ToList();
 
             this.dataGridDocumentList.ItemsSource
                 = documentsOfTheCurrentPatient;

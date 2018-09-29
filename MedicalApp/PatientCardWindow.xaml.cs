@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -273,22 +274,7 @@ namespace MedicalApp
 
                 if (!String.IsNullOrEmpty(this.txbAStartData.Text))
                 {
-                    documentsOfTheCurrentPatient
-                        = (
-                        from doc in db.MedicalDocs.Include("MedicalDocType")
-                        where doc.PatientId == this.idPatient
-                        where doc.Name.Contains(this.txbName.Text)
-                        select new RedefinedMedicalDoc
-                        {
-                            Id = doc.Id,
-                            DocumentType = doc.MedicalDocType.Name,
-                            Name = doc.Name,
-                            Info = doc.Info,
-                            BeginTime = doc.BeginTime,
-                            EndTime = doc.EndTime
-                        }
-                        )
-                        .ToList();
+                    this.SearchForDocumentsByInitialDate(db, documentsOfTheCurrentPatient);
                 }
             }
 
@@ -296,6 +282,70 @@ namespace MedicalApp
             this.dataGridDocumentList.ItemsSource
                     = documentsOfTheCurrentPatient;
         }
+
+        private void SearchForDocumentsByInitialDate(DataModel db, List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        {
+            if (documentsOfTheCurrentPatient.Count > 0)
+            {
+                documentsOfTheCurrentPatient
+                    = SearchByInitialDate(documentsOfTheCurrentPatient);
+            }
+            else
+            {
+                documentsOfTheCurrentPatient
+                    = SearchByInitialDate(db.MedicalDocs);
+            } 
+        }
+
+        private List<RedefinedMedicalDoc> SearchByInitialDate(DbSet<MedicalDoc> medicalDocs)
+        {
+            List<RedefinedMedicalDoc> documents = null;
+
+            documents
+                = (
+                from doc in medicalDocs.Include("MedicalDocType")
+                where doc.PatientId == this.idPatient
+                // TODO поиск по начальной дате.
+                select new RedefinedMedicalDoc
+                {
+                    Id = doc.Id,
+                    DocumentType = doc.MedicalDocType.Name,
+                    Name = doc.Name,
+                    Info = doc.Info,
+                    BeginTime = doc.BeginTime,
+                    EndTime = doc.EndTime
+                }
+                )
+                .ToList();
+
+            return documents;
+        }
+
+        private List<RedefinedMedicalDoc> SearchByInitialDate(List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        {
+            List<RedefinedMedicalDoc> documents = null;
+
+            documents
+                = (
+                from doc in documentsOfTheCurrentPatient
+                where doc.Id == this.idPatient
+                // TODO поиск по начальной дате.
+                select new RedefinedMedicalDoc
+                {
+                    Id = doc.Id,
+                    DocumentType = doc.DocumentType,
+                    Name = doc.Name,
+                    Info = doc.Info,
+                    BeginTime = doc.BeginTime,
+                    EndTime = doc.EndTime
+                }
+                )
+                .ToList();
+
+            return documents;
+        }
+
+
 
         /// <summary>
         /// Search fields are empty.

@@ -272,7 +272,7 @@ namespace MedicalApp
                         .ToList();
                 }
 
-                if (!String.IsNullOrEmpty(this.txbAStartData.Text))
+                if (!String.IsNullOrEmpty(this.datePicStartData.Text))
                 {
                     this.SearchForDocumentsByInitialDate(db, documentsOfTheCurrentPatient);
                 }
@@ -354,8 +354,8 @@ namespace MedicalApp
         private bool IsSearchFieldsAreEmpty()
         {
             if (String.IsNullOrEmpty(this.txbName.Text)
-                && String.IsNullOrEmpty(this.txbAStartData.Text)
-                && String.IsNullOrEmpty(this.txbFinalData.Text))
+                && String.IsNullOrEmpty(this.datePicStartData.Text)
+                && String.IsNullOrEmpty(this.datePicFinalData.Text))
             {
                 return true;
             }

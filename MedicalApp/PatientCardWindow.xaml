@@ -9,7 +9,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        TextElement.FontSize="24"		
+        TextElement.FontSize="18"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Patient Card" Height="714.626" Width="780">
     <Border Background="WhiteSmoke" BorderThickness="4"  CornerRadius="5" Margin="0,0,2,-3" RenderTransformOrigin="0.317,0.53">
@@ -70,7 +70,7 @@
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" x:Name="DateOfBirthValue" Content="00/00/00" HorizontalAlignment="Right" Margin="185,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.988,0.414"/>
                 <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Name="txbAdress" IsReadOnly="true" Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                 <Label  Grid.Column="0" Grid.Row="8"  FontWeight="Bold" x:Name="labelDoc" Content="Documents" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
-                <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document" Click="btnDocAdd_Click"></Button>
+                <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>
                 <Button x:Name="btnDocEdit"  Grid.Column="3" Grid.Row="6" Height="Auto" Margin="2" Content="Edit document"/>
 
 

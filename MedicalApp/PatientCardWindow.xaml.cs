@@ -233,7 +233,55 @@ namespace MedicalApp
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
 		{
             // TODO реализовать поиск документов.
-            MessageBox.Show("Пока еще не реализовано");
+            //MessageBox.Show("Пока еще не реализовано");
+
+            if (this.IsSearchFieldsAreEmpty())
+            {
+                this.ShowPatientDocsToADatagrid();
+            }
+            else
+            {
+                // TODO проверяем. и выводим по заполненным полям поиска
+                List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;
+
+                using (DataModel db = new DataModel())
+                {
+                    if (!String.IsNullOrEmpty(this.txbName.Text))
+                    {
+                        documentsOfTheCurrentPatient
+                            = (
+                            from doc in db.MedicalDocs.Include("MedicalDocType")
+                            where doc.PatientId == this.idPatient
+                            where doc.Name.Contains(this.txbName.Text)
+                            select new RedefinedMedicalDoc
+                            {
+                                Id = doc.Id,
+                                DocumentType = doc.MedicalDocType.Name,
+                                Name = doc.Name,
+                                Info = doc.Info,
+                                BeginTime = doc.BeginTime,
+                                EndTime = doc.EndTime
+                            }
+                            )
+                            .ToList();
+
+
+
+                    }
+                }
+
+
+                this.dataGridDocumentList.ItemsSource
+                        = documentsOfTheCurrentPatient;
+            }
 		}
-	}
+        /// <summary>
+        /// Search fields are empty.
+        /// </summary>
+        /// <returns>true if all search fields are empty.</returns>
+        private bool IsSearchFieldsAreEmpty()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

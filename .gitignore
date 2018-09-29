@@ -6,6 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+MedicalApp/App.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -45,7 +46,7 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-App.config
+
 *_i.c
 *_p.c
 *_i.h

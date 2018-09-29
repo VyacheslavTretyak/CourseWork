@@ -281,7 +281,14 @@ namespace MedicalApp
         /// <returns>true if all search fields are empty.</returns>
         private bool IsSearchFieldsAreEmpty()
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(this.txbName.Text)
+                && String.IsNullOrEmpty(this.txbAStartData.Text)
+                && String.IsNullOrEmpty(this.txbFinalData.Text))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

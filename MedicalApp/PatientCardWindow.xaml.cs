@@ -20,13 +20,39 @@ namespace MedicalApp
     /// </summary>
     public partial class PatientCardWindow : Window
     {
-        private List<MedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
+        //private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
 
         private int idPatient;
+
+        private int selectedIndexDocument;
+
+        //private Type type = null;
+        private class RedefinedMedicalDoc /*: MedicalDoc*/
+        {
+            public int Id { get; set; }
+            public string DocumentType { get; set; }
+            public string Name { get; set; }
+            public string Info { get; set; }
+            public DateTime BeginTime { get; set; }
+            public DateTime? EndTime { get; set; }
+        }
 
         public PatientCardWindow()
         {
             InitializeComponent();
+
+            this.Loaded += PatientCardWindow_Loaded;
+        }
+
+        private void PatientCardWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("An error occurred while getting the patient's Id.\n"
+                + "The window will be closed.",
+                "Error while retrieving data",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+
+            this.Close();
         }
 
         public PatientCardWindow(int idPatient)
@@ -40,7 +66,6 @@ namespace MedicalApp
             this.FillTheCardWithPatientData();
 
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
-            //this.dataGridDocumentList.AutoGeneratingColumn += DataGridDocumentList_AutoGeneratingColumn;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
@@ -53,13 +78,13 @@ namespace MedicalApp
 
         private void TempMethod()
         {
-            this.dataGridDocumentList.ToolTip = "// TODO = Вместо цифр будут выводится названия типов доков, и в 1ю колонку";
+            
         }
 
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
             int currentDocId
-                = (this.dataGridDocumentList.SelectedItem as MedicalDoc)
+                = (this.dataGridDocumentList.SelectedItem as RedefinedMedicalDoc)
                 .Id;
 
             AddEditDocument addDocument 
@@ -68,43 +93,29 @@ namespace MedicalApp
             addDocument.ShowDialog();
 
             this.ShowPatientDocsToADatagrid();
+
+            // TODO выбрать (выделить) редактируемого пациента
+            this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
         {
             AddEditDocument addDocument = new AddEditDocument(this.idPatient);
 
-            addDocument.ShowDialog();
+            bool? result = addDocument.ShowDialog();
 
             this.ShowPatientDocsToADatagrid();
+
+            // TODO выбрать (выделить) добавленного пациента
+            if (result == true)
+            {
+                this.dataGridDocumentList.SelectedIndex = this.dataGridDocumentList.Items.Count - 1;
+            }
+            else
+            {
+                this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
+            }
         }
-
-        
-
-        //private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        //{
-        //    PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
-        //    e.Column.Header = propertyDescriptor.DisplayName;
-        //    if (IsColumnNotDisplayed(propertyDescriptor))
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private static bool IsColumnNotDisplayed(PropertyDescriptor propertyDescriptor)
-        //{
-        //    if (propertyDescriptor.DisplayName == "Id"
-        //        || propertyDescriptor.DisplayName == "idPacient"
-        //        || propertyDescriptor.DisplayName == "BeginTime"
-        //        || propertyDescriptor.DisplayName == "EndTime"
-        //        || propertyDescriptor.DisplayName == "Info"
-        //        || propertyDescriptor.DisplayName == "Pacient_Id")
-        //    {
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
 
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -112,12 +123,16 @@ namespace MedicalApp
             {
                 this.ActivationOfTheDocumentEditingButton();
 
-                //this.txbInfo.Text
-                    //= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+                this.txbInfo.Text
+                    = ((sender as DataGrid).SelectedItem as RedefinedMedicalDoc).Info;
+
+                this.selectedIndexDocument = this.dataGridDocumentList.SelectedIndex;
             }
             else
             {
                 this.DeactivationOfTheDocumentEditingButton();
+
+                this.txbInfo.Text = "";
             }
         }
 
@@ -150,8 +165,6 @@ namespace MedicalApp
         /// </summary>
         private void FillTheCardWithPatientData()
         {
-            // TODO #1
-
             using (DataModel db = new DataModel())
             {
                 var currentPatient 
@@ -167,7 +180,6 @@ namespace MedicalApp
                     this.labelFullName.Content = currentPatient.FirstName
                         + " "
                         + currentPatient.LastName
-                        // TODO add MiddleName in DB
                         + " "
                         + currentPatient.MiddleName
                         ;
@@ -199,23 +211,23 @@ namespace MedicalApp
         {
             // db search doc type
             var documentsOfTheCurrentPatient
-            //this.documentsOfTheCurrentPatient
                 = (
                 from doc in db.MedicalDocs.Include("MedicalDocType")
-                //join docType in db.MedicalDocTypes
-                //on doc.idMedicalDocType equals docType.Id
                 where doc.PatientId == this.idPatient
-                //select doc
-                select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name, doc.Info }
+                select new RedefinedMedicalDoc{
+                    Id =  doc.Id,
+                    DocumentType = doc.MedicalDocType.Name,
+                    Name = doc.Name,
+                    Info = doc.Info,
+                    BeginTime = doc.BeginTime,
+                    EndTime = doc.EndTime
+                }
                 )
                 .ToList();
 
-            // show docs patient
+
             this.dataGridDocumentList.ItemsSource
-                = documentsOfTheCurrentPatient
-                .Select(x => x)
-                //.Select(x => new { x.Id, Type = x.MedicalDocType.Name })
-                .ToList();
+                = documentsOfTheCurrentPatient;
         }
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)

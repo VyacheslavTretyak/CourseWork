@@ -31,6 +31,8 @@ namespace MedicalApp
             public string DocumentType { get; set; }
             public string Name { get; set; }
             public string Info { get; set; }
+            public DateTime BeginTime { get; set; }
+            public DateTime? EndTime { get; set; }
         }
 
         public PatientCardWindow()
@@ -219,7 +221,9 @@ namespace MedicalApp
                     Id =  doc.Id,
                     DocumentType = doc.MedicalDocType.Name,
                     Name = doc.Name,
-                    Info = doc.Info
+                    Info = doc.Info,
+                    BeginTime = doc.BeginTime,
+                    EndTime = doc.EndTime
                 }
                 )
                 .ToList();

@@ -39,15 +39,7 @@ namespace MedicalApp
         {
             InitializeComponent();
 
-            this.Loaded += PatientCardWindow_Loaded; 
-
-            //if (this.IsInitialized)
-            //{
-            //    MessageBox.Show("An error occurred while getting the patient's Id.\n"
-            //    + "The window will be closed.",
-            //    "Error while retrieving data");
-            //    //this.Close();
-            //}
+            this.Loaded += PatientCardWindow_Loaded;
         }
 
         private void PatientCardWindow_Loaded(object sender, RoutedEventArgs e)
@@ -99,6 +91,9 @@ namespace MedicalApp
             addDocument.ShowDialog();
 
             this.ShowPatientDocsToADatagrid();
+
+            // TODO выбрать (выделить) редактируемого пациента
+
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)

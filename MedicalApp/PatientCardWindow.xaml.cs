@@ -24,6 +24,8 @@ namespace MedicalApp
 
         private int idPatient;
 
+        private int selectedIndexDocument;
+
         //private Type type = null;
         private class RedefinedMedicalDoc /*: MedicalDoc*/
         {
@@ -93,16 +95,26 @@ namespace MedicalApp
             this.ShowPatientDocsToADatagrid();
 
             // TODO выбрать (выделить) редактируемого пациента
-
+            this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
         {
             AddEditDocument addDocument = new AddEditDocument(this.idPatient);
 
-            addDocument.ShowDialog();
+            bool? result = addDocument.ShowDialog();
 
             this.ShowPatientDocsToADatagrid();
+
+            // TODO выбрать (выделить) добавленного пациента
+            if (result == true)
+            {
+                this.dataGridDocumentList.SelectedIndex = this.dataGridDocumentList.Items.Count - 1;
+            }
+            else
+            {
+                this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
+            }
         }
 
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -113,6 +125,8 @@ namespace MedicalApp
 
                 this.txbInfo.Text
                     = ((sender as DataGrid).SelectedItem as RedefinedMedicalDoc).Info;
+
+                this.selectedIndexDocument = this.dataGridDocumentList.SelectedIndex;
             }
             else
             {

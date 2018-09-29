@@ -29,6 +29,7 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
+			//Test();
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -276,7 +277,7 @@ namespace MedicalApp
 		private void InitFirstData()
 		{
 			//Первичные данные для DB
-			Patient[] pacients = {
+			Patient[] patients = {
 			new Patient()
 			{
 				FirstName = "Bart",
@@ -320,53 +321,44 @@ namespace MedicalApp
 					Name = "Результати аналізів"
 				}
 			};
-            MedicalDoc[] docs =
-          {
-                new MedicalDoc()
-                {
-                    Name = "Лікарняний Перелом",
-                    idPacient =1,
-                    idMedicalDocType = 1,
-                    BeginTime = new DateTime(2002,04,21),
-                    EndTime = new DateTime(2002,05,21),
-                    Info = "Aliquam gravida mauris ut mi. Duis risus odio"
-                },
-                new MedicalDoc()
-                {
-                    Name = "Направлення на анализ крови",
-                    idPacient =2,
-                    idMedicalDocType = 2,
-                    BeginTime = new DateTime(2004,04,22),
-                    EndTime = new DateTime(2004,04,22),
-                    Info = "ut, nulla. Cras eu tellus eu augue"
-                },
-                new MedicalDoc()
-                {
-                    Name = "Направлення на мойку",
-                    idPacient =2,
-                    idMedicalDocType = 1,
-                    BeginTime = new DateTime(2004,04,22),
-                    EndTime = new DateTime(2004,04,22),
-                    Info = "lorem ipsum"
-                },
-                new MedicalDoc()
-                {
-                    Name = "Результати аналізів крови",
-                    idPacient =3,
-                    idMedicalDocType = 3,
-                    BeginTime = new DateTime(2006,04,23),
-                    EndTime = new DateTime(2006,05,23),
-                    Info = "sit amet, consectetuer adipiscing elit. Aliquam auctor"
-                }
-            };
-
-            using (DataModel db = new DataModel())
-			{
-				foreach (Patient pacient in pacients)
+			MedicalDoc[] docs =
+		    {
+				new MedicalDoc()
 				{
-					if (db.Pacients.FirstOrDefault(p => p.FirstName == pacient.FirstName) == null)
+					Name = "Лікарняний Перелом",
+					Patient = patients[0],
+					MedicalDocType = types[0],
+					BeginTime = new DateTime(2002,04,21),
+					EndTime = new DateTime(2002,05,21),
+					Info = "Aliquam gravida mauris ut mi. Duis risus odio"
+				},
+				new MedicalDoc()
+				{
+					Name = "Направлення на анализ крови",
+					Patient = patients[1],
+					MedicalDocType = types[1],
+					BeginTime = new DateTime(2004,04,22),
+					EndTime = new DateTime(2004,04,22),
+					Info = "ut, nulla. Cras eu tellus eu augue"
+				},
+				new MedicalDoc()
+				{
+					Name = "Результати аналізів крови",
+					Patient = patients[2],
+					MedicalDocType = types[2],
+					BeginTime = new DateTime(2006,04,23),
+					EndTime = new DateTime(2006,05,23),
+					Info = "sit amet, consectetuer adipiscing elit. Aliquam auctor"
+				}
+			};
+
+			using (DataModel db = new DataModel())
+			{
+				foreach (Patient patient in patients)
+				{
+					if (db.Pacients.FirstOrDefault(p => p.FirstName == patient.FirstName) == null)
 					{
-						db.Pacients.Add(pacient);
+						db.Pacients.Add(patient);
 					}
 				}
 				foreach (MedicalDocType doc in types)
@@ -376,14 +368,23 @@ namespace MedicalApp
 						db.MedicalDocTypes.Add(doc);
 					}
 				}
-                foreach (MedicalDoc docum in docs)
-                {
-                    if (db.MedicalDocs.FirstOrDefault(p => p.Info == docum.Info) == null)
-                    {
-                        db.MedicalDocs.Add(docum);
-                    }
-                }
-                db.SaveChanges();
+				foreach (MedicalDoc docum in docs)
+				{
+					if (db.MedicalDocs.FirstOrDefault(p => p.Name== docum.Name) == null)
+					{
+						db.MedicalDocs.Add(docum);
+					}
+				}
+				db.SaveChanges();
+			}
+		}
+
+		private void Test()
+		{
+			using (DataModel db = new DataModel())
+			{
+				MedicalDoc doc = db.MedicalDocs.FirstOrDefault(d => d.Id == 1);
+				MessageBox.Show(doc.Patient.FirstName);
 			}
 		}
 

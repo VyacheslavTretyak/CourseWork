@@ -96,7 +96,7 @@ namespace MedicalApp
                 //filling fields
                 foreach (var item in ComboType.Items)
                 {
-                    if (item.ToString() == db.MedicalDocTypes.Where(a => a.Id == medicalDocType.idMedicalDocType).FirstOrDefault().Name)
+                    if (item.ToString() == db.MedicalDocTypes.Where(a => a.Id == medicalDocType.MedicalDocTypeId).FirstOrDefault().Name)
                     {
                         ComboType.SelectedItem = item as ComboBoxItem;
                         ComboType.Text = item.ToString();
@@ -120,8 +120,8 @@ namespace MedicalApp
                     MedicalDoc medicalDoc = new MedicalDoc
                     {
                         Name = TxBxName.Text,
-                        idPacient = IdPacient,
-                        idMedicalDocType = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id,
+                        PatientId = IdPacient,
+                        MedicalDocTypeId = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id,
                         BeginTime = (DateTime)DateBegin.SelectedDate,
                         EndTime = DateEnd.SelectedDate,
                         Info = TxBxInfo.Text
@@ -132,7 +132,7 @@ namespace MedicalApp
                 {
                     //Edit MedicalDoc
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Name = TxBxName.Text;
-                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().idMedicalDocType = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id;
+                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().MedicalDocTypeId = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id;
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().BeginTime = (DateTime)DateBegin.SelectedDate;
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().EndTime = DateEnd.SelectedDate;
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Info = TxBxInfo.Text;

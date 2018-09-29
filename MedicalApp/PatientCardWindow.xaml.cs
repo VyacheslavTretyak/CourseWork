@@ -38,6 +38,27 @@ namespace MedicalApp
         public PatientCardWindow()
         {
             InitializeComponent();
+
+            this.Loaded += PatientCardWindow_Loaded; 
+
+            //if (this.IsInitialized)
+            //{
+            //    MessageBox.Show("An error occurred while getting the patient's Id.\n"
+            //    + "The window will be closed.",
+            //    "Error while retrieving data");
+            //    //this.Close();
+            //}
+        }
+
+        private void PatientCardWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("An error occurred while getting the patient's Id.\n"
+                + "The window will be closed.",
+                "Error while retrieving data",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+
+            this.Close();
         }
 
         public PatientCardWindow(int idPatient)

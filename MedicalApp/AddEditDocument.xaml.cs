@@ -32,7 +32,8 @@ namespace MedicalApp
         {
             InitializeComponent();
             IdPacient = _IdPacient;
-            //init window
+            this.Title = "Add Document";
+            Add.Content = "Add";
             InitAdd();
         }
 
@@ -63,7 +64,8 @@ namespace MedicalApp
             IdPacient = _IdPacient;
             IdMedicalDoc = _IdMedicalDoc;
             InitializeComponent();
-            //init windows
+            this.Title = "Edit Document";
+            Add.Content = "Edit";
             InitEdit();
         }
 

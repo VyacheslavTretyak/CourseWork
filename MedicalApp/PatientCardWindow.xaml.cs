@@ -20,9 +20,18 @@ namespace MedicalApp
     /// </summary>
     public partial class PatientCardWindow : Window
     {
-        private List<MedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
+        private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
 
         private int idPatient;
+
+        //private Type type = null;
+        private class RedefinedMedicalDoc /*: MedicalDoc*/
+        {
+            public int Id { get; set; }
+            public string DocumentType { get; set; }
+            public string Name { get; set; }
+            public string Info { get; set; }
+        }
 
         public PatientCardWindow()
         {
@@ -59,7 +68,7 @@ namespace MedicalApp
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
             int currentDocId
-                = (this.dataGridDocumentList.SelectedItem as MedicalDoc)
+                = (this.dataGridDocumentList.SelectedItem as RedefinedMedicalDoc)
                 .Id;
 
             AddEditDocument addDocument 
@@ -112,8 +121,8 @@ namespace MedicalApp
             {
                 this.ActivationOfTheDocumentEditingButton();
 
-                //this.txbInfo.Text
-                    //= ((sender as DataGrid).SelectedItem as MedicalDoc).Info;
+                this.txbInfo.Text
+                    = ((sender as DataGrid).SelectedItem as RedefinedMedicalDoc).Info;
             }
             else
             {
@@ -201,21 +210,32 @@ namespace MedicalApp
             var documentsOfTheCurrentPatient
             //this.documentsOfTheCurrentPatient
                 = (
-                from doc in db.MedicalDocs.Include("MedicalDocType")
+                from doc in db.MedicalDocs//.Include("MedicalDocType")
                 //join docType in db.MedicalDocTypes
                 //on doc.idMedicalDocType equals docType.Id
                 where doc.PatientId == this.idPatient
                 //select doc
-                select new { doc.Id, DocumentType = doc.MedicalDocType.Name, doc.Name, doc.Info }
+                select new RedefinedMedicalDoc{
+                    Id =  doc.Id,
+                    DocumentType = doc.MedicalDocType.Name,
+                    Name = doc.Name,
+                    Info = doc.Info
+                }
                 )
                 .ToList();
 
+            //this.type = typeof(documentsOfTheCurrentPatient);
+
             // show docs patient
+            //this.dataGridDocumentList.ItemsSource
+            //    = documentsOfTheCurrentPatient
+            //    .Select(x => x)
+            //    //.Select(x => new { x.Id, Type = x.MedicalDocType.Name })
+            //    //.Select(x => new { x, DocumentType = x.MedicalDocType.Name })
+            //    .ToList();
+
             this.dataGridDocumentList.ItemsSource
-                = documentsOfTheCurrentPatient
-                .Select(x => x)
-                //.Select(x => new { x.Id, Type = x.MedicalDocType.Name })
-                .ToList();
+                = documentsOfTheCurrentPatient;
         }
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)

@@ -140,7 +140,7 @@ namespace MedicalApp
                 db.SaveChanges();
             }
 
-            //this.DialogResult = true;
+            this.DialogResult = true;
 
             Close();
         }
@@ -148,7 +148,7 @@ namespace MedicalApp
         //clickable button cancel
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            //this.DialogResult = false;
+            this.DialogResult = false;
 
             Close();
         }

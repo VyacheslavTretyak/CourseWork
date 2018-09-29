@@ -11,11 +11,11 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="24"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Title="Patient Card" Height="714.626" Width="662.252">
+        Title="Patient Card" Height="714.626" Width="780">
     <Border Background="WhiteSmoke" BorderThickness="4"  CornerRadius="5" Margin="0,0,2,-3" RenderTransformOrigin="0.317,0.53">
         <Border  Background="White" RenderTransformOrigin="0.308,0.5" Margin="-3,-1,-4,6">
             <Grid>
-                
+
                 <Grid.Resources>
                     <Style x:Key="ControlBaseStyle" TargetType="{x:Type FrameworkElement}">
                         <Setter Property="Margin" Value="5 0"/>
@@ -24,7 +24,7 @@
                         <Setter Property="VerticalAlignment" Value="Bottom"/>
                     </Style>
                 </Grid.Resources>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55*"></RowDefinition>
                     <RowDefinition Height="7*"></RowDefinition>
@@ -51,11 +51,11 @@
                     <RowDefinition Height="35*"></RowDefinition>
                     <RowDefinition Height="7*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="269*"></ColumnDefinition>
+                    <ColumnDefinition Width="350*"></ColumnDefinition>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
-                    <ColumnDefinition Width="261*"></ColumnDefinition>
+                    <ColumnDefinition Width="400*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <materialDesign:ColorZone Grid.ColumnSpan="3" Mode="PrimaryLight"  Padding="16">
@@ -70,7 +70,7 @@
                 <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" x:Name="DateOfBirthValue" Content="00/00/00" HorizontalAlignment="Right" Margin="185,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.988,0.414"/>
                 <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Name="txbAdress" IsReadOnly="true" Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                 <Label  Grid.Column="0" Grid.Row="8"  FontWeight="Bold" x:Name="labelDoc" Content="Documents" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
-                <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document"></Button>
+                <Button Name="btnDocAdd" Grid.Column="3" Grid.Row="4" Height="Auto"  Margin="2" Content="Add document" Click="btnDocAdd_Click"></Button>
                 <Button x:Name="btnDocEdit"  Grid.Column="3" Grid.Row="6" Height="Auto" Margin="2" Content="Edit document"/>
 
 
@@ -96,9 +96,10 @@
                 </DataGrid>
 
                 <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <TextBox x:Name="txbAStartData" Grid.Row="12" Grid.Column="2" MaxLength="12" materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <TextBox x:Name="txbFinalData" Grid.Row="14" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2" Click="btnDocSearch_Click"  Content="Search document"/>
+                <DatePicker x:Name="datePicStartData" Grid.Row="12" Grid.Column="2"  materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="1,0,2,0"/>
+                <DatePicker x:Name="datePicFinalData"  Grid.Row="14" Grid.Column="2"  materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="1,0,2,0"/>
+                <Button Grid.Row="16" Grid.Column="2" Name="buttonEraser" Margin="0,1,5,2" Content="{materialDesign:PackIcon Eraser}" ToolTip="Clear all search fields" HorizontalAlignment="Right" Width="50" Height="Auto"/>
+                <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2,2,60,2" Click="btnDocSearch_Click"  Content="Search document"/>
                 <Label  Grid.Column="0" Grid.Row="18"  FontWeight="Bold" x:Name="labelDocInfo" Content="Document`s Info" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
                 <TextBox Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="3" Grid.RowSpan="3" Name="txbInfo" Margin="1" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" IsReadOnly="true"/>
 

@@ -89,33 +89,6 @@ namespace MedicalApp
             this.ShowPatientDocsToADatagrid();
         }
 
-        
-
-        //private void DataGridDocumentList_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        //{
-        //    PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
-        //    e.Column.Header = propertyDescriptor.DisplayName;
-        //    if (IsColumnNotDisplayed(propertyDescriptor))
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private static bool IsColumnNotDisplayed(PropertyDescriptor propertyDescriptor)
-        //{
-        //    if (propertyDescriptor.DisplayName == "Id"
-        //        || propertyDescriptor.DisplayName == "idPacient"
-        //        || propertyDescriptor.DisplayName == "BeginTime"
-        //        || propertyDescriptor.DisplayName == "EndTime"
-        //        || propertyDescriptor.DisplayName == "Info"
-        //        || propertyDescriptor.DisplayName == "Pacient_Id")
-        //    {
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.IsARowOfTheDocumentInTheTableIsHighlighted())

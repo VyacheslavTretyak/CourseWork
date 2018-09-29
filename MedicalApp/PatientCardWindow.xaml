@@ -88,7 +88,8 @@
                 <TextBox x:Name="txbName" Grid.Row="10" Grid.Column="2"  MaxLength="12" materialDesign:HintAssist.Hint="Document Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <DatePicker x:Name="datePicStartData" Grid.Row="12" Grid.Column="2"  materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="1,0,2,0"/>
                 <DatePicker x:Name="datePicFinalData"  Grid.Row="14" Grid.Column="2"  materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="1,0,2,0"/>
-                <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2" Click="btnDocSearch_Click"  Content="Search document"/>
+                <Button Grid.Row="16" Grid.Column="2" Name="buttonEraser" Margin="0,1,5,2" Content="{materialDesign:PackIcon Eraser}" ToolTip="Clear all search fields" HorizontalAlignment="Right" Width="50" Height="Auto"/>
+                <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2,2,60,2" Click="btnDocSearch_Click"  Content="Search document"/>
                 <Label  Grid.Column="0" Grid.Row="18"  FontWeight="Bold" x:Name="labelDocInfo" Content="Document`s Info" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Top"/>
                 <TextBox Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="3" Grid.RowSpan="3" Name="txbInfo" Margin="1" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" IsReadOnly="true"/>
 

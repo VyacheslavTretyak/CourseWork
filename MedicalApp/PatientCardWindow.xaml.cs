@@ -28,5 +28,10 @@ namespace MedicalApp
 		{
 
 		}
-	}
+
+        private void btnDocAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 }

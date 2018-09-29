@@ -272,9 +272,18 @@ namespace MedicalApp
                         .ToList();
                 }
 
-                if (!String.IsNullOrEmpty(this.datePicStartData.Text))
+                if (!String.IsNullOrEmpty(this.datePicStartData.Text)
+                    && !String.IsNullOrEmpty(this.datePicFinalData.Text))
                 {
                     this.SearchForDocumentsByInitialDate(db, documentsOfTheCurrentPatient);
+                }
+                else if (String.IsNullOrEmpty(this.datePicStartData.Text)
+                        || String.IsNullOrEmpty(this.datePicFinalData.Text))
+                {
+                    MessageBox.Show("To search by range, you need to enter both dates!",
+                        "Date field is not filled",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Asterisk);
                 }
             }
 

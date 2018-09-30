@@ -72,9 +72,57 @@ namespace MedicalApp
             this.btnDocAdd.Click += BtnDocAdd_Click;
             this.btnDocEdit.Click += BtnDocEdit_Click;
 
+            // DatePicker
+            this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
+            this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
+            this.datePicStartData.PreviewKeyDown += DatePicStartData_PreviewKeyDown;
+
 
             // Temp method - do not delete.
             TempMethod();
+        }
+
+        private void DatePicStartData_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.Key.ToString());
+            if (e.Key >= Key.D0 && e.Key <= Key.D9
+                || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
+                || e.Key == Key.OemPeriod
+                || e.Key == Key.Decimal
+                || e.Key == Key.Back
+                || e.Key == Key.Tab)
+            {
+                e.Handled = false;
+            }
+            else if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DatePicStartData_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
+            
+        }
+
+        private void DatePicStartData_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            //if (!Char.IsDigit(e.Text, 0)
+            //    && e.Text != ".")
+            //{
+            //    e.Handled = true;
+            //}
+
+            //if (e.Text == " ")
+            //{
+            //    e.Handled = true;
+            //}
         }
 
         private void TempMethod()
@@ -275,7 +323,9 @@ namespace MedicalApp
                 if (!String.IsNullOrEmpty(this.datePicStartData.Text)
                     && !String.IsNullOrEmpty(this.datePicFinalData.Text))
                 {
-                    this.SearchForDocumentsByInitialDate(db, documentsOfTheCurrentPatient);
+                    MessageBox.Show(this.datePicStartData.ToString());
+
+                    //this.SearchForDocumentsByDateRange(db, documentsOfTheCurrentPatient);
                 }
                 else if (String.IsNullOrEmpty(this.datePicStartData.Text)
                         || String.IsNullOrEmpty(this.datePicFinalData.Text))
@@ -292,21 +342,26 @@ namespace MedicalApp
                     = documentsOfTheCurrentPatient;
         }
 
-        private void SearchForDocumentsByInitialDate(DataModel db, List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        /// <summary>
+        /// Search for documents by date range.
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="documentsOfTheCurrentPatient"></param>
+        private void SearchForDocumentsByDateRange(DataModel db, List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
         {
             if (documentsOfTheCurrentPatient.Count > 0)
             {
                 documentsOfTheCurrentPatient
-                    = SearchByInitialDate(documentsOfTheCurrentPatient);
+                    = SearchByDateRange(documentsOfTheCurrentPatient);
             }
             else
             {
                 documentsOfTheCurrentPatient
-                    = SearchByInitialDate(db.MedicalDocs);
+                    = SearchByDateRange(db.MedicalDocs);
             } 
         }
 
-        private List<RedefinedMedicalDoc> SearchByInitialDate(DbSet<MedicalDoc> medicalDocs)
+        private List<RedefinedMedicalDoc> SearchByDateRange(DbSet<MedicalDoc> medicalDocs)
         {
             List<RedefinedMedicalDoc> documents = null;
 
@@ -330,7 +385,7 @@ namespace MedicalApp
             return documents;
         }
 
-        private List<RedefinedMedicalDoc> SearchByInitialDate(List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        private List<RedefinedMedicalDoc> SearchByDateRange(List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
         {
             List<RedefinedMedicalDoc> documents = null;
 

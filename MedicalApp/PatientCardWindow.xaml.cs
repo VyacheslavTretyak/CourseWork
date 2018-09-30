@@ -162,7 +162,12 @@ namespace MedicalApp
             AddEditDocument addDocument
                 = new AddEditDocument(this.idPatient, currentDocId);
 
-            addDocument.ShowDialog();
+            bool? result = addDocument.ShowDialog();
+
+            if (result == true)
+            {
+                this.ShowNotification("Document edited");
+            }
 
             this.ReturningLatestDataInTable();
 

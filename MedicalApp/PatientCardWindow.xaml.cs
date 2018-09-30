@@ -23,6 +23,7 @@ namespace MedicalApp
     public partial class PatientCardWindow : Window
     {
         //private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
+        List<RedefinedMedicalDoc> documentsAfterSearch = null;
 
         private int idPatient;
 
@@ -69,6 +70,8 @@ namespace MedicalApp
 
             this.datePicStartData.ToolTip = "Введите дату в формате 00.00.0000";
             this.datePicFinalData.ToolTip = "Введите дату в формате 00.00.0000";
+
+            this.documentsAfterSearch = new List<RedefinedMedicalDoc>();
 
 
 
@@ -156,15 +159,30 @@ namespace MedicalApp
                 = (this.dataGridDocumentList.SelectedItem as RedefinedMedicalDoc)
                 .Id;
 
-            AddEditDocument addDocument 
+            AddEditDocument addDocument
                 = new AddEditDocument(this.idPatient, currentDocId);
 
             addDocument.ShowDialog();
 
-            this.ShowPatientDocsToADatagrid();
+            this.ReturningLatestDataInTable();
 
             // TODO выбрать (выделить) редактируемого пациента
             this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
+        }
+
+        /// <summary>
+        /// Returning the latest data in the table.
+        /// </summary>
+        private void ReturningLatestDataInTable()
+        {
+            if (this.documentsAfterSearch.Count > 0)
+            {
+                this.dataGridDocumentList.ItemsSource = this.documentsAfterSearch;
+            }
+            else
+            {
+                this.ShowPatientDocsToADatagrid();
+            }
         }
 
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
@@ -173,15 +191,19 @@ namespace MedicalApp
 
             bool? result = addDocument.ShowDialog();
 
-            this.ShowPatientDocsToADatagrid();
+            
 
             // TODO выбрать (выделить) добавленного пациента
             if (result == true)
             {
+                this.ShowPatientDocsToADatagrid();
+
                 this.dataGridDocumentList.SelectedIndex = this.dataGridDocumentList.Items.Count - 1;
             }
             else
             {
+                this.ReturningLatestDataInTable();
+
                 this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
             }
         }
@@ -301,6 +323,8 @@ namespace MedicalApp
 
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
 		{
+            this.selectedIndexDocument = -1;
+
             if (this.IsSearchFieldsAreEmpty())
             {
                 this.ShowPatientDocsToADatagrid();
@@ -339,14 +363,15 @@ namespace MedicalApp
         /// </summary>
         private void SearchDocumentsBasedOnEnteredData()
         {
-            List<RedefinedMedicalDoc> documentsOfTheCurrentPatient 
-                = new List<RedefinedMedicalDoc>();
+            //List<RedefinedMedicalDoc> documentsOfTheCurrentPatient
+            //    = new List<RedefinedMedicalDoc>();
+            this.documentsAfterSearch.Clear();
 
             using (DataModel db = new DataModel())
             {
                 if (!String.IsNullOrEmpty(this.txbName.Text))
                 {
-                    documentsOfTheCurrentPatient
+                    this.documentsAfterSearch
                         = (
                         from doc in db.MedicalDocs.Include("MedicalDocType")
                         where doc.PatientId == this.idPatient
@@ -369,10 +394,12 @@ namespace MedicalApp
                 {
                     //MessageBox.Show(this.datePicStartData.ToString());
 
-                    this.SearchForDocumentsByDateRange(db, ref documentsOfTheCurrentPatient);
+                    this.SearchForDocumentsByDateRange(db/*, ref documentsOfTheCurrentPatient*/);
                 }
                 else if (String.IsNullOrEmpty(this.datePicStartData.Text)
-                        || String.IsNullOrEmpty(this.datePicFinalData.Text))
+                        && !String.IsNullOrEmpty(this.datePicFinalData.Text)
+                        || !String.IsNullOrEmpty(this.datePicStartData.Text)
+                        && String.IsNullOrEmpty(this.datePicFinalData.Text))
                 {
                     MessageBox.Show("To search by range, you need to enter both dates!",
                         "Date field is not filled",
@@ -383,7 +410,7 @@ namespace MedicalApp
 
 
             this.dataGridDocumentList.ItemsSource
-                    = documentsOfTheCurrentPatient;
+                    = this.documentsAfterSearch;
         }
 
         /// <summary>
@@ -391,18 +418,18 @@ namespace MedicalApp
         /// </summary>
         /// <param name="db"></param>
         /// <param name="documentsOfTheCurrentPatient"></param>
-        private void SearchForDocumentsByDateRange(DataModel db, ref List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        private void SearchForDocumentsByDateRange(DataModel db/*, ref List<RedefinedMedicalDoc> documentsOfTheCurrentPatient*/)
         {
             if (this.IsCorrectDateRange())
             {
-                if (documentsOfTheCurrentPatient.Count > 0)
+                if (this.documentsAfterSearch.Count > 0)
                 {
-                    documentsOfTheCurrentPatient
-                        = SearchByDateRange(documentsOfTheCurrentPatient);
+                    this.documentsAfterSearch
+                        = SearchByDateRange(this.documentsAfterSearch);
                 }
                 else
                 {
-                    documentsOfTheCurrentPatient
+                    this.documentsAfterSearch
                         = SearchByDateRange(db.MedicalDocs);
                 }
             }

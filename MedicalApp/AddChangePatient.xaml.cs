@@ -26,7 +26,7 @@ namespace MedicalApp
             InitializeComponent();
             //commit
             btnAddEdit.Content = "Add";
-            WindowName.Content = "Add Client";
+            //WindowName.Content = "Add Client";
         }
 
         //add/edit button click
@@ -98,7 +98,7 @@ namespace MedicalApp
 		{
             pacient = patient;
             btnAddEdit.Content = "Save";
-            WindowName.Content = "Edit Client";
+            //WindowName.Content = "Edit Client";
             txbFirstName.Text = patient.FirstName;
             txbLastName.Text = patient.LastName;
 			txbMiddleName.Text = pacient.MiddleName;           
@@ -106,6 +106,11 @@ namespace MedicalApp
             txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,23 +67,38 @@ namespace MedicalApp
 
             this.FillTheCardWithPatientData();
 
+            this.datePicStartData.ToolTip = "Введите дату в формате 00.00.0000";
+            this.datePicFinalData.ToolTip = "Введите дату в формате 00.00.0000";
+
+
+
+
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
             this.btnDocEdit.Click += BtnDocEdit_Click;
+            this.buttonEraser.Click += ButtonEraser_Click;
 
             // DatePicker
             this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
             this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
-            this.datePicStartData.PreviewKeyDown += DatePicStartData_PreviewKeyDown;
+            this.datePicStartData.PreviewKeyDown += DatePic_PreviewKeyDown;
+            this.datePicFinalData.PreviewKeyDown += DatePic_PreviewKeyDown;
 
 
             // Temp method - do not delete.
             TempMethod();
         }
 
-        private void DatePicStartData_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void ButtonEraser_Click(object sender, RoutedEventArgs e)
+        {
+            this.txbName.Text = "";
+            this.datePicStartData.Text = "";
+            this.datePicFinalData.Text = "";
+        }
+
+        private void DatePic_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key >= Key.D0 && e.Key <= Key.D9
                 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
@@ -101,6 +117,8 @@ namespace MedicalApp
             {
                 e.Handled = true;
             }
+
+
         }
 
         private void DatePicStartData_KeyDown(object sender, KeyEventArgs e)
@@ -122,6 +140,9 @@ namespace MedicalApp
             //{
             //    e.Handled = true;
             //}
+            //MessageBox.Show(Regex.IsMatch(this.datePicStartData.Text, @"[0-9.]{3}").ToString());
+            //e.Handled = Regex.IsMatch(e.Text, @"[0-9.]");
+            //e.Handled = Regex.IsMatch(e.Text, @"\d{1,2}\.\d{1,2}\.\d{4}");
         }
 
         private void TempMethod()

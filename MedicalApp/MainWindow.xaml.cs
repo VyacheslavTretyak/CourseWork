@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -28,6 +29,7 @@ namespace MedicalApp
 		{
 			InitializeComponent();
 			InitFirstData();
+			//Test();
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -41,17 +43,17 @@ namespace MedicalApp
 		// fill data grid from db
 		void fillDataFromDBtoDatagrid()
 		{
-			using (DataModel db = new DataModel())
+			try
 			{
-				try
+				using (DataModel db = new DataModel())
 				{
 					// select only not archived patients
 					datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
 				}
-				catch(Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -68,12 +70,12 @@ namespace MedicalApp
 			using (DataModel db = new DataModel())
 			{
 				// first select all not archived patiens
-				IQueryable<Pacient> queryable = db.Pacients.Where(p => p.IsArchived == false);
+				IQueryable<Patient> queryable = db.Pacients.Where(p => p.IsArchived == false);
 				// if number card field not empty
 				if (!string.IsNullOrWhiteSpace(textboxNumberCard.Text))
 				{
 					// selection of patients with the entered card number
-					int cardNum = Convert.ToInt32(textboxNumberCard.Text);
+					long cardNum = Convert.ToInt64 (textboxNumberCard.Text);
 					queryable = queryable.Where(p => p.Id == cardNum);
 				}
 				// if last name field not empty
@@ -106,10 +108,18 @@ namespace MedicalApp
 			// open add patient window
 			AddChangePatient addEditWindow = new AddChangePatient();
 			addEditWindow.Title = "Add patient";
-			
+
 			// update data grid if patient was added 
 			if (addEditWindow.ShowDialog() == true)
+			{
 				fillDataFromDBtoDatagrid();
+				// focus on the added patient 
+				datagridPatiens.SelectedIndex = datagridPatiens.Items.Count - 1;
+				// scroll patient list to the added patient
+				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+				// popup notification
+				showNotification("The patient was added");
+			}
 		}
 
 		// edit patient button click
@@ -118,14 +128,25 @@ namespace MedicalApp
 			// check patient was chosen in list
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
-
+			
 			// open add patient window with filled fields
-			AddChangePatient addEditWindow = new AddChangePatient((Pacient)datagridPatiens.SelectedItem);
+			AddChangePatient addEditWindow = new AddChangePatient(datagridPatiens.SelectedItem as Patient);
 			addEditWindow.Title = "Edit patient";
 
 			// update data grid if patient was changed 
 			if (addEditWindow.ShowDialog() == true)
+			{
+				// save position to restore
+				int selectedIndex = datagridPatiens.SelectedIndex;
+
 				fillDataFromDBtoDatagrid();
+				// focus on the changed patient from saved position
+				datagridPatiens.SelectedIndex = selectedIndex;
+				// scroll patient list to the changed patient
+				datagridPatiens.ScrollIntoView(datagridPatiens.SelectedItem);
+				// popup notification
+				showNotification("The patient was edited");
+			}
 		}
 
 		// remove patient button click
@@ -136,13 +157,16 @@ namespace MedicalApp
 				return;
 			
 			// get selected patient
-			Pacient pacient = datagridPatiens.SelectedItem as Pacient;
+			Patient pacient = datagridPatiens.SelectedItem as Patient;
 			// show confirmation message box
 			if (MessageBox.Show($"Are you sure you want to archive {pacient.FirstName + " " + pacient.LastName} ?",
 				"Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
 				using (DataModel db = new DataModel())
 				{
+					// save position to restore
+					int selectedIndex = datagridPatiens.SelectedIndex;
+
 					// find patient in db
 					pacient = db.Pacients.FirstOrDefault(p => p.Id == pacient.Id);
 					// remove
@@ -151,6 +175,10 @@ namespace MedicalApp
 					db.SaveChanges();
 					// update data grid list
 					fillDataFromDBtoDatagrid();
+					// scroll patient list to the previous position
+					datagridPatiens.ScrollIntoView(datagridPatiens.Items[Math.Min(selectedIndex,datagridPatiens.Items.Count-1)]);
+					// popup notification
+					showNotification("The patient was removed");
 				}
 			}
 		}
@@ -192,8 +220,9 @@ namespace MedicalApp
 		void openPatientsCard()
 		{
 			// TODO
-			// PatientCardWindow patientCardWindow = new PatientCardWindow();
-			// patientCardWindow.Show();
+
+            PatientCardWindow patientCard = new PatientCardWindow();
+			patientCard.Show();
 		}
 
 		// search by enter key
@@ -203,6 +232,10 @@ namespace MedicalApp
 			if (e.Key == Key.Enter)
 				buttonSearch.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
 		}
+			//kuku
+            //test
+            //testkate
+            //lisa
 
 		// open card button
 		private void buttonOpen_Click(object sender, RoutedEventArgs e)
@@ -213,16 +246,30 @@ namespace MedicalApp
 
 			openPatientsCard();
 		}
-	
-			
-			
-            
-		
+
+		// button to clear all fields
+		private void buttonEraser_Click(object sender, RoutedEventArgs e)
+		{
+			textboxNumberCard.Text = textboxAddress.Text = textboxLastName.Text = textboxDateOfBirth.Text = "";
+		}
+
+		// show popup notification
+		void showNotification(string message)
+		{
+			// SnackbarThree - xaml name of MaterialDesign.Snackbar  
+			var messageQueue = SnackbarThree.MessageQueue;
+
+			//the message queue can be called from any thread
+			Task.Run(() => messageQueue.Enqueue(message));
+		}
+
+
+
 		private void InitFirstData()
 		{
 			//Первичные данные для DB
-			Pacient[] pacients = {
-			new Pacient()
+			Patient[] patients = {
+			new Patient()
 			{
 				FirstName = "Pomber",
 				LastName = "Asekrot",
@@ -230,7 +277,7 @@ namespace MedicalApp
 				Addres = "Krivoy Rog Sicheslavska str. 11/13",
 				Gender = true
 			},
-			new Pacient()
+			new Patient()
 			{
 				FirstName = "Arkport",
 				LastName = "Shurtrych",
@@ -238,7 +285,7 @@ namespace MedicalApp
 				Addres = "Krivoy Rog Myru str. 121/15",
 				Gender = true
 			},
-			new Pacient()
+			new Patient()
 			{
 				FirstName = "Roska",
 				LastName = "Viaerkova",
@@ -259,16 +306,47 @@ namespace MedicalApp
 				},
 				new MedicalDocType()
 				{
-					Name = "Results of analizes"
+					Name = "Результати аналізів"
 				}
 			};
+			MedicalDoc[] docs =
+		    {
+				new MedicalDoc()
+				{
+					Name = "Лікарняний Перелом",
+					Patient = patients[0],
+					MedicalDocType = types[0],
+					BeginTime = new DateTime(2002,04,21),
+					EndTime = new DateTime(2002,05,21),
+					Info = "Aliquam gravida mauris ut mi. Duis risus odio"
+				},
+				new MedicalDoc()
+				{
+					Name = "Направлення на анализ крови",
+					Patient = patients[1],
+					MedicalDocType = types[1],
+					BeginTime = new DateTime(2004,04,22),
+					EndTime = new DateTime(2004,04,22),
+					Info = "ut, nulla. Cras eu tellus eu augue"
+				},
+				new MedicalDoc()
+				{
+					Name = "Результати аналізів крови",
+					Patient = patients[2],
+					MedicalDocType = types[2],
+					BeginTime = new DateTime(2006,04,23),
+					EndTime = new DateTime(2006,05,23),
+					Info = "sit amet, consectetuer adipiscing elit. Aliquam auctor"
+				}
+			};
+
 			using (DataModel db = new DataModel())
 			{
-				foreach (Pacient pacient in pacients)
+				foreach (Patient patient in patients)
 				{
-					if (db.Pacients.FirstOrDefault(p => p.FirstName == pacient.FirstName) == null)
+					if (db.Pacients.FirstOrDefault(p => p.FirstName == patient.FirstName) == null)
 					{
-						db.Pacients.Add(pacient);
+						db.Pacients.Add(patient);
 					}
 				}
 				foreach (MedicalDocType doc in types)
@@ -278,14 +356,31 @@ namespace MedicalApp
 						db.MedicalDocTypes.Add(doc);
 					}
 				}
+				foreach (MedicalDoc docum in docs)
+				{
+					if (db.MedicalDocs.FirstOrDefault(p => p.Name== docum.Name) == null)
+					{
+						db.MedicalDocs.Add(docum);
+					}
+				}
 				db.SaveChanges();
 			}
 		}
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddChangePatient addChangePatient = new AddChangePatient();
-            addChangePatient.Show();
-        }
-    }
+		private void Test()
+		{
+			using (DataModel db = new DataModel())
+			{
+				MedicalDoc doc = db.MedicalDocs.FirstOrDefault(d => d.Id == 1);
+				MessageBox.Show(doc.Patient.FirstName);
+			}
+		}
+
+		// unused method
+		//private void btnAdd_Click(object sender, RoutedEventArgs e)
+		//{
+		//    AddChangePatient addChangePatient = new AddChangePatient();
+		//    addChangePatient.Show();
+		//}
+	}
 }

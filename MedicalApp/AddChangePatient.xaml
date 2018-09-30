@@ -9,12 +9,12 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        TextElement.FontSize="24" MaxWidth="650" MinWidth="500" MaxHeight="700" MinHeight="600"
+        TextElement.FontSize="14"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
         Title="AddChangePatient" Height="600" Width="500" WindowStartupLocation="CenterScreen">
     <!--<Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5">-->
-        <!--<Border Margin="30, 10, 30, 30" Background="White">-->
+    <!--<Border Margin="30, 10, 30, 30" Background="White">-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -52,8 +52,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="0, 20, 20, 0" Foreground="Gray">Gender:</TextBlock>
-                <RadioButton Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="20, 25, 40, 20" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
-                <RadioButton Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="60, 25, 20, 20"  Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+                <RadioButton Name="rdbMale" Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="20, 25, 40, 20" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+                <RadioButton Name="rdbFemale" Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="60, 25, 20, 20"  Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
             </Grid>
         </StackPanel>
 
@@ -71,7 +71,7 @@
 
     </Grid>
 
-        <!--</Border>-->
     <!--</Border>-->
-      
+    <!--</Border>-->
+
 </Window>

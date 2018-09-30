@@ -81,8 +81,8 @@ namespace MedicalApp
             this.buttonEraser.Click += ButtonEraser_Click;
 
             // DatePicker
-            this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
-            this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
+            //this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
+            //this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
             this.datePicStartData.PreviewKeyDown += DatePic_PreviewKeyDown;
             this.datePicFinalData.PreviewKeyDown += DatePic_PreviewKeyDown;
 
@@ -121,29 +121,29 @@ namespace MedicalApp
 
         }
 
-        private void DatePicStartData_KeyDown(object sender, KeyEventArgs e)
-        {
+        //private void DatePicStartData_KeyDown(object sender, KeyEventArgs e)
+        //{
             
 
             
-        }
+        //}
 
-        private void DatePicStartData_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            //if (!Char.IsDigit(e.Text, 0)
-            //    && e.Text != ".")
-            //{
-            //    e.Handled = true;
-            //}
+        //private void DatePicStartData_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        //{
+        //    //if (!Char.IsDigit(e.Text, 0)
+        //    //    && e.Text != ".")
+        //    //{
+        //    //    e.Handled = true;
+        //    //}
 
-            //if (e.Text == " ")
-            //{
-            //    e.Handled = true;
-            //}
-            //MessageBox.Show(Regex.IsMatch(this.datePicStartData.Text, @"[0-9.]{3}").ToString());
-            //e.Handled = Regex.IsMatch(e.Text, @"[0-9.]");
-            //e.Handled = Regex.IsMatch(e.Text, @"\d{1,2}\.\d{1,2}\.\d{4}");
-        }
+        //    //if (e.Text == " ")
+        //    //{
+        //    //    e.Handled = true;
+        //    //}
+        //    //MessageBox.Show(Regex.IsMatch(this.datePicStartData.Text, @"[0-9.]{3}").ToString());
+        //    //e.Handled = Regex.IsMatch(e.Text, @"[0-9.]");
+        //    //e.Handled = Regex.IsMatch(e.Text, @"\d{1,2}\.\d{1,2}\.\d{4}");
+        //}
 
         private void TempMethod()
         {
@@ -313,6 +313,19 @@ namespace MedicalApp
             }
         }
 
+        private bool IsCorrectDateRange()
+        {
+            DateTime dateTimeStartData = this.GetStartingDateOfSearchRange();
+            DateTime dateTimeFinalData = this.GetFinalDateOfSearchRange();
+
+            if (dateTimeStartData <= dateTimeFinalData)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Forget the last selected document.
         /// </summary>
@@ -326,7 +339,8 @@ namespace MedicalApp
         /// </summary>
         private void SearchDocumentsBasedOnEnteredData()
         {
-            List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;
+            List<RedefinedMedicalDoc> documentsOfTheCurrentPatient 
+                = new List<RedefinedMedicalDoc>();
 
             using (DataModel db = new DataModel())
             {
@@ -353,9 +367,9 @@ namespace MedicalApp
                 if (!String.IsNullOrEmpty(this.datePicStartData.Text)
                     && !String.IsNullOrEmpty(this.datePicFinalData.Text))
                 {
-                    MessageBox.Show(this.datePicStartData.ToString());
+                    //MessageBox.Show(this.datePicStartData.ToString());
 
-                    //this.SearchForDocumentsByDateRange(db, documentsOfTheCurrentPatient);
+                    this.SearchForDocumentsByDateRange(db, ref documentsOfTheCurrentPatient);
                 }
                 else if (String.IsNullOrEmpty(this.datePicStartData.Text)
                         || String.IsNullOrEmpty(this.datePicFinalData.Text))
@@ -377,29 +391,43 @@ namespace MedicalApp
         /// </summary>
         /// <param name="db"></param>
         /// <param name="documentsOfTheCurrentPatient"></param>
-        private void SearchForDocumentsByDateRange(DataModel db, List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
+        private void SearchForDocumentsByDateRange(DataModel db, ref List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
         {
-            if (documentsOfTheCurrentPatient.Count > 0)
+            if (this.IsCorrectDateRange())
             {
-                documentsOfTheCurrentPatient
-                    = SearchByDateRange(documentsOfTheCurrentPatient);
+                if (documentsOfTheCurrentPatient.Count > 0)
+                {
+                    documentsOfTheCurrentPatient
+                        = SearchByDateRange(documentsOfTheCurrentPatient);
+                }
+                else
+                {
+                    documentsOfTheCurrentPatient
+                        = SearchByDateRange(db.MedicalDocs);
+                }
             }
             else
             {
-                documentsOfTheCurrentPatient
-                    = SearchByDateRange(db.MedicalDocs);
-            } 
+                MessageBox.Show("Invalid date range!",
+                        "Invalid date range",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Asterisk);
+            }
         }
 
         private List<RedefinedMedicalDoc> SearchByDateRange(DbSet<MedicalDoc> medicalDocs)
         {
             List<RedefinedMedicalDoc> documents = null;
 
+            DateTime dateTimeStartData = this.GetStartingDateOfSearchRange();
+            DateTime dateTimeFinalData = this.GetFinalDateOfSearchRange();
+
             documents
                 = (
                 from doc in medicalDocs.Include("MedicalDocType")
                 where doc.PatientId == this.idPatient
-                // TODO поиск по начальной дате.
+                where doc.BeginTime >= dateTimeStartData
+                where doc.BeginTime <= dateTimeFinalData
                 select new RedefinedMedicalDoc
                 {
                     Id = doc.Id,
@@ -419,11 +447,14 @@ namespace MedicalApp
         {
             List<RedefinedMedicalDoc> documents = null;
 
+            DateTime dateTimeStartData = this.GetStartingDateOfSearchRange();
+            DateTime dateTimeFinalData = this.GetFinalDateOfSearchRange();
+
             documents
                 = (
                 from doc in documentsOfTheCurrentPatient
-                where doc.Id == this.idPatient
-                // TODO поиск по начальной дате.
+                where doc.BeginTime >= dateTimeStartData
+                where doc.BeginTime <= dateTimeFinalData
                 select new RedefinedMedicalDoc
                 {
                     Id = doc.Id,
@@ -437,6 +468,24 @@ namespace MedicalApp
                 .ToList();
 
             return documents;
+        }
+
+        /// <summary>
+        /// Get the final date of the search range.
+        /// </summary>
+        /// <returns>Final date of the search range.</returns>
+        private DateTime GetFinalDateOfSearchRange()
+        {
+            return this.datePicFinalData.SelectedDate.Value;
+        }
+
+        /// <summary>
+        /// Get the starting date of the search range.
+        /// </summary>
+        /// <returns>Starting date of the search range.</returns>
+        private DateTime GetStartingDateOfSearchRange()
+        {
+            return this.datePicStartData.SelectedDate.Value;
         }
 
 

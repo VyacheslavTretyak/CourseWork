@@ -196,6 +196,8 @@ namespace MedicalApp
             // TODO выбрать (выделить) добавленного пациента
             if (result == true)
             {
+                this.ShowNotification("Document added");
+
                 this.ShowPatientDocsToADatagrid();
 
                 this.dataGridDocumentList.SelectedIndex = this.dataGridDocumentList.Items.Count - 1;
@@ -531,6 +533,15 @@ namespace MedicalApp
             }
 
             return false;
+        }
+
+        void ShowNotification(string message)
+        {
+            // SnackbarThree - xaml name of MaterialDesign.Snackbar  
+            var messageQueue = SnackbarThree.MessageQueue;
+
+            // The message queue can be called from any thread.
+            Task.Run(() => messageQueue.Enqueue(message));
         }
     }
 }

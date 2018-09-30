@@ -84,7 +84,6 @@ namespace MedicalApp
 
         private void DatePicStartData_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            //MessageBox.Show(e.Key.ToString());
             if (e.Key >= Key.D0 && e.Key <= Key.D9
                 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
                 || e.Key == Key.OemPeriod
@@ -284,11 +283,21 @@ namespace MedicalApp
             if (this.IsSearchFieldsAreEmpty())
             {
                 this.ShowPatientDocsToADatagrid();
+
+                this.ForgetTheLastSelectedDocument();
             }
             else
             {
                 this.SearchDocumentsBasedOnEnteredData();
             }
+        }
+
+        /// <summary>
+        /// Forget the last selected document.
+        /// </summary>
+        private void ForgetTheLastSelectedDocument()
+        {
+            this.selectedIndexDocument = -1;
         }
 
         /// <summary>

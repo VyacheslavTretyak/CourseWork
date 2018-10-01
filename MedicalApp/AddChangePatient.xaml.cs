@@ -26,7 +26,6 @@ namespace MedicalApp
             InitializeComponent();
             //commit
             btnAddEdit.Content = "Add";
-            WindowName.Content = "Add Client";
         }
 
         //add/edit button click
@@ -42,36 +41,63 @@ namespace MedicalApp
                     //edit current user
                     if (pacient != null)
                     {
-                        db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
-                        db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
-                        db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
-                        db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                            System.Globalization.CultureInfo.InvariantCulture);
-                        if (rdbMale.IsChecked == false)
-                            db.Pacients.Find(pacient.Id).Gender = false;
-                        else
-                            db.Pacients.Find(pacient.Id).Gender = true;
-                        db.SaveChanges();
+                        try
+                        {
+                            db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
+                            db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
+                            db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text;
+                            db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
+                            try
+                            {
+                                db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                                    System.Globalization.CultureInfo.InvariantCulture);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Format of date isn't correct", "Warning", MessageBoxButton.OK);
+                            }
+                            if (rdbMale.IsChecked == false)
+                                db.Pacients.Find(pacient.Id).Gender = false;
+                            else
+                                db.Pacients.Find(pacient.Id).Gender = true;
+                            db.SaveChanges();
+                            DialogResult = true;
+                            this.Close();
+                        }
+                        catch(Exception ex){}
                     }
                     //create new user
                     else
                     {
-                        pacient = new Patient();
-                        pacient.FirstName = txbFirstName.Text;
-                        pacient.LastName = txbLastName.Text;
-                        pacient.Addres = txbAdress.Text;
-                        pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                            System.Globalization.CultureInfo.InvariantCulture);
-                        if (rdbMale.IsChecked == false)
-                            pacient.Gender = false;
-                        else
-                            pacient.Gender = true;
-                        db.Pacients.Add(pacient);
-                        db.SaveChanges();
+                        try
+                        {
+                            pacient = new Patient();
+                            pacient.FirstName = txbFirstName.Text;
+                            pacient.LastName = txbLastName.Text;
+                            pacient.MiddleName = txbMiddleName.Text;
+                            pacient.Addres = txbAdress.Text;
+                            try
+                            {
+                                pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                                    System.Globalization.CultureInfo.InvariantCulture);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Format of date isn't correct", "Warning", MessageBoxButton.OK);
+                                pacient = null;
+                            }
+                            if (rdbMale.IsChecked == false)
+                                pacient.Gender = false;
+                            else
+                                pacient.Gender = true;
+                            db.Pacients.Add(pacient);
+                            db.SaveChanges();
+                            DialogResult = true;
+                            this.Close();
+                        }
+                        catch(Exception ex){}
                     }
                 }
-		DialogResult = true;
-                this.Close();
             }
             //warn about not fill required fields
             else
@@ -84,7 +110,7 @@ namespace MedicalApp
         private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9.]+");
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9.]");
         }
 
         //cancel button click
@@ -98,7 +124,6 @@ namespace MedicalApp
 		{
             pacient = patient;
             btnAddEdit.Content = "Save";
-            WindowName.Content = "Edit Client";
             txbFirstName.Text = patient.FirstName;
             txbLastName.Text = patient.LastName;
 			txbMiddleName.Text = pacient.MiddleName;           

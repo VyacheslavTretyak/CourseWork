@@ -3,8 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MedicalApp"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="18"		
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="AddEditDocument" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock">
@@ -43,22 +49,12 @@
         <TextBox Name="TxBxInfo" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd"></TextBox>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock HorizontalAlignment="Left" Margin="115 10 10 10">Date:</TextBlock>
-            <DatePicker Name="DateBegin" MinWidth="200" Margin="10 10 30 10" SelectedDateChanged="EnabledAdd">
-                <DatePicker.Resources>
-                    <Style TargetType="{x:Type DatePickerTextBox}" >
-                        <Setter Property="Text" Value="дата начало" />
-                        <Setter Property="IsReadOnly" Value="True" />
-                    </Style>
-                </DatePicker.Resources>
-            </DatePicker>
+            <DatePicker  Name="DateBegin" MinWidth="200" Margin="10 10 30 10" SelectedDateChanged="EnabledAdd"
+                         materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            
             <TextBlock HorizontalAlignment="Left">Date:</TextBlock>
-            <DatePicker Name="DateEnd" MinWidth="200" Margin="10 10 10 10" >
-                <DatePicker.Resources>
-                    <Style TargetType="{x:Type DatePickerTextBox}" >
-                        <Setter Property="Text" Value="дата конец" />
-                    </Style>
-                </DatePicker.Resources>
-            </DatePicker>
+            <DatePicker  Name="DateEnd" MinWidth="200" Margin="10 10 10 10" SelectedDateChanged="EnabledAdd" VerticalAlignment="Center"
+                         materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Name="Add" Click="Add_Click" MinWidth="200" Margin="150 10 10 10" FontSize="20" IsEnabled="False">Add</Button>

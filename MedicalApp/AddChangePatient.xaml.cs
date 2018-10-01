@@ -70,7 +70,7 @@ namespace MedicalApp
                         db.SaveChanges();
                     }
                 }
-				DialogResult = true;
+		DialogResult = true;
                 this.Close();
             }
             //warn about not fill required fields

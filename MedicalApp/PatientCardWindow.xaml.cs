@@ -68,8 +68,8 @@ namespace MedicalApp
 
             this.FillTheCardWithPatientData();
 
-            this.datePicStartData.ToolTip = "Введите дату в формате 00.00.0000";
-            this.datePicFinalData.ToolTip = "Введите дату в формате 00.00.0000";
+            this.datePicStartData.ToolTip = "Enter the date in the format 00.00.0000";
+            this.datePicFinalData.ToolTip = "Enter the date in the format 00.00.0000";
 
             this.documentsAfterSearch = new List<RedefinedMedicalDoc>();
 

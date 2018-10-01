@@ -26,14 +26,14 @@ namespace MedicalApp
             InitializeComponent();
             //commit
             btnAddEdit.Content = "Add";
-            WindowName.Content = "Add Client";
+            //WindowName.Content = "Add Client";
         }
 
         //add/edit button click
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(txbFirstName.Text) && 
-                !String.IsNullOrEmpty(txbLastName.Text) && 
+            if (!String.IsNullOrEmpty(txbFirstName.Text) &&
+                !String.IsNullOrEmpty(txbLastName.Text) &&
                 !String.IsNullOrEmpty(txbAdress.Text) &&
                 !String.IsNullOrEmpty(txbBirth.Text))
             {
@@ -44,7 +44,9 @@ namespace MedicalApp
                     {
                         db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
                         db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
+                        db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text;
                         db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
+                        
                         db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
                             System.Globalization.CultureInfo.InvariantCulture);
                         if (rdbMale.IsChecked == false)
@@ -59,6 +61,7 @@ namespace MedicalApp
                         pacient = new Patient();
                         pacient.FirstName = txbFirstName.Text;
                         pacient.LastName = txbLastName.Text;
+                        pacient.MiddleName = txbMiddleName.Text;
                         pacient.Addres = txbAdress.Text;
                         pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
                             System.Globalization.CultureInfo.InvariantCulture);
@@ -70,7 +73,7 @@ namespace MedicalApp
                         db.SaveChanges();
                     }
                 }
-				DialogResult = true;
+                DialogResult = true;
                 this.Close();
             }
             //warn about not fill required fields
@@ -94,18 +97,29 @@ namespace MedicalApp
         }
 
         //display information about selected user
-		public AddChangePatient(Patient patient) : this()
-		{
+        public AddChangePatient(Patient patient) : this()
+        {
             pacient = patient;
             btnAddEdit.Content = "Save";
-            WindowName.Content = "Edit Client";
+            //WindowName.Content = "Edit Client";
             txbFirstName.Text = patient.FirstName;
             txbLastName.Text = patient.LastName;
-			txbMiddleName.Text = pacient.MiddleName;           
+            txbMiddleName.Text = pacient.MiddleName;
             txbAdress.Text = patient.Addres;
             txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
+        }
+
+
+
+
+
+
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

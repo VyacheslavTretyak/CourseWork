@@ -110,5 +110,16 @@ namespace MedicalApp
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
         }
+
+
+
+
+
+
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

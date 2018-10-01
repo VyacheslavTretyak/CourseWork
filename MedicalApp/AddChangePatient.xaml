@@ -44,7 +44,6 @@
         <TextBox Name="txbBirth" Grid.Column="0" Grid.Row="4" Margin="10, 5, 5, 5" MaxLength="4" materialDesign:HintAssist.Hint="Year of birth:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
         <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="6"  Margin="10, 0, 5, 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Adress:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
-
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" Margin="10, 0, 0, 0">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -53,8 +52,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="0, 20, 20, 0" Foreground="Gray">Gender:</TextBlock>
-                <RadioButton Name="rdbMale" Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="20, 25, 40, 20" Checked="RadioButton_Checked" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
-				<RadioButton Name="rdbFemale" Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="60, 25, 20, 20"  Checked="RadioButton_Checked" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+                <RadioButton Name="rdbMale" Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="20, 25, 40, 20"  Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
+                <RadioButton Name="rdbFemale" Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="20" Margin="60, 25, 20, 20"   Content="Female" Style="{StaticResource MaterialDesignRadioButton}"></RadioButton>
             </Grid>
         </StackPanel>
 
@@ -68,7 +67,6 @@
                 <Button Name="btnCancel" Grid.Column="1" Grid.Row="0" Margin="40, 10, 10, 10" MinWidth="200" Click="btnCancel_Click">Cancel</Button>
             </Grid>
         </StackPanel>
-
 
 
     </Grid>

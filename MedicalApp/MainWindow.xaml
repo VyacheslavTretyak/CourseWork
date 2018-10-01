@@ -40,8 +40,8 @@
 		<!--<TextBlock Grid.Row="1" Grid.Column="0">Card number:</TextBlock>-->
 		<!--<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>-->
 
-		<TextBox Grid.Row="1" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="12" materialDesign:HintAssist.Hint="Card number"></TextBox>
+		<TextBox Grid.Row="1" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" MaxLength="12" KeyDown="textbox_EnterKeyDown"
+				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Card number"></TextBox>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
 				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address"></TextBox>
 
@@ -50,8 +50,8 @@
 
 		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxLastName" Margin="5 0" KeyDown="textbox_EnterKeyDown"
 				 MaxLength="32" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" MaxLength="4" materialDesign:HintAssist.Hint="Year of birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" MaxLength="4" KeyDown="textbox_EnterKeyDown"
+				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Year of birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 		<Button Grid.Row="2" Grid.Column="3" Name="buttonSearch" Margin="-65 5 65 5" Click="buttonSearch_Click" ToolTip="Search for patients">Search</Button>
 		<Button Grid.Row="2" Grid.Column="3" Name="buttonEraser" Margin="5 5" Content="{materialDesign:PackIcon Eraser}"

@@ -64,6 +64,13 @@ namespace MedicalApp
 			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
 		}
 
+		// PreviewKeyDown event to restrict space key because of PreviewTextInput doesn't catch space
+		private void textbox_restrictSpace(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Space)
+				e.Handled = true;
+		}
+
 		// search button click 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
 		{

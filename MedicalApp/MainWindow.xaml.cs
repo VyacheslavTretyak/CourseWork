@@ -60,7 +60,6 @@ namespace MedicalApp
 		// PreviewTextInput event to make numeric textbox
 		private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
 		{
-			var textBox = sender as TextBox;
 			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
 		}
 

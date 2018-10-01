@@ -124,30 +124,6 @@ namespace MedicalApp
 
         }
 
-        //private void DatePicStartData_KeyDown(object sender, KeyEventArgs e)
-        //{
-            
-
-            
-        //}
-
-        //private void DatePicStartData_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        //{
-        //    //if (!Char.IsDigit(e.Text, 0)
-        //    //    && e.Text != ".")
-        //    //{
-        //    //    e.Handled = true;
-        //    //}
-
-        //    //if (e.Text == " ")
-        //    //{
-        //    //    e.Handled = true;
-        //    //}
-        //    //MessageBox.Show(Regex.IsMatch(this.datePicStartData.Text, @"[0-9.]{3}").ToString());
-        //    //e.Handled = Regex.IsMatch(e.Text, @"[0-9.]");
-        //    //e.Handled = Regex.IsMatch(e.Text, @"\d{1,2}\.\d{1,2}\.\d{4}");
-        //}
-
         private void TempMethod()
         {
             
@@ -279,21 +255,29 @@ namespace MedicalApp
 
                 if (currentPatient != null)
                 {
-                    this.labelFullName.Content = currentPatient.FirstName
-                        + " "
-                        + currentPatient.LastName
-                        + " "
-                        + currentPatient.MiddleName
-                        ;
-
-                    this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
-
-                    this.txbAdress.Text = currentPatient.Addres;
-
+                    this.FillTheCardWithData(currentPatient);
 
                     this.ShowPatientDocsToADatagrid(db);
                 }
             }
+        }
+
+        /// <summary>
+        /// Fill the card with data.
+        /// </summary>
+        /// <param name="currentPatient"></param>
+        private void FillTheCardWithData(Patient currentPatient)
+        {
+            this.labelFullName.Content = currentPatient.FirstName
+                                    + " "
+                                    + currentPatient.LastName
+                                    + " "
+                                    + currentPatient.MiddleName
+                                    ;
+
+            this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
+
+            this.txbAdress.Text = currentPatient.Addres;
         }
 
         private void ShowPatientDocsToADatagrid()
@@ -374,62 +358,76 @@ namespace MedicalApp
         /// </summary>
         private void SearchDocumentsBasedOnEnteredData()
         {
-            //List<RedefinedMedicalDoc> documentsOfTheCurrentPatient
-            //    = new List<RedefinedMedicalDoc>();
             this.documentsAfterSearch.Clear();
 
             using (DataModel db = new DataModel())
             {
-                if (!String.IsNullOrEmpty(this.txbName.Text))
-                {
-                    this.documentsAfterSearch
-                        = (
-                        from doc in db.MedicalDocs.Include("MedicalDocType")
-                        where doc.PatientId == this.idPatient
-                        where doc.Name.Contains(this.txbName.Text)
-                        select new RedefinedMedicalDoc
-                        {
-                            Id = doc.Id,
-                            DocumentType = doc.MedicalDocType.Name,
-                            Name = doc.Name,
-                            Info = doc.Info,
-                            BeginTime = doc.BeginTime,
-                            EndTime = doc.EndTime
-                        }
-                        )
-                        .ToList();
-                }
+                this.SearchDocumentsByName(db);
 
-                if (!String.IsNullOrEmpty(this.datePicStartData.Text)
-                    && !String.IsNullOrEmpty(this.datePicFinalData.Text))
-                {
-                    //MessageBox.Show(this.datePicStartData.ToString());
-
-                    this.SearchForDocumentsByDateRange(db/*, ref documentsOfTheCurrentPatient*/);
-                }
-                else if (String.IsNullOrEmpty(this.datePicStartData.Text)
-                        && !String.IsNullOrEmpty(this.datePicFinalData.Text)
-                        || !String.IsNullOrEmpty(this.datePicStartData.Text)
-                        && String.IsNullOrEmpty(this.datePicFinalData.Text))
-                {
-                    MessageBox.Show("To search by range, you need to enter both dates!",
-                        "Date field is not filled",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Asterisk);
-                }
+                this.SearchDocumentsByDateRange(db);
             }
-
 
             this.dataGridDocumentList.ItemsSource
                     = this.documentsAfterSearch;
         }
 
         /// <summary>
-        /// Search for documents by date range.
+        /// Search documents by date range.
         /// </summary>
-        /// <param name="db"></param>
-        /// <param name="documentsOfTheCurrentPatient"></param>
-        private void SearchForDocumentsByDateRange(DataModel db/*, ref List<RedefinedMedicalDoc> documentsOfTheCurrentPatient*/)
+        /// <param name="db">Context database.</param>
+        private void SearchDocumentsByDateRange(DataModel db)
+        {
+            if (!String.IsNullOrEmpty(this.datePicStartData.Text)
+                                && !String.IsNullOrEmpty(this.datePicFinalData.Text))
+            {
+                //MessageBox.Show(this.datePicStartData.ToString());
+
+                this.SearchByDateRange(db/*, ref documentsOfTheCurrentPatient*/);
+            }
+            else if (String.IsNullOrEmpty(this.datePicStartData.Text)
+                    && !String.IsNullOrEmpty(this.datePicFinalData.Text)
+                    || !String.IsNullOrEmpty(this.datePicStartData.Text)
+                    && String.IsNullOrEmpty(this.datePicFinalData.Text))
+            {
+                MessageBox.Show("To search by range, you need to enter both dates!",
+                    "Date field is not filled",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Asterisk);
+            }
+        }
+
+        /// <summary>
+        /// Search documents by name.
+        /// </summary>
+        /// <param name="db">Context database.</param>
+        private void SearchDocumentsByName(DataModel db)
+        {
+            if (!String.IsNullOrEmpty(this.txbName.Text))
+            {
+                this.documentsAfterSearch
+                    = (
+                    from doc in db.MedicalDocs.Include("MedicalDocType")
+                    where doc.PatientId == this.idPatient
+                    where doc.Name.Contains(this.txbName.Text)
+                    select new RedefinedMedicalDoc
+                    {
+                        Id = doc.Id,
+                        DocumentType = doc.MedicalDocType.Name,
+                        Name = doc.Name,
+                        Info = doc.Info,
+                        BeginTime = doc.BeginTime,
+                        EndTime = doc.EndTime
+                    }
+                    )
+                    .ToList();
+            }
+        }
+
+        /// <summary>
+        /// Search by date range.
+        /// </summary>
+        /// <param name="db">Context database.</param>
+        private void SearchByDateRange(DataModel db)
         {
             if (this.IsCorrectDateRange())
             {
@@ -453,6 +451,11 @@ namespace MedicalApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="medicalDocs"></param>
+        /// <returns></returns>
         private List<RedefinedMedicalDoc> SearchByDateRange(DbSet<MedicalDoc> medicalDocs)
         {
             List<RedefinedMedicalDoc> documents = null;

@@ -31,8 +31,8 @@ namespace MedicalApp
         //add/edit button click
         private void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(txbFirstName.Text) && 
-                !String.IsNullOrEmpty(txbLastName.Text) && 
+            if (!String.IsNullOrEmpty(txbFirstName.Text) &&
+                !String.IsNullOrEmpty(txbLastName.Text) &&
                 !String.IsNullOrEmpty(txbAdress.Text) &&
                 !String.IsNullOrEmpty(txbBirth.Text))
             {
@@ -120,17 +120,28 @@ namespace MedicalApp
         }
 
         //display information about selected user
-		public AddChangePatient(Patient patient) : this()
-		{
+        public AddChangePatient(Patient patient) : this()
+        {
             pacient = patient;
             btnAddEdit.Content = "Save";
             txbFirstName.Text = patient.FirstName;
             txbLastName.Text = patient.LastName;
-			txbMiddleName.Text = pacient.MiddleName;           
+            txbMiddleName.Text = pacient.MiddleName;
             txbAdress.Text = patient.Addres;
             txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
+        }
+
+
+
+
+
+
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -139,12 +139,17 @@ namespace MedicalApp
                 }
                 db.SaveChanges();
             }
+
+            this.DialogResult = true;
+
             Close();
         }
 
         //clickable button cancel
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
+
             Close();
         }
 

@@ -201,11 +201,15 @@ namespace MedicalApp
             // TODO выбрать (выделить) добавленного пациента
             if (result == true)
             {
+                this.documentsAfterSearch.Clear();
+
                 this.ShowNotification("Document added");
 
                 this.ShowPatientDocsToADatagrid();
 
                 this.dataGridDocumentList.SelectedIndex = this.dataGridDocumentList.Items.Count - 1;
+
+                this.dataGridDocumentList.ScrollIntoView(this.dataGridDocumentList.SelectedItem);
             }
             else
             {

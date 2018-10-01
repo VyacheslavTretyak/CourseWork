@@ -86,12 +86,18 @@ namespace MedicalApp
             // DatePicker
             //this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
             //this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
-            this.datePicStartData.PreviewKeyDown += DatePic_PreviewKeyDown;
-            this.datePicFinalData.PreviewKeyDown += DatePic_PreviewKeyDown;
+            //this.datePicStartData.PreviewKeyDown += DatePic_PreviewKeyDown;
+            this.datePicStartData.PreviewTextInput += DatePic_PreviewTextInput;
+            this.datePicFinalData.PreviewTextInput += DatePic_PreviewTextInput;
 
 
             // Temp method - do not delete.
             TempMethod();
+        }
+
+        private void DatePic_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = Regex.IsMatch(e.Text, @"[^0-9.\-/]+");
         }
 
         private void ButtonEraser_Click(object sender, RoutedEventArgs e)
@@ -103,23 +109,30 @@ namespace MedicalApp
 
         private void DatePic_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9
-                || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
-                || e.Key == Key.OemPeriod
-                || e.Key == Key.Decimal
-                || e.Key == Key.Back
-                || e.Key == Key.Tab)
-            {
-                e.Handled = false;
-            }
-            else if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            // TODO delete - пикер уже нормально настроен.
+
+            //if (e.Key >= Key.D0 && e.Key <= Key.D9
+            //    || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
+            //    || e.Key == Key.OemPeriod
+            //    || e.Key == Key.Decimal
+            //    || e.Key == Key.Back
+            //    || e.Key == Key.Tab
+            //    || e.Key == Key.Delete
+            //    || e.Key == Key.Left
+            //    || e.Key == Key.Up
+            //    || e.Key == Key.Right
+            //    || e.Key == Key.Down)
+            //{
+            //    e.Handled = false;
+            //}
+            //else if (e.Key == Key.Space)
+            //{
+            //    e.Handled = true;
+            //}
+            //else
+            //{
+            //    e.Handled = true;
+            //}
 
 
         }

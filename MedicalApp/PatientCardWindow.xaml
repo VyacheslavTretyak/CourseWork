@@ -90,8 +90,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Type" Binding="{Binding DocumentType}"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Begin Time" Binding="{Binding BeginTime}"/>
-                        <DataGridTextColumn Header="End Time" Binding="{Binding EndTime}"/>
+                        <DataGridTextColumn Header="Begin Time" Binding="{Binding BeginTime, StringFormat={}{0:dd.MM.yyyy}}"/>
+                        <DataGridTextColumn Header="End Time" Binding="{Binding EndTime, StringFormat={}{0:dd.MM.yyyy}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

@@ -363,22 +363,12 @@ namespace MedicalApp
                 this.documentsAfterSearch.Clear();
 
                 this.ShowPatientDocsToADatagrid();
-
-                //this.ForgetTheLastSelectedDocument();
             }
             else
             {
                 this.SearchDocumentsBasedOnEnteredData();
             }
         }
-
-
-        //Remove the selection of the document in the table.
-
-        //private void RemoveSelectionOfDocumentInTable()
-        //{
-        //    this.selectedIndexDocument = -1;
-        //}
 
         /// <summary>
         /// Date range is correct.

@@ -360,7 +360,7 @@ namespace MedicalApp
 
             if (this.IsSearchFieldsAreEmpty())
             {
-                //this.documentsAfterSearch.Clear();
+                this.documentsAfterSearch.Clear();
 
                 this.ShowPatientDocsToADatagrid();
 

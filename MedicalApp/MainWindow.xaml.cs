@@ -60,8 +60,14 @@ namespace MedicalApp
 		// PreviewTextInput event to make numeric textbox
 		private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
 		{
-			var textBox = sender as TextBox;
 			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+		}
+
+		// PreviewKeyDown event to restrict space key because of PreviewTextInput doesn't catch space
+		private void textbox_restrictSpace(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Space)
+				e.Handled = true;
 		}
 
 		// search button click 

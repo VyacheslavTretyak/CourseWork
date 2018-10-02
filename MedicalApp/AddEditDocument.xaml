@@ -30,35 +30,45 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="2.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0">Type:</TextBlock>
-        <ComboBox Name="ComboType" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" FontSize="20" SelectionChanged="EnabledAdd"></ComboBox>
-        <TextBlock Grid.Row="1">Name:</TextBlock>
-        <TextBox Name="TxBxName" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" TextChanged="EnabledAdd"></TextBox>
-        <TextBlock Grid.Row="2" VerticalAlignment="Top">Info:</TextBlock>
-        <TextBox Name="TxBxInfo" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd"></TextBox>
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" Margin="115 10 10 10">Date:</TextBlock>
-            <DatePicker  Name="DateBegin" MinWidth="200" Margin="10 10 30 10" SelectedDateChanged="EnabledAdd"
+        <materialDesign:ColorZone Mode="PrimaryLight"  Padding="16">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
+                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <ComboBox Name="ComboType" Grid.Row="1" Margin="10 10 10 0" SelectionChanged="EnabledAdd" materialDesign:HintAssist.Hint="Type:" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+
+        <TextBox Name="TxBxName" Grid.Row="2" Margin="10 10 10 0"  VerticalAlignment="Center" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+
+        <TextBox Name="TxBxInfo" Grid.Row="3" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Info:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DatePicker Grid.Column="0" Name="DateBegin" MinWidth="200" Margin="10 10 10 0" SelectedDateChanged="EnabledAdd" VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Start Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
             
-            <TextBlock HorizontalAlignment="Left">Date:</TextBlock>
-            <DatePicker  Name="DateEnd" MinWidth="200" Margin="10 10 10 10" SelectedDateChanged="EnabledAdd" VerticalAlignment="Center"
+            <DatePicker Grid.Column="1" Name="DateEnd" MinWidth="200" Margin="10 10 10 0" SelectedDateChanged="EnabledAdd" VerticalAlignment="Center"
                          materialDesign:HintAssist.Hint="Final Data" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-        </StackPanel>
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Name="Add" Click="Add_Click" MinWidth="200" Margin="150 10 10 10" FontSize="20" IsEnabled="False">Add</Button>
-            <Button Name="Cancel" Click="Cancel_Click" MinWidth="200" Margin="50 10 10 10" FontSize="20">Cancel</Button>
-        </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="Add" Click="Add_Click" MinWidth="200" Margin="10 10 10 10" FontSize="20" IsEnabled="False">Add</Button>
+            <Button Grid.Column="1" Name="Cancel" Click="Cancel_Click" MinWidth="200" Margin="10 10 10 10" FontSize="20">Cancel</Button>
+        </Grid>
     </Grid>
 </Window>

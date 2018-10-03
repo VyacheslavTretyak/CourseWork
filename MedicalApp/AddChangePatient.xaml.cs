@@ -134,11 +134,6 @@ namespace MedicalApp
         }
 
 
-
-
-
-
-
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 

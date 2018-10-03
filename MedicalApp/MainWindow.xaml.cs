@@ -60,8 +60,14 @@ namespace MedicalApp
 		// PreviewTextInput event to make numeric textbox
 		private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
 		{
-			var textBox = sender as TextBox;
 			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+		}
+
+		// PreviewKeyDown event to restrict space key because of PreviewTextInput doesn't catch space
+		private void textbox_restrictSpace(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Space)
+				e.Handled = true;
 		}
 
 		// search button click 
@@ -201,7 +207,7 @@ namespace MedicalApp
 		{
 			// open patient's card by enter key
 			if (e.Key == Key.Enter)
-				openPatientsCard();
+				openPatientsCard(this.GetIdOfTheSelectedPatient());
 			// remove patient by delete key
 			else if (e.Key == Key.Delete)
 				buttonRemove.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -211,17 +217,26 @@ namespace MedicalApp
 		private void datagridPatiens_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (datagridPatiens.SelectedItems.Count > 0)
-			{
-				openPatientsCard();
-			}
-		}
+            {
+                openPatientsCard(this.GetIdOfTheSelectedPatient());
+            }
+        }
 
-		// open patient card window
-		void openPatientsCard()
+        /// <summary>
+        /// Get the id of the selected patient.
+        /// </summary>
+        /// <returns>Id of the selected patient in the datagridPatiens.</returns>
+        private int GetIdOfTheSelectedPatient()
+        {
+            return (datagridPatiens.SelectedItem as Patient).Id;
+        }
+
+        // open patient card window
+        void openPatientsCard(int idPatient)
 		{
 			// TODO
 
-            PatientCardWindow patientCard = new PatientCardWindow();
+            PatientCardWindow patientCard = new PatientCardWindow(idPatient);
 			patientCard.Show();
 		}
 
@@ -244,7 +259,7 @@ namespace MedicalApp
 			if (datagridPatiens.SelectedItems.Count <= 0)
 				return;
 
-			openPatientsCard();
+			openPatientsCard(this.GetIdOfTheSelectedPatient());
 		}
 
 		// button to clear all fields
@@ -271,26 +286,29 @@ namespace MedicalApp
 			Patient[] patients = {
 			new Patient()
 			{
-				FirstName = "Pomber",
-				LastName = "Asekrot",
+				FirstName = "Bart",
+				LastName = "Simpson",
+                MiddleName = "mBartSimps",
 				BirthDay = new DateTime(1991, 1, 1),
-				Addres = "Krivoy Rog Sicheslavska str. 11/13",
+				Addres = "Springfield Sicheslavska str. 11/13",
 				Gender = true
 			},
 			new Patient()
 			{
-				FirstName = "Arkport",
-				LastName = "Shurtrych",
+				FirstName = "Bender",
+				LastName = "Rodriguez",
+                MiddleName = "S",
 				BirthDay = new DateTime(1988, 12, 17),
-				Addres = "Krivoy Rog Myru str. 121/15",
+				Addres = "New York Myru str. 121/15",
 				Gender = true
 			},
 			new Patient()
 			{
-				FirstName = "Roska",
-				LastName = "Viaerkova",
-				BirthDay = new DateTime(2001, 9, 11),
-				Addres = "Krivoy Rog Almasna str. 49/51",
+				FirstName = "Lisa",
+				LastName = "Simpson",
+                MiddleName = "mLisaSimps",
+                BirthDay = new DateTime(2001, 9, 11),
+				Addres = "Springfield Almasna str. 49/51",
 				Gender = false
 			},
 			};

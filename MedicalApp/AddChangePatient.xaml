@@ -38,11 +38,11 @@
             </StackPanel>
         </materialDesign:ColorZone>
 
-        <TextBox Name="txbFirstName" Grid.Column="0" Grid.Row="1" Margin="10, 5, 5, 5" materialDesign:HintAssist.Hint="First Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-        <TextBox Name="txbLastName" Grid.Column="0" Grid.Row="2" Margin="10, 5, 5, 5" materialDesign:HintAssist.Hint="Last Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-        <TextBox Name="txbMiddleName" Grid.Column="0" Grid.Row="3" Margin="10, 5, 5, 5" materialDesign:HintAssist.Hint="Middle Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-        <TextBox Name="txbBirth" Grid.Column="0" Grid.Row="4" Margin="10, 5, 5, 5" MaxLength="4" materialDesign:HintAssist.Hint="Year of birth:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-        <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="6"  Margin="10, 0, 5, 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Adress:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <TextBox Name="txbFirstName" Grid.Column="0" Grid.Row="1" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="First Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <TextBox Name="txbLastName" Grid.Column="0" Grid.Row="2" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Last Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <TextBox Name="txbMiddleName" Grid.Column="0" Grid.Row="3" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Middle Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <DatePicker Name="txbBirth" Grid.Column="0" Grid.Row="4" MinWidth="200" Margin="10 10 20 10" materialDesign:HintAssist.Hint="Date of Birth" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"></DatePicker>
+        <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="6"  Margin="10, 0, 20, 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Adress:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" Margin="10, 0, 0, 0">
             <Grid>

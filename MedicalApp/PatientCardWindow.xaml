@@ -66,11 +66,11 @@
             </StackPanel>
         </materialDesign:ColorZone>
 
-        <Label  Grid.Column="0" Grid.Row="2"  FontWeight="Bold" x:Name="labelFullName" Content="FullName" HorizontalAlignment="Left" Margin="5,1,0,0" VerticalAlignment="Top" Height="32" Width="91"/>
+        <Label  Grid.Column="0" Grid.Row="2"  FontWeight="Bold" x:Name="labelFullName" Content="FullName" HorizontalAlignment="Left" Margin="5,1,0,0" VerticalAlignment="Top" Height="32" Width="305"/>
         <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Left" x:Name="Gender" Content="Gender" Margin="1,1,0,0" VerticalAlignment="Top" Height="32" Width="71"/>
         <Label  Grid.Column="2" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Center" x:Name="DateOfBirth" Content="Date Of Birth:" Margin="109,1,4,0" VerticalAlignment="Top" Height="32" Width="130"/>
         <Label  Grid.Column="3" Grid.Row="2" FontWeight="Bold" x:Name="DateOfBirthValue" Content="00/00/00" HorizontalAlignment="Right" Margin="0,1,10,0" VerticalAlignment="Top" RenderTransformOrigin="1.988,0.414" Height="32" Width="103"/>
-        <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Name="txbAdress" IsReadOnly="true" Background="White"  BorderThickness="1" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="10,1,0,0"/>
+        <TextBox Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Name="txbAdress" IsReadOnly="true" Background="White"  BorderThickness="1" TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="10,1,0,0"/>
         <Label  Grid.Column="0" Grid.Row="8"  FontWeight="Bold" x:Name="labelDoc" Content="Documents" HorizontalAlignment="Left" Margin="7,1,0,0" VerticalAlignment="Top" Height="32" Width="106"/>
         <Button Name="btnDocAdd" Grid.Column="2" Grid.Row="4" Height="Auto"  Margin="2,2,10,2" Content="Add document" Grid.ColumnSpan="2"></Button>
         <Button x:Name="btnDocEdit"  Grid.Column="2" Grid.Row="6" Height="Auto" Margin="2,2,10,2" Content="Edit document" Grid.ColumnSpan="2"/>
@@ -103,7 +103,7 @@
         <Button Grid.Row="16" Grid.Column="3" Name="buttonEraser" Margin="0,1,10,2" Content="{materialDesign:PackIcon Eraser}" ToolTip="Clear all search fields" HorizontalAlignment="Right" Width="50" Height="Auto"/>
         <Button x:Name="btnDocSearch" Grid.Row="16" Grid.Column="2"  Height="Auto" Margin="2,2,70,2" Click="btnDocSearch_Click"  Content="Search document" Grid.ColumnSpan="2"/>
         <Label  Grid.Column="0" Grid.Row="18"  FontWeight="Bold" x:Name="labelDocInfo" Content="Document`s Info" HorizontalAlignment="Left" Margin="1,1,0,0" VerticalAlignment="Top" Height="32" Width="151"/>
-        <TextBox Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="4" Grid.RowSpan="3" Name="txbInfo" Margin="10,1,10,5" Background="White"  BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" IsReadOnly="true" />
+        <TextBox Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="4" Grid.RowSpan="3" Name="txbInfo" Margin="10,1,10,5" Background="White"  BorderThickness="1" TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" IsReadOnly="true" />
 
         <!--popup notification-->
         <materialDesign:Snackbar Grid.Column="2" Grid.Row="23" Grid.RowSpan="1" 

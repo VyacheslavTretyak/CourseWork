@@ -95,6 +95,7 @@ namespace MedicalApp
 
             // DataGrid
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
+            this.dataGridDocumentList.MouseDoubleClick += DataGridDocumentList_MouseDoubleClick;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
@@ -104,6 +105,11 @@ namespace MedicalApp
             // DatePicker
             this.datePicStartData.PreviewTextInput += DatePic_PreviewTextInput;
             this.datePicFinalData.PreviewTextInput += DatePic_PreviewTextInput;
+        }
+
+        private void DataGridDocumentList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

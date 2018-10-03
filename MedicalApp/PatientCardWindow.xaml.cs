@@ -319,10 +319,7 @@ namespace MedicalApp
                                     + currentPatient.MiddleName
                                     ;
 
-            // TODO добавить пол пациента.
-            //string gender = currentPatient.Gender == true ? "Male" : "Female";
-            //MessageBox.Show(gender);
-            //this.labelGender = currentPatient.Gender == true ? "Male" : "Female";
+            this.Gender.Content = currentPatient.Gender == true ? "Male" : "Female";
 
             this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
 

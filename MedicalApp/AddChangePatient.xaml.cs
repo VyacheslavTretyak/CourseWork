@@ -34,8 +34,8 @@ namespace MedicalApp
         {
             if (!String.IsNullOrEmpty(txbFirstName.Text) &&
                 !String.IsNullOrEmpty(txbLastName.Text) &&
-                !String.IsNullOrEmpty(txbAdress.Text) &&
-                !String.IsNullOrEmpty(txbBirth.Text))
+                !String.IsNullOrEmpty(txbAdress.Text))
+                //!String.IsNullOrEmpty(txbBirth.Text))
             {
                 using (DataModel db = new DataModel())
                 {
@@ -47,8 +47,8 @@ namespace MedicalApp
                         db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text;
                         db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
                         
-                        db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                            System.Globalization.CultureInfo.InvariantCulture);
+                        //db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                        //    System.Globalization.CultureInfo.InvariantCulture);
                         if (rdbMale.IsChecked == false)
                             db.Pacients.Find(pacient.Id).Gender = false;
                         else
@@ -63,8 +63,8 @@ namespace MedicalApp
                         pacient.LastName = txbLastName.Text;
                         pacient.MiddleName = txbMiddleName.Text;
                         pacient.Addres = txbAdress.Text;
-                        pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                            System.Globalization.CultureInfo.InvariantCulture);
+                        //pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                        //    System.Globalization.CultureInfo.InvariantCulture);
                         if (rdbMale.IsChecked == false)
                             pacient.Gender = false;
                         else
@@ -106,9 +106,17 @@ namespace MedicalApp
             txbLastName.Text = patient.LastName;
             txbMiddleName.Text = pacient.MiddleName;
             txbAdress.Text = patient.Addres;
-            txbBirth.Text = patient.BirthDay.ToShortDateString();
+            //txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
         }
+
+        //private void txbBirth_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (txbBirth.Text.Length == 2)
+        //        txbBirth.Text +=".";
+        //    if (txbBirth.Text.Length == 5)
+        //        txbBirth.Text += ".";
+        //}
     }
 }

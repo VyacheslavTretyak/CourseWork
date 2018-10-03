@@ -116,12 +116,18 @@ namespace MedicalApp
 
         /// <summary>
         /// Erase button click processing (search data).
+        /// Show of all documents of the current patient to the table of documents.
         /// </summary>
         private void ButtonEraser_Click(object sender, RoutedEventArgs e)
         {
             this.txbName.Text = "";
             this.datePicStartData.Text = "";
             this.datePicFinalData.Text = "";
+
+            this.documentsAfterSearch.Clear();
+            this.ForgetTheLastSelectedDocument();
+
+            this.ShowPatientDocsToADatagrid();
         }
 
         /// <summary>

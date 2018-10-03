@@ -38,7 +38,7 @@ namespace MedicalApp
             {
                 using (DataModel db = new DataModel())
                 {
-                    //edit current user
+                    //edit current user 
                     if (pacient != null)
                     {
                         try
@@ -131,17 +131,6 @@ namespace MedicalApp
             txbBirth.Text = patient.BirthDay.ToShortDateString();
             if (!patient.Gender)
                 rdbFemale.IsChecked = true;
-        }
-
-
-
-
-
-
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

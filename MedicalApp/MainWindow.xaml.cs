@@ -324,7 +324,7 @@ namespace MedicalApp
 				},
 				new MedicalDocType()
 				{
-					Name = "Результати аналізів"
+					Name = "Result of analizes"
 				}
 			};
 			MedicalDoc[] docs =

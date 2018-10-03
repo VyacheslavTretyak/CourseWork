@@ -11,7 +11,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="18"		
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Title="Patient Card" Height="714.626" Width="780">
+        Title="Patient Card" Height="714.626" Width="780" WindowStartupLocation="CenterScreen">
     <!--<Border Background="WhiteSmoke" BorderThickness="4"  CornerRadius="5" Margin="0,0,2,-3" RenderTransformOrigin="0.317,0.53">-->
         <!--<Border  Background="White" RenderTransformOrigin="0.308,0.5" Margin="-3,-1,-4,6">-->
             <Grid>

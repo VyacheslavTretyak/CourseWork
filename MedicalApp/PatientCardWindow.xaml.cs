@@ -107,9 +107,12 @@ namespace MedicalApp
             this.datePicFinalData.PreviewTextInput += DatePic_PreviewTextInput;
         }
 
+        /// <summary>
+        /// Double-click handler in the table on the document.
+        /// </summary>
         private void DataGridDocumentList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            this.OpeningDocumentEditingWindow();
         }
 
         /// <summary>
@@ -141,7 +144,15 @@ namespace MedicalApp
         /// </summary>
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
-            int currentDocId
+            this.OpeningDocumentEditingWindow();
+        }
+
+        /// <summary>
+        /// Opening the document editing window.
+        /// </summary>
+        private void OpeningDocumentEditingWindow()
+        {
+            int currentDocId 
                 = (this.dataGridDocumentList.SelectedItem as RedefinedMedicalDoc)
                 .Id;
 

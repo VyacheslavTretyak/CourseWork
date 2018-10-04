@@ -22,15 +22,23 @@ namespace MedicalApp
     /// </summary>
     public partial class PatientCardWindow : Window
     {
-        //private List<RedefinedMedicalDoc> documentsOfTheCurrentPatient = null;   // TODO HACK ???
+        /// <summary>
+        /// Documents received after the request (search).
+        /// </summary>
         List<RedefinedMedicalDoc> documentsAfterSearch = null;
-
+        /// <summary>
+        /// Patient id (open card).
+        /// </summary>
         private int idPatient;
-
+        /// <summary>
+        /// Index of the selected document in the document table.
+        /// </summary>
         private int selectedIndexDocument;
 
-        //private Type type = null;
-        private class RedefinedMedicalDoc /*: MedicalDoc*/
+        /// <summary>
+        /// Override class MedicalDoc.
+        /// </summary>
+        private class RedefinedMedicalDoc
         {
             public int Id { get; set; }
             public string DocumentType { get; set; }
@@ -40,15 +48,14 @@ namespace MedicalApp
             public DateTime? EndTime { get; set; }
         }
 
+
+        /// <summary>
+        /// The default constructor is not designed to work in the current application.
+        /// </summary>
         public PatientCardWindow()
         {
             InitializeComponent();
 
-            this.Loaded += PatientCardWindow_Loaded;
-        }
-
-        private void PatientCardWindow_Loaded(object sender, RoutedEventArgs e)
-        {
             MessageBox.Show("An error occurred while getting the patient's Id.\n"
                 + "The window will be closed.",
                 "Error while retrieving data",
@@ -58,25 +65,37 @@ namespace MedicalApp
             this.Close();
         }
 
+        /// <summary>
+        /// The constructor accepts the patient ID to open a card of the patient.
+        /// </summary>
+        /// <param name="idPatient">Patient id.</param>
         public PatientCardWindow(int idPatient)
         {
             InitializeComponent();
 
             this.idPatient = idPatient;
 
+            this.Loaded += PatientCardWindow_Loaded;
+        }
+
+        /// <summary>
+        /// Installation of initial window data.
+        /// Register event handlers.
+        /// </summary>
+        private void PatientCardWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             this.btnDocEdit.IsEnabled = false;
 
             this.FillTheCardWithPatientData();
 
-            this.datePicStartData.ToolTip = "Введите дату в формате 00.00.0000";
-            this.datePicFinalData.ToolTip = "Введите дату в формате 00.00.0000";
+            this.datePicStartData.ToolTip = "Enter the date in the format 00.00.0000";
+            this.datePicFinalData.ToolTip = "Enter the date in the format 00.00.0000";
 
             this.documentsAfterSearch = new List<RedefinedMedicalDoc>();
 
-
-
-
+            // DataGrid
             this.dataGridDocumentList.SelectionChanged += DataGridDocumentList_SelectionChanged;
+            this.dataGridDocumentList.MouseDoubleClick += DataGridDocumentList_MouseDoubleClick;
 
             // Button
             this.btnDocAdd.Click += BtnDocAdd_Click;
@@ -84,62 +103,68 @@ namespace MedicalApp
             this.buttonEraser.Click += ButtonEraser_Click;
 
             // DatePicker
-            //this.datePicStartData.PreviewTextInput += DatePicStartData_PreviewTextInput;
-            //this.datePicStartData.KeyDown += DatePicStartData_KeyDown;
-            this.datePicStartData.PreviewKeyDown += DatePic_PreviewKeyDown;
-            this.datePicFinalData.PreviewKeyDown += DatePic_PreviewKeyDown;
-
-
-            // Temp method - do not delete.
-            TempMethod();
+            this.datePicStartData.PreviewTextInput += DatePic_PreviewTextInput;
+            this.datePicFinalData.PreviewTextInput += DatePic_PreviewTextInput;
         }
 
+        /// <summary>
+        /// Double-click handler in the table on the document.
+        /// </summary>
+        private void DataGridDocumentList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.OpeningDocumentEditingWindow();
+        }
+
+        /// <summary>
+        /// Processing of input characters (the ban letters).
+        /// </summary>
+        private void DatePic_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = Regex.IsMatch(e.Text, @"[^0-9.\-/]+");
+        }
+
+        /// <summary>
+        /// Erase button click processing (search data).
+        /// Show of all documents of the current patient to the table of documents.
+        /// </summary>
         private void ButtonEraser_Click(object sender, RoutedEventArgs e)
         {
             this.txbName.Text = "";
             this.datePicStartData.Text = "";
             this.datePicFinalData.Text = "";
+
+            this.documentsAfterSearch.Clear();
+            this.ForgetTheLastSelectedDocument();
+
+            this.ShowPatientDocsToADatagrid();
         }
 
-        private void DatePic_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9
-                || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9
-                || e.Key == Key.OemPeriod
-                || e.Key == Key.Decimal
-                || e.Key == Key.Back
-                || e.Key == Key.Tab)
-            {
-                e.Handled = false;
-            }
-            else if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-
-
-        }
-
-        private void TempMethod()
-        {
-            
-        }
-
+        /// <summary>
+        /// Handler for the document edit button.
+        /// </summary>
         private void BtnDocEdit_Click(object sender, RoutedEventArgs e)
         {
-            int currentDocId
+            this.OpeningDocumentEditingWindow();
+        }
+
+        /// <summary>
+        /// Opening the document editing window.
+        /// </summary>
+        private void OpeningDocumentEditingWindow()
+        {
+            int currentDocId 
                 = (this.dataGridDocumentList.SelectedItem as RedefinedMedicalDoc)
                 .Id;
 
+
+            //Opening the edit window.
             AddEditDocument addDocument
                 = new AddEditDocument(this.idPatient, currentDocId);
 
             bool? result = addDocument.ShowDialog();
 
+
+            // Actions after closing the window.
             if (result == true)
             {
                 this.ShowNotification("Document edited");
@@ -147,7 +172,14 @@ namespace MedicalApp
 
             this.ReturningLatestDataInTable();
 
-            // TODO выбрать (выделить) редактируемого пациента
+            this.SelectionInTableOfEditedPatient();
+        }
+
+        /// <summary>
+        /// Selection in the table of the edited patient.
+        /// </summary>
+        private void SelectionInTableOfEditedPatient()
+        {
             this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
         }
 
@@ -166,15 +198,18 @@ namespace MedicalApp
             }
         }
 
+        /// <summary>
+        /// Handler for the add document button.
+        /// </summary>
         private void BtnDocAdd_Click(object sender, RoutedEventArgs e)
         {
+            // Opening the add document window.
             AddEditDocument addDocument = new AddEditDocument(this.idPatient);
 
             bool? result = addDocument.ShowDialog();
 
-            
 
-            // TODO выбрать (выделить) добавленного пациента
+            // Actions after closing the window.
             if (result == true)
             {
                 this.documentsAfterSearch.Clear();
@@ -191,10 +226,13 @@ namespace MedicalApp
             {
                 this.ReturningLatestDataInTable();
 
-                this.dataGridDocumentList.SelectedIndex = this.selectedIndexDocument;
+                this.SelectionInTableOfEditedPatient();
             }
         }
 
+        /// <summary>
+        /// Handler to change the selected document in the document table.
+        /// </summary>
         private void DataGridDocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.IsARowOfTheDocumentInTheTableIsHighlighted())
@@ -228,11 +266,17 @@ namespace MedicalApp
             return false;
         }
 
+        /// <summary>
+        /// Deactivation of the document editing button.
+        /// </summary>
         private void DeactivationOfTheDocumentEditingButton()
         {
             this.btnDocEdit.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Activation of the document editing button.
+        /// </summary>
         private void ActivationOfTheDocumentEditingButton()
         {
             this.btnDocEdit.IsEnabled = true;
@@ -265,7 +309,7 @@ namespace MedicalApp
         /// <summary>
         /// Fill the card with data.
         /// </summary>
-        /// <param name="currentPatient"></param>
+        /// <param name="currentPatient">Current patient whose card is open.</param>
         private void FillTheCardWithData(Patient currentPatient)
         {
             this.labelFullName.Content = currentPatient.FirstName
@@ -275,11 +319,16 @@ namespace MedicalApp
                                     + currentPatient.MiddleName
                                     ;
 
+            this.Gender.Content = currentPatient.Gender == true ? "Male" : "Female";
+
             this.DateOfBirthValue.Content = currentPatient.BirthDay.ToShortDateString();
 
             this.txbAdress.Text = currentPatient.Addres;
         }
 
+        /// <summary>
+        /// Show Patient docs to a Datagrid.
+        /// </summary>
         private void ShowPatientDocsToADatagrid()
         {
             using (DataModel db = new DataModel())
@@ -288,14 +337,21 @@ namespace MedicalApp
             }
         }
 
+        /// <summary>
+        /// Show Patient docs to a Datagrid (with passing database context).
+        /// </summary>
+        /// <param name="db">Database context.</param>
         private void ShowPatientDocsToADatagrid(DataModel db)
         {
             this.LoadingFromDatabaseDocsThePatientInDatagrid(db);
         }
 
+        /// <summary>
+        /// Loading from the patient's database of documents in Datagrid.
+        /// </summary>
+        /// <param name="db">Database context.</param>
         private void LoadingFromDatabaseDocsThePatientInDatagrid(DataModel db)
         {
-            // db search doc type
             var documentsOfTheCurrentPatient
                 = (
                 from doc in db.MedicalDocs.Include("MedicalDocType")
@@ -316,15 +372,18 @@ namespace MedicalApp
                 = documentsOfTheCurrentPatient;
         }
 
+        /// <summary>
+        /// Handler for clicking on the document search button.
+        /// </summary>
 		private void btnDocSearch_Click(object sender, RoutedEventArgs e)
-		{
-            this.selectedIndexDocument = -1;
+        {
+            this.ForgetTheLastSelectedDocument();
 
             if (this.IsSearchFieldsAreEmpty())
             {
-                this.ShowPatientDocsToADatagrid();
+                this.documentsAfterSearch.Clear();
 
-                this.ForgetTheLastSelectedDocument();
+                this.ShowPatientDocsToADatagrid();
             }
             else
             {
@@ -332,6 +391,10 @@ namespace MedicalApp
             }
         }
 
+        /// <summary>
+        /// Date range is correct.
+        /// </summary>
+        /// <returns>true if the range is correct.</returns>
         private bool IsCorrectDateRange()
         {
             DateTime dateTimeStartData = this.GetStartingDateOfSearchRange();
@@ -377,23 +440,39 @@ namespace MedicalApp
         /// <param name="db">Context database.</param>
         private void SearchDocumentsByDateRange(DataModel db)
         {
-            if (!String.IsNullOrEmpty(this.datePicStartData.Text)
-                                && !String.IsNullOrEmpty(this.datePicFinalData.Text))
+            if (this.IsBothDateFieldsAreFilled())
             {
-                //MessageBox.Show(this.datePicStartData.ToString());
-
-                this.SearchByDateRange(db/*, ref documentsOfTheCurrentPatient*/);
+                this.SearchByDateRange(db);
             }
-            else if (String.IsNullOrEmpty(this.datePicStartData.Text)
-                    && !String.IsNullOrEmpty(this.datePicFinalData.Text)
-                    || !String.IsNullOrEmpty(this.datePicStartData.Text)
-                    && String.IsNullOrEmpty(this.datePicFinalData.Text))
+            else if (this.IsOneOfDateRangeFieldsIsEmpty())
             {
                 MessageBox.Show("To search by range, you need to enter both dates!",
                     "Date field is not filled",
                     MessageBoxButton.OK,
                     MessageBoxImage.Asterisk);
             }
+        }
+
+        /// <summary>
+        /// One of the date range fields is empty.
+        /// </summary>
+        /// <returns>true if one of the date range fields is empty.</returns>
+        private bool IsOneOfDateRangeFieldsIsEmpty()
+        {
+            return String.IsNullOrEmpty(this.datePicStartData.Text)
+                && !String.IsNullOrEmpty(this.datePicFinalData.Text)
+                || !String.IsNullOrEmpty(this.datePicStartData.Text)
+                && String.IsNullOrEmpty(this.datePicFinalData.Text);
+        }
+
+        /// <summary>
+        /// Both date fields are filled.
+        /// </summary>
+        /// <returns>true if both date range fields are filled.</returns>
+        private bool IsBothDateFieldsAreFilled()
+        {
+            return !String.IsNullOrEmpty(this.datePicStartData.Text)
+                && !String.IsNullOrEmpty(this.datePicFinalData.Text);
         }
 
         /// <summary>
@@ -452,10 +531,10 @@ namespace MedicalApp
         }
 
         /// <summary>
-        /// 
+        /// Search by date range.
         /// </summary>
-        /// <param name="medicalDocs"></param>
-        /// <returns></returns>
+        /// <param name="medicalDocs">MedicalDoc collection (in the database).</param>
+        /// <returns>List of overridden documents (RedefinedMedicalDoc).</returns>
         private List<RedefinedMedicalDoc> SearchByDateRange(DbSet<MedicalDoc> medicalDocs)
         {
             List<RedefinedMedicalDoc> documents = null;
@@ -484,6 +563,11 @@ namespace MedicalApp
             return documents;
         }
 
+        /// <summary>
+        /// Search by date range.
+        /// </summary>
+        /// <param name="medicalDocs">RedefinedMedicalDoc collection (after searching by name).</param>
+        /// <returns>List of overridden documents (RedefinedMedicalDoc).</returns>
         private List<RedefinedMedicalDoc> SearchByDateRange(List<RedefinedMedicalDoc> documentsOfTheCurrentPatient)
         {
             List<RedefinedMedicalDoc> documents = null;
@@ -529,8 +613,6 @@ namespace MedicalApp
             return this.datePicStartData.SelectedDate.Value;
         }
 
-
-
         /// <summary>
         /// Search fields are empty.
         /// </summary>
@@ -547,6 +629,10 @@ namespace MedicalApp
             return false;
         }
 
+        /// <summary>
+        /// Show popup messages.
+        /// </summary>
+        /// <param name="message">Message text.</param>
         void ShowNotification(string message)
         {
             // SnackbarThree - xaml name of MaterialDesign.Snackbar  

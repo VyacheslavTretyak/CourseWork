@@ -164,9 +164,16 @@ namespace MedicalApp
             }
             else
             {
+                if (DateEnd.SelectedDate != null)
+                {
+                    if (DateBegin.SelectedDate > DateEnd.SelectedDate)
+                    {
+                        Add.IsEnabled = false;
+                        return;
+                    }
+                }
                 Add.IsEnabled = true;
             }
-
         }
     }
 }

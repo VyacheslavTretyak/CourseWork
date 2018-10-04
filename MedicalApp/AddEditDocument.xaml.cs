@@ -168,9 +168,14 @@ namespace MedicalApp
                 {
                     if (DateBegin.SelectedDate > DateEnd.SelectedDate)
                     {
+						DateEnd.Foreground = new SolidColorBrush(Colors.Red);
                         Add.IsEnabled = false;
                         return;
                     }
+					else
+					{
+						DateEnd.Foreground = DateBegin.Foreground;
+					}
                 }
                 Add.IsEnabled = true;
             }

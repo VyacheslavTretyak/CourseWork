@@ -62,6 +62,7 @@ namespace MedicalApp
                                 db.Pacients.Find(pacient.Id).Gender = true;
                             db.SaveChanges();
                             DialogResult = true;
+                            var t = db.Pacients.FirstOrDefault(x => x.Id == pacient.Id);
                             this.Close();
                         }
                         catch(Exception ex){}

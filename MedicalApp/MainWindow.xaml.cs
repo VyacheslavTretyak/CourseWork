@@ -77,6 +77,12 @@ namespace MedicalApp
 				e.Handled = true;
 		}
 
+		// PreviewTextInput event to make numeric textbox
+		private void textbox_NotNumeric(object sender, TextCompositionEventArgs e)
+		{
+			e.Handled = !Regex.IsMatch(e.Text, "[^0-9]+");
+		}
+
 		// search button click 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
 		{

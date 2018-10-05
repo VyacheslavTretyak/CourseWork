@@ -118,14 +118,14 @@ namespace MedicalApp
 				if (!string.IsNullOrWhiteSpace(textboxNumberCard.Text))
 				{
 					// selection of patients with the entered card number
-					long cardNum = Convert.ToInt64 (textboxNumberCard.Text);
+					long cardNum = Convert.ToInt64(textboxNumberCard.Text);
 					queryable = queryable.Where(p => p.Id == cardNum);
 				}
 				// if last name field not empty
 				if (!string.IsNullOrWhiteSpace(textboxLastName.Text))
 				{
 					// selection of patients whose names contain the entered text 
-					queryable = queryable.Where(p => p.LastName.Contains(textboxLastName.Text));
+					queryable = queryable.Where(p => p.LastName.Contains(textboxLastName.Text.Trim()));
 				}
 				// if year of birth field not empty
 				if (!string.IsNullOrWhiteSpace(textboxDateOfBirth.Text))
@@ -138,7 +138,7 @@ namespace MedicalApp
 				if (!string.IsNullOrWhiteSpace(textboxAddress.Text))
 				{
 					// selection of patients whose address contain the entered text 
-					queryable = queryable.Where(p => p.Addres.Contains(textboxAddress.Text));
+					queryable = queryable.Where(p => p.Addres.Contains(textboxAddress.Text.Trim()));
 				}
 				// put query result to data grid table
 				datagridPatiens.ItemsSource = queryable.ToList();

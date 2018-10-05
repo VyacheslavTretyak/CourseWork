@@ -84,7 +84,13 @@ namespace MedicalApp
 		// PreviewTextInput event to make numeric textbox
 		private void textbox_OnlyNumeric(object sender, TextCompositionEventArgs e)
 		{
-			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+			e.Handled = IsStringNumeric(e.Text);
+		}
+
+		// check string has numbers
+		bool IsStringNumeric(string str)
+		{
+			return Regex.IsMatch(str, "[^0-9]+");
 		}
 
 		// PreviewKeyDown event to restrict space key because of PreviewTextInput doesn't catch space
@@ -94,10 +100,11 @@ namespace MedicalApp
 				e.Handled = true;
 		}
 
-		// PreviewTextInput event to make numeric textbox
-		private void textbox_NotNumeric(object sender, TextCompositionEventArgs e)
+		// PreviewTextInput event to make only letters textbox
+		private void textbox_OnlyLetters(object sender, TextCompositionEventArgs e)
 		{
-			e.Handled = !Regex.IsMatch(e.Text, "[^0-9]+");
+			char symbol = e.Text.FirstOrDefault();
+			e.Handled = !Char.IsLetter(symbol) && symbol != '-';
 		}
 
 		// search button click 

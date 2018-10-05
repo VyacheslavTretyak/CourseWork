@@ -28,7 +28,14 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			InitializeComponent();
-			InitFirstData();
+			try
+			{
+				InitFirstData();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 			//Test();
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;

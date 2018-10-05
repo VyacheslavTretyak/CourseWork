@@ -41,9 +41,9 @@
 		<!--<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>-->
 
 		<TextBox Grid.Row="1" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" MaxLength="12" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Card number"></TextBox>
+				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Card number" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
-				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address"></TextBox>
+				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 		<!--<TextBlock Grid.Row="3" Grid.Column="0">Last name:</TextBlock>-->
 		<!--<TextBlock Grid.Row="3" Grid.Column="1">Year of birth:</TextBlock>-->

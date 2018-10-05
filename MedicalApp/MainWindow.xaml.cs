@@ -27,16 +27,19 @@ namespace MedicalApp
 	{
 		public MainWindow()
 		{
+			// check DB is avaliable
+			if (!CheckConnection())
+			{
+				Application.Current.Shutdown(); // close application
+				return;
+			}
+
 			InitializeComponent();
-			try
-			{
-				InitFirstData();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+
+			InitFirstData();
+		
 			//Test();
+
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -47,20 +50,34 @@ namespace MedicalApp
 			buttonsEditRemoveStateChange();
 		}
 
+		bool CheckConnection()
+		{
+			using (DataModel db = new DataModel())
+			{
+				try
+				{
+					db.Database.Connection.Open();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Connection to Data Base error", MessageBoxButton.OK, MessageBoxImage.Error);
+					return false;
+				}
+				finally
+				{
+					db.Database.Connection?.Close();
+				}
+			}
+			return true;
+		}
+
 		// fill data grid from db
 		void fillDataFromDBtoDatagrid()
 		{
-			try
+			using (DataModel db = new DataModel())
 			{
-				using (DataModel db = new DataModel())
-				{
-					// select only not archived patients
-					datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
+				// select only not archived patients
+				datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
 			}
 		}
 

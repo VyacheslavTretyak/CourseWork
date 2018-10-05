@@ -47,15 +47,9 @@ namespace MedicalApp
                             db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
                             db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text;
                             db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
-                            try
-                            {
-                                db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                                    System.Globalization.CultureInfo.InvariantCulture);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Format of date isn't correct", "Warning", MessageBoxButton.OK);
-                            }
+                            db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                                System.Globalization.CultureInfo.InvariantCulture);
+
                             if (rdbMale.IsChecked == false)
                                 db.Pacients.Find(pacient.Id).Gender = false;
                             else
@@ -64,7 +58,7 @@ namespace MedicalApp
                             DialogResult = true;
                             this.Close();
                         }
-                        catch(Exception ex){}
+                        catch (Exception ex) { }
                     }
                     //create new user
                     else
@@ -76,16 +70,10 @@ namespace MedicalApp
                             pacient.LastName = txbLastName.Text;
                             pacient.MiddleName = txbMiddleName.Text;
                             pacient.Addres = txbAdress.Text;
-                            try
-                            {
-                                pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
-                                    System.Globalization.CultureInfo.InvariantCulture);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Format of date isn't correct", "Warning", MessageBoxButton.OK);
-                                pacient = null;
-                            }
+
+                            pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
+                                System.Globalization.CultureInfo.InvariantCulture);
+
                             if (rdbMale.IsChecked == false)
                                 pacient.Gender = false;
                             else
@@ -95,7 +83,7 @@ namespace MedicalApp
                             DialogResult = true;
                             this.Close();
                         }
-                        catch(Exception ex){}
+                        catch (Exception ex) { }
                     }
                 }
             }

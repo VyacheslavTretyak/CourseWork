@@ -121,23 +121,23 @@ namespace MedicalApp
                 {
                     MedicalDoc medicalDoc = new MedicalDoc
                     {
-                        Name = TxBxName.Text,
+                        Name = TxBxName.Text.Trim(),
                         PatientId = IdPacient,
                         MedicalDocTypeId = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id,
                         BeginTime = (DateTime)DateBegin.SelectedDate,
                         EndTime = DateEnd.SelectedDate,
-                        Info = TxBxInfo.Text
+                        Info = TxBxInfo.Text.Trim()
                     };
                     db.MedicalDocs.Add(medicalDoc);
                 }
                 else
                 {
                     //Edit MedicalDoc
-                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Name = TxBxName.Text;
+                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Name = (TxBxName.Text).Trim();
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().MedicalDocTypeId = db.MedicalDocTypes.Where(a => a.Name == ComboType.SelectedValue.ToString()).FirstOrDefault().Id;
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().BeginTime = (DateTime)DateBegin.SelectedDate;
                     db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().EndTime = DateEnd.SelectedDate;
-                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Info = TxBxInfo.Text;
+                    db.MedicalDocs.Where(x => x.Id == IdMedicalDoc).FirstOrDefault().Info = TxBxInfo.Text.Trim();
                 }
                 db.SaveChanges();
             }

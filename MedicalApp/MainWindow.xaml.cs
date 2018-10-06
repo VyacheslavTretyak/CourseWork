@@ -28,11 +28,11 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			// check DB is avaliable
-			if (!CheckConnection())
-			{
-				Application.Current.Shutdown(); // close application
-				return;
-			}
+			//if (!CheckConnection())
+			//{
+			//	Application.Current.Shutdown(); // close application
+			//	return;
+			//}
 
 			InitializeComponent();
 			//InitFirstData();
@@ -41,9 +41,6 @@ namespace MedicalApp
 
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-			
-			
 
 			// disable edit and remove buttons
 			buttonsEditRemoveStateChange();
@@ -73,10 +70,16 @@ namespace MedicalApp
 		// fill data grid from db
 		void fillDataFromDBtoDatagrid()
 		{
-			using (DataModel db = new DataModel())
+			DataModel db = null;
+			try
 			{
-				// select only not archived patients
-				datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();
+				db = new DataModel();				
+					// select only not archived patients
+				datagridPatiens.ItemsSource = db.Pacients.Where(p => p.IsArchived == false).ToList();				
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
 

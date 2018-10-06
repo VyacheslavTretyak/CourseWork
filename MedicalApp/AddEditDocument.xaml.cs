@@ -65,7 +65,7 @@ namespace MedicalApp
             IdMedicalDoc = _IdMedicalDoc;
             InitializeComponent();
             this.Title = "Edit Document";
-            Add.Content = "Edit";
+            Add.Content = "Save";
             InitEdit();
         }
 

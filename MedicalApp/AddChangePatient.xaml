@@ -13,65 +13,65 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
         Title="AddChangePatient" Height="600" Width="550" MinHeight="550" MinWidth="500" WindowStartupLocation="CenterScreen">
-    <!--<Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5">-->
-    <!--<Border Margin="30, 10, 30, 30" Background="White">-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <!--<Grid.ColumnDefinitions>
+	<!--<Border Background="WhiteSmoke" BorderThickness="4" BorderBrush="Yellow" CornerRadius="5">-->
+	<!--<Border Margin="30, 10, 30, 30" Background="White">-->
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>-->
 
-        <materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
-                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
-            </StackPanel>
-        </materialDesign:ColorZone>
+		<materialDesign:ColorZone Grid.ColumnSpan="4" Mode="PrimaryLight"  Padding="16">
+			<StackPanel Orientation="Horizontal">
+				<materialDesign:PackIcon Kind="Hospital" Height="30" Width="30" />
+				<TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
+			</StackPanel>
+		</materialDesign:ColorZone>
 
-        <TextBox Name="txbFirstName" Grid.Column="0" Grid.Row="1" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="First Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbFirstName_TextChanged"></TextBox>
-        <TextBox Name="txbLastName" Grid.Column="0" Grid.Row="2" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Last Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbLastName_TextChanged"></TextBox>
-        <TextBox Name="txbMiddleName" Grid.Column="0" Grid.Row="3" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Middle Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-        <DatePicker Name="txbBirth" Grid.Column="0" Grid.Row="4" MinWidth="200" Margin="10 10 20 10" materialDesign:HintAssist.Hint="Date of Birth" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDateChanged="txbBirth_SelectedDateChanged"></DatePicker>
-        <TextBox Name="txbAdress" Grid.Column="0" Grid.Row="6"  Margin="10, 0, 20, 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Adress" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbAdress_TextChanged"></TextBox>
+		<TextBox Name="txbFirstName" Grid.Column="0" Grid.Row="1" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="First Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbFirstName_TextChanged" PreviewTextInput="onlyLetters"></TextBox>
+		<TextBox Name="txbLastName" Grid.Column="0" Grid.Row="2" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Last Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbLastName_TextChanged" PreviewTextInput="onlyLetters"></TextBox>
+		<TextBox Name="txbMiddleName" Grid.Column="0" Grid.Row="3" Margin="10, 5, 20, 5" materialDesign:HintAssist.Hint="Middle Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewTextInput="onlyLetters"></TextBox>
+		<DatePicker Name="txbBirth" Grid.Column="0" Grid.Row="4" MinWidth="200" Margin="10 10 20 10" materialDesign:HintAssist.Hint="Date of Birth" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDateChanged="txbBirth_SelectedDateChanged"></DatePicker>
+		<TextBox Name="txbAdress" Grid.Column="0" Grid.Row="6"  Margin="10, 0, 20, 0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Adress" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="txbAdress_TextChanged"></TextBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" Margin="10, 0, 0, 0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0, 20, 20, 0" Foreground="Gray">Gender:</TextBlock>
-                <RadioButton x:Name="rdbMale" Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="20, 25, 40, 20" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"/>
-                <RadioButton x:Name="rdbFemale" Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="60, 25, 20, 20" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"/>
-            </Grid>
-        </StackPanel>
+		<StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" Margin="10, 0, 0, 0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="2*"/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0, 20, 20, 0" Foreground="Gray">Gender:</TextBlock>
+				<RadioButton x:Name="rdbMale" Grid.Column="1" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="20, 25, 40, 20" Content="Male" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}"/>
+				<RadioButton x:Name="rdbFemale" Grid.Column="2" Grid.Row="0" GroupName="Gender" FontSize="16" Margin="60, 25, 20, 20" Content="Female" Style="{StaticResource MaterialDesignRadioButton}"/>
+			</Grid>
+		</StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="7" Orientation="Horizontal">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Name="btnAddEdit" Grid.Column="0" Grid.Row="0" Margin="10" MinWidth="200" Click="btnAddEdit_Click">Add/Edit</Button>
-                <Button Name="btnCancel" Grid.Column="1" Grid.Row="0" Margin="40, 10, 10, 10" MinWidth="200" Click="btnCancel_Click">Cancel</Button>
-            </Grid>
-        </StackPanel>
+		<StackPanel Grid.Column="0" Grid.Row="7" Orientation="Horizontal">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button Name="btnAddEdit" Grid.Column="0" Grid.Row="0" Margin="10" MinWidth="200" Click="btnAddEdit_Click">Add/Edit</Button>
+				<Button Name="btnCancel" Grid.Column="1" Grid.Row="0" Margin="40, 10, 10, 10" MinWidth="200" Click="btnCancel_Click">Cancel</Button>
+			</Grid>
+		</StackPanel>
 
 
-    </Grid>
+	</Grid>
 
-    <!--</Border>-->
-    <!--</Border>-->
+	<!--</Border>-->
+	<!--</Border>-->
 
 </Window>

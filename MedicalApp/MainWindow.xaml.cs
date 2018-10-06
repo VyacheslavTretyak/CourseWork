@@ -28,30 +28,21 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			// check DB is avaliable
-			//if (!CheckConnection())
-			//{
-			//	Application.Current.Shutdown(); // close application
-			//	return;
-			//}
+			if (!CheckConnection())
+			{
+				Application.Current.Shutdown(); // close application
+				return;
+			}
 
 			InitializeComponent();
-
-			try
-			{
-				InitFirstData();
-				fillDataFromDBtoDatagrid();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			//Test();
+			//InitFirstData();
+			// fill data grid
+			fillDataFromDBtoDatagrid();			
 
 			// window center to screen 
 			WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-			// fill data grid
+			
 			
 
 			// disable edit and remove buttons

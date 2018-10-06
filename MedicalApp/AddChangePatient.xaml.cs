@@ -39,10 +39,10 @@ namespace MedicalApp
                 {
                     try
                     {
-                        db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text;
-                        db.Pacients.Find(pacient.Id).LastName = txbLastName.Text;
-                        db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text;
-                        db.Pacients.Find(pacient.Id).Addres = txbAdress.Text;
+                        db.Pacients.Find(pacient.Id).FirstName = txbFirstName.Text.Trim();
+                        db.Pacients.Find(pacient.Id).LastName = txbLastName.Text.Trim();
+                        db.Pacients.Find(pacient.Id).MiddleName = txbMiddleName.Text.Trim();
+                        db.Pacients.Find(pacient.Id).Addres = txbAdress.Text.Trim();
                         db.Pacients.Find(pacient.Id).BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
                             System.Globalization.CultureInfo.InvariantCulture);
 
@@ -62,10 +62,10 @@ namespace MedicalApp
                     try
                     {
                         pacient = new Patient();
-                        pacient.FirstName = txbFirstName.Text;
-                        pacient.LastName = txbLastName.Text;
-                        pacient.MiddleName = txbMiddleName.Text;
-                        pacient.Addres = txbAdress.Text;
+                        pacient.FirstName = txbFirstName.Text.Trim();
+                        pacient.LastName = txbLastName.Text.Trim();
+                        pacient.MiddleName = txbMiddleName.Text.Trim();
+                        pacient.Addres = txbAdress.Text.Trim();
 
                         pacient.BirthDay = DateTime.ParseExact(txbBirth.Text, "dd.MM.yyyy",
                             System.Globalization.CultureInfo.InvariantCulture);

@@ -112,6 +112,7 @@ namespace MedicalApp
                 rdbFemale.IsChecked = true;
         }
 
+        //Check if field firstName isn't empty
         private void txbFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (String.IsNullOrEmpty(txbFirstName.Text))
@@ -123,6 +124,7 @@ namespace MedicalApp
                 btnAddEdit.IsEnabled = true;
         }
 
+        //Check if field lastName isn't empty
         private void txbLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (String.IsNullOrEmpty(txbLastName.Text))
@@ -134,6 +136,7 @@ namespace MedicalApp
                 btnAddEdit.IsEnabled = true;
         }
 
+        //Check if field Adress isn't empty
         private void txbAdress_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (String.IsNullOrEmpty(txbAdress.Text))
@@ -145,6 +148,7 @@ namespace MedicalApp
                 btnAddEdit.IsEnabled = true;
         }
 
+        //Check if field date of birth isn't empty
         private void txbBirth_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (String.IsNullOrEmpty(txbBirth.Text))
@@ -154,6 +158,13 @@ namespace MedicalApp
                 !String.IsNullOrEmpty(txbAdress.Text) &&
                 !String.IsNullOrEmpty(txbBirth.Text))
                 btnAddEdit.IsEnabled = true;
+        }
+
+        //Forbiding write symbols in names
+        private void onlyLetters(object sender, TextCompositionEventArgs e)
+        {
+            char symbol = e.Text.FirstOrDefault();
+            e.Handled = !Char.IsLetter(symbol) && symbol != '-';
         }
     }
 }

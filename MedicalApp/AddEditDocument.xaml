@@ -44,11 +44,11 @@
                 <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">MedicalApp</TextBlock>
             </StackPanel>
         </materialDesign:ColorZone>
-        <ComboBox Name="ComboType" Grid.Row="1" Margin="10 10 10 0" SelectionChanged="EnabledAdd" materialDesign:HintAssist.Hint="Type:" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+        <ComboBox Name="ComboType" Grid.Row="1" Margin="10 10 10 0" SelectionChanged="EnabledAdd" materialDesign:HintAssist.Hint="Type" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
 
-        <TextBox Name="TxBxName" Grid.Row="2" Margin="10 10 10 0"  VerticalAlignment="Center" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Name:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <TextBox Name="TxBxName" Grid.Row="2" Margin="10 10 10 0"  VerticalAlignment="Center" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
-        <TextBox Name="TxBxInfo" Grid.Row="3" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Info:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+        <TextBox Name="TxBxInfo" Grid.Row="3" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextChanged="EnabledAdd" materialDesign:HintAssist.Hint="Info" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 
         <Grid Grid.Row="4">

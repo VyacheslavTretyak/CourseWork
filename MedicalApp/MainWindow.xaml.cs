@@ -28,11 +28,11 @@ namespace MedicalApp
 		public MainWindow()
 		{
 			// check DB is avaliable
-			if (!CheckConnection())
-			{
-				Application.Current.Shutdown(); // close application
-				return;
-			}
+			//if (!CheckConnection())
+			//{
+			//	Application.Current.Shutdown(); // close application
+			//	return;
+			//}
 
 			InitializeComponent();
 

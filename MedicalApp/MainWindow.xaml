@@ -41,7 +41,7 @@
 		<!--<TextBlock Grid.Row="1" Grid.Column="1">Address:</TextBlock>-->
 
 		<TextBox Grid.Row="1" Grid.Column="0" Name="textboxNumberCard" Margin="5 0" MaxLength="12" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Card number" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Card Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="textboxAddress" Margin="5 0" KeyDown="textbox_EnterKeyDown"
 				 Grid.ColumnSpan="3" MaxLength="64" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
@@ -49,16 +49,16 @@
 		<!--<TextBlock Grid.Row="3" Grid.Column="1">Year of birth:</TextBlock>-->
 
 		<TextBox Grid.Row="2" Grid.Column="0" Name="textboxLastName" Margin="5 0" KeyDown="textbox_EnterKeyDown" PreviewTextInput="textbox_OnlyLetters"
-				 MaxLength="32" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+				 MaxLength="32" materialDesign:HintAssist.Hint="Last Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 		<TextBox Grid.Row="2" Grid.Column="1" Name="textboxDateOfBirth" Margin="5 0" MaxLength="4" KeyDown="textbox_EnterKeyDown"
-				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Year of birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+				 PreviewTextInput="textbox_OnlyNumeric" PreviewKeyDown="textbox_restrictSpace" materialDesign:HintAssist.Hint="Year of Birth" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 		<Button Grid.Row="2" Grid.Column="3" Name="buttonSearch" Margin="-65 5 65 5" Click="buttonSearch_Click" ToolTip="Search for patients">Search</Button>
 		<Button Grid.Row="2" Grid.Column="3" Name="buttonEraser" Margin="5 5" Content="{materialDesign:PackIcon Eraser}"
 				Click="buttonEraser_Click" ToolTip="Clear all search fields" HorizontalAlignment="Right" Width="50"/>
 
 		<TextBlock Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center"
-				   Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="0 15 0 0">List of patient cards:</TextBlock>
+				   Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="0 15 0 0">List of Patient Cards:</TextBlock>
 		<DataGrid Grid.Row="4" Grid.ColumnSpan="4" Name="datagridPatiens" SelectionUnit="FullRow"
 				  SelectionMode="Single" SelectionChanged="datagridPatiens_SelectionChanged"
 				   AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*"
@@ -72,16 +72,16 @@
 				</Style>
 			</DataGrid.CellStyle>
 			<DataGrid.Columns>
-				<DataGridTextColumn Width="0.6*" Header="Card number" Binding="{Binding Id}"/>
-				<DataGridTextColumn Header="Last name"  Binding="{Binding LastName}"/>
-				<DataGridTextColumn Header="First name"  Binding="{Binding FirstName}"/>
+				<DataGridTextColumn Width="0.6*" Header="Card Number" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="Last Name"  Binding="{Binding LastName}"/>
+				<DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
 				<DataGridTextColumn Width="0.6*" Header="Birthday"  Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"/>
 				<DataGridTextColumn Width="0.6*" Header="Gender"  Binding="{Binding Gender, Converter={StaticResource BooleanToStringConverter}}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		
 		<Button Grid.Row="6" Grid.Column="0" Name="buttonOpen" Margin="5 5" Click="buttonOpen_Click"
-				ToolTip="Open patient card" Style="{StaticResource MaterialDesignRaisedAccentButton}">Open card</Button>
+				ToolTip="Open patient card" Style="{StaticResource MaterialDesignRaisedAccentButton}">Open Card</Button>
 		<Button Grid.Row="6" Grid.Column="1" Name="buttonEdit" Margin="5 5" Click="buttonEdit_Click" ToolTip="Edit a patient">Edit</Button>
 		<Button Grid.Row="6" Grid.Column="2" Name="buttonRemove" Margin="5 5" Click="buttonRemove_Click" ToolTip="Remove a patient">Remove</Button>
 		<Button Grid.Row="6" Grid.Column="3" Name="buttonAdd" Click="buttonAdd_Click" ToolTip="Add a patients"

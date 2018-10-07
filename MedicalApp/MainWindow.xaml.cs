@@ -36,6 +36,7 @@ namespace MedicalApp
 
 			InitializeComponent();
 			//InitFirstData();
+			InitDocType();
 			// fill data grid
 			fillDataFromDBtoDatagrid();			
 
@@ -317,7 +318,36 @@ namespace MedicalApp
 			Task.Run(() => messageQueue.Enqueue(message));
 		}
 
-
+		private void InitDocType(){
+			MedicalDocType[] types =
+			{
+				new MedicalDocType()
+				{
+					Name = "Hospital"
+				},
+				new MedicalDocType()
+				{
+					Name = "Referral on analizes"
+				},
+				new MedicalDocType()
+				{
+					Name = "Result of analizes"
+				}
+			};
+			using (DataModel db = new DataModel())
+			{				
+				foreach (MedicalDocType doc in types)
+				{
+					if (db.MedicalDocTypes.FirstOrDefault(p => p.Name == doc.Name) == null)
+					{
+						db.MedicalDocTypes.Add(doc);
+					}
+				}	
+				db.SaveChanges();
+			}
+			
+		
+		}
 
 		private void InitFirstData()
 		{

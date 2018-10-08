@@ -36,15 +36,21 @@ namespace MedicalApp
 
 			InitializeComponent();
 			//InitFirstData();
-			InitDocType();
-			// fill data grid
-			fillDataFromDBtoDatagrid();			
-
-			// window center to screen 
-			WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-			// disable edit and remove buttons
-			buttonsEditRemoveStateChange();
+			try
+			{
+				InitDocType();
+				// fill data grid
+				fillDataFromDBtoDatagrid();
+				// window center to screen 
+				WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				// disable edit and remove buttons
+				buttonsEditRemoveStateChange();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				throw;
+			}
 		}
 
 		bool CheckConnection()

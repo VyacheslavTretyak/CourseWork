@@ -48,8 +48,7 @@ namespace MedicalApp
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
-				throw;
+				MessageBox.Show(ex.Message);				
 			}
 		}
 
